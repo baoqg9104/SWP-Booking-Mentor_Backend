@@ -6,3 +6,4 @@ In SWP391, students work in groups to develop software projects, each group in c
 Technologies: 
   - Frontend: React
   - Backend: ASP.NET Core Web API (.NET 8)
+  - RDBMS: SQL Server 
