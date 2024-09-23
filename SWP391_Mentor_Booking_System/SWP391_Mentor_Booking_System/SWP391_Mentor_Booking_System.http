@@ -1,0 +1,6 @@
+@SWP391_Mentor_Booking_System_HostAddress = http://localhost:5000
+
+GET {{SWP391_Mentor_Booking_System_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
