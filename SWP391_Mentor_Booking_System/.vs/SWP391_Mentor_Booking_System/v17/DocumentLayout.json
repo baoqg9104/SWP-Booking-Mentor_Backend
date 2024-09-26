@@ -1,7 +1,16 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "C:\\Users\\Admin\\Documents\\GitHub\\Group2_SWP391_SE1867_Backend\\SWP391_Mentor_Booking_System\\",
-  "Documents": [],
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{C9ADBCF2-FA8D-41DE-ABB9-9EB3F8695A79}|SWP391_Mentor_Booking_System_Data\\SWP391_Mentor_Booking_System_Data.csproj|c:\\users\\admin\\documents\\github\\group2_swp391_se1867_backend\\swp391_mentor_booking_system\\swp391_mentor_booking_system_data\\swp391_mentor_booking_system_data.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{C9ADBCF2-FA8D-41DE-ABB9-9EB3F8695A79}|SWP391_Mentor_Booking_System_Data\\SWP391_Mentor_Booking_System_Data.csproj|solutionrelative:swp391_mentor_booking_system_data\\swp391_mentor_booking_system_data.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C9ADBCF2-FA8D-41DE-ABB9-9EB3F8695A79}|SWP391_Mentor_Booking_System_Data\\SWP391_Mentor_Booking_System_Data.csproj|c:\\users\\admin\\documents\\github\\group2_swp391_se1867_backend\\swp391_mentor_booking_system\\swp391_mentor_booking_system_data\\data\\skill.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C9ADBCF2-FA8D-41DE-ABB9-9EB3F8695A79}|SWP391_Mentor_Booking_System_Data\\SWP391_Mentor_Booking_System_Data.csproj|solutionrelative:swp391_mentor_booking_system_data\\data\\skill.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
@@ -9,8 +18,21 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": -1,
+          "SelectedChildIndex": 0,
           "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "SWP391_Mentor_Booking_System_Data",
+              "DocumentMoniker": "C:\\Users\\Admin\\Documents\\GitHub\\Group2_SWP391_SE1867_Backend\\SWP391_Mentor_Booking_System\\SWP391_Mentor_Booking_System_Data\\SWP391_Mentor_Booking_System_Data.csproj",
+              "RelativeDocumentMoniker": "SWP391_Mentor_Booking_System_Data\\SWP391_Mentor_Booking_System_Data.csproj",
+              "ToolTip": "C:\\Users\\Admin\\Documents\\GitHub\\Group2_SWP391_SE1867_Backend\\SWP391_Mentor_Booking_System\\SWP391_Mentor_Booking_System_Data\\SWP391_Mentor_Booking_System_Data.csproj",
+              "RelativeToolTip": "SWP391_Mentor_Booking_System_Data\\SWP391_Mentor_Booking_System_Data.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2024-09-26T03:57:06.909Z",
+              "EditorCaption": ""
+            },
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
@@ -18,6 +40,19 @@
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Skill.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\Documents\\GitHub\\Group2_SWP391_SE1867_Backend\\SWP391_Mentor_Booking_System\\SWP391_Mentor_Booking_System_Data\\Data\\Skill.cs",
+              "RelativeDocumentMoniker": "SWP391_Mentor_Booking_System_Data\\Data\\Skill.cs",
+              "ToolTip": "C:\\Users\\Admin\\Documents\\GitHub\\Group2_SWP391_SE1867_Backend\\SWP391_Mentor_Booking_System\\SWP391_Mentor_Booking_System_Data\\Data\\Skill.cs",
+              "RelativeToolTip": "SWP391_Mentor_Booking_System_Data\\Data\\Skill.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-26T03:30:20.101Z",
+              "EditorCaption": ""
             }
           ]
         },
