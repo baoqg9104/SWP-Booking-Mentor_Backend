@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\buildMultiTargeting\SWP391_Mentor_Booking_System_API.props" />
+</Project>

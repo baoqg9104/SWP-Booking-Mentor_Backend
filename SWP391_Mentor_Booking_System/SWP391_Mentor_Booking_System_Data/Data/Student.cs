@@ -1,15 +1,18 @@
-﻿namespace SWP391_Mentor_Booking_System_Data.Data
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace SWP391_Mentor_Booking_System_Data.Data
 {
     public class Student
     {
-        public int StudentId { get; set; }
-        public string FullName { get; set; }
-        public string Email { get; set; }
-        public string Password { get; set; }
-        public string Phone { get; set; }
-        public DateTime RegistrationDate { get; set; }
-        public ICollection<BookingRequest> BookingRequests { get; set; }
-        public ICollection<WalletTransaction> WalletTransactions { get; set; }
+        public int UserId { get; set; }
+        public int GroupId { get; set; }
+
+        public Group Group { get; set; }
     }
+
 
 }

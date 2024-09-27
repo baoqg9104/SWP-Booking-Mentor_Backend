@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace SWP391_Mentor_Booking_System_Data.Data
 {
-    internal class Skill
+    public class Skill
     {
+        public int SkillId { get; set; }
+        public string Name { get; set; }
     }
+
 }
