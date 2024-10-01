@@ -36,7 +36,7 @@ namespace SWP391_Mentor_Booking_System_API.Controllers
                 Password = registerDTO.Password, // Lưu mật khẩu trực tiếp
                 Email = registerDTO.Email,
                 Phone = registerDTO.Phone,
-                RoleId = registerDTO.RoleId
+            
             };
 
             // Đăng ký người dùng mới

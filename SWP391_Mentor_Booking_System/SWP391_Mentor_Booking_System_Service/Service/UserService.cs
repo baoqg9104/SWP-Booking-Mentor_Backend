@@ -27,6 +27,10 @@ namespace SWP391_Mentor_Booking_System_Service.Service
         // Đăng ký người dùng mới
         public void RegisterUser(User user)
         {
+            // Gán RoleId mặc định là 1
+            user.RoleId = 1;
+
+            // Thêm người dùng vào cơ sở dữ liệu
             _userRepository.AddUser(user);
         }
     }
