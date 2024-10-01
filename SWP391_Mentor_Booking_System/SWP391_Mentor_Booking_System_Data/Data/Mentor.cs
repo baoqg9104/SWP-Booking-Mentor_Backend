@@ -8,15 +8,21 @@ namespace SWP391_Mentor_Booking_System_Data.Data
 {
     public class Mentor
     {
-        public int UserId { get; set; }
-        public int PointsReceived { get; set; }
-        public int NumOfSlot { get; set; }
-        public DateTime RegistrationDate { get; set; }
-        public bool ApplyStatus { get; set; }
+        public string Id { get; set; }  
+        public int PointsReceived { get; set; }  
+        public int NumOfSlot { get; set; }  
+        public DateTime RegistrationDate { get; set; }  
+        public bool ApplyStatus { get; set; }  
+        public string UserId { get; set; } 
 
-        public ICollection<MentorSkill> MentorSkills { get; set; }
-        public ICollection<MentorSlot> MentorSlots { get; set; }
-        public ICollection<SwpClass> SwpClasses { get; set; }
+        public User User { get; set; }  
+        public ICollection<MentorSkill> MentorSkills { get; set; }  
+        public ICollection<MentorSlot> MentorSlots { get; set; }  
+        public ICollection<SwpClass> SwpClasses { get; set; }  
     }
+
+
+
+
 
 }

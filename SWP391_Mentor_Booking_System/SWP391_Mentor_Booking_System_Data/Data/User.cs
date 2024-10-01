@@ -8,14 +8,21 @@ namespace SWP391_Mentor_Booking_System_Data.Data
 {
     public class User
     {
-        public int UserId { get; set; }
-        public string FullName { get; set; }
+        public string Id { get; set; }  // ID của User, có thể là string để linh động
+        public string Username { get; set; }  // Tên đăng nhập của người dùng
+        public string Password { get; set; }  // Mật khẩu đã được mã hóa
         public string Email { get; set; }
-        public string Password { get; set; }
         public string Phone { get; set; }
+        public int RoleId { get; set; }  // Khóa ngoại liên kết với Role
 
-        public int RoleId { get; set; }
-        public Role Role { get; set; }
+        public Role Role { get; set; }  // Mỗi User có một vai trò
+        public Mentor Mentor { get; set; }  // Một User có thể là Mentor
+        public Student Student { get; set; }  // Một User có thể là Student
     }
+
+
+
+
+
 
 }

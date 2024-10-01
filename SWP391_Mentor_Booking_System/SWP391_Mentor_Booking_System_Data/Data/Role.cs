@@ -8,10 +8,13 @@ namespace SWP391_Mentor_Booking_System_Data.Data
 {
     public class Role
     {
-        public int RoleId { get; set; }
-        public string Name { get; set; }
+        public int Id { get; set; }  // ID của Role
+        public string Name { get; set; }  // Tên vai trò, ví dụ 'student', 'mentor'
 
-        public ICollection<User> Users { get; set; }
+        public ICollection<User> Users { get; set; }  // Một Role có thể có nhiều User
     }
+
+
+
 
 }

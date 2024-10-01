@@ -22,6 +22,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\SWP391_Mentor_Booking_System_Data\SWP391_Mentor_Booking_System_Data.csproj" />
+    <ProjectReference Include="..\SWP391_Mentor_Booking_System_Service\SWP391_Mentor_Booking_System_Service.csproj" />
   </ItemGroup>
 
 </Project>
