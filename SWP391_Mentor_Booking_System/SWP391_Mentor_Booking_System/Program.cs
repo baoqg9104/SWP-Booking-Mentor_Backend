@@ -1,7 +1,10 @@
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using SWP391_Mentor_Booking_System_Data;
 using SWP391_Mentor_Booking_System_Data.Repositories;
 using SWP391_Mentor_Booking_System_Service.Service;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,9 +19,27 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<SWP391_Mentor_Booking_System_DBContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
+// Add repository and services to DI container
 builder.Services.AddScoped<UserRepository>();
 builder.Services.AddScoped<UserService>();
 
+// Configure JWT Authentication
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(options =>
+    {
+        options.RequireHttpsMetadata = false; // False n?u b?n mu?n h? tr? HTTP trong quá trình phát tri?n
+        options.SaveToken = true;
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuer = true,
+            ValidateAudience = true,
+            ValidateLifetime = true,
+            ValidateIssuerSigningKey = true,
+            ValidIssuer = "http://localhost:5000", 
+            ValidAudience = "http://localhost:5000", 
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("wP@34UdJ%QW9&as*Fl8Pn1z^RT5xVN&2")) // Khóa bí m?t
+        };
+    });
 
 var app = builder.Build();
 
@@ -29,7 +50,10 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+// S? d?ng HTTPS ho?c HTTP d?a trên launchSettings.json
 app.UseHttpsRedirection();
+
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

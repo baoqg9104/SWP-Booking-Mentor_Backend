@@ -33,5 +33,16 @@ namespace SWP391_Mentor_Booking_System_Service.Service
             // Thêm người dùng vào cơ sở dữ liệu
             _userRepository.AddUser(user);
         }
+        // Đăng nhập người dùng
+        public User Authenticate(string username, string password)
+        {
+            var user = _userRepository.GetUserByUsername(username);
+            if (user == null || user.Password != password)
+            {
+                return null; // Đăng nhập thất bại
+            }
+            return user; // Đăng nhập thành công
+        }
+        
     }
 }

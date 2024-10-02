@@ -28,5 +28,10 @@ namespace SWP391_Mentor_Booking_System_Data.Repositories
             _context.Users.Add(user);
             _context.SaveChanges(); // Lưu thay đổi vào database
         }
+        public User GetUserByUsername(string username)
+        {
+            return _context.Users.FirstOrDefault(u => u.Username == username);
+        }
+        
     }
 }
