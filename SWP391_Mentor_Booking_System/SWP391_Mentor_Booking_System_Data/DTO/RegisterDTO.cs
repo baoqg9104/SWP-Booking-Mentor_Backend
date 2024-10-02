@@ -12,6 +12,5 @@ namespace SWP391_Mentor_Booking_System_Data.DTO
         public string Password { get; set; }
         public string Email { get; set; }
         public string Phone { get; set; }
-        public int RoleId { get; set; } // Nếu cần phân quyền
     }
 }
