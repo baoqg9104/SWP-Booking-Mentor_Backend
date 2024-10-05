@@ -1,4 +1,4 @@
-using Microsoft.AspNetCore.Authentication.JwtBearer;
+﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using SWP391_Mentor_Booking_System_Data;
@@ -21,13 +21,14 @@ builder.Services.AddDbContext<SWP391_Mentor_Booking_System_DBContext>(options =>
 
 // Add repository and services to DI container
 builder.Services.AddScoped<UserRepository>();
+builder.Services.AddScoped<RefreshTokenRepository>(); // Đăng ký RefreshTokenRepository
 builder.Services.AddScoped<UserService>();
 
 // Configure JWT Authentication
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
     {
-        options.RequireHttpsMetadata = false; 
+        options.RequireHttpsMetadata = false;
         options.SaveToken = true;
         options.TokenValidationParameters = new TokenValidationParameters
         {
@@ -35,9 +36,9 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             ValidateAudience = true,
             ValidateLifetime = true,
             ValidateIssuerSigningKey = true,
-            ValidIssuer = "http://localhost:5000", 
-            ValidAudience = "http://localhost:5000", 
-            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("wP@34UdJ%QW9&as*Fl8Pn1z^RT5xVN&2")) 
+            ValidIssuer = "http://localhost:5000",
+            ValidAudience = "http://localhost:5000",
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("wP@34UdJ%QW9&as*Fl8Pn1z^RT5xVN&2"))
         };
     });
 
@@ -50,12 +51,15 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-// S? d?ng HTTPS ho?c HTTP d?a tr�n launchSettings.json
+// Enable HTTPS redirection
 app.UseHttpsRedirection();
 
+// Enable authentication and authorization
 app.UseAuthentication();
 app.UseAuthorization();
 
+// Map controllers to routes
 app.MapControllers();
 
+// Run the application
 app.Run();

@@ -18,6 +18,7 @@ namespace SWP391_Mentor_Booking_System_Data.Data
         public Role Role { get; set; }  // Mỗi User có một vai trò
         public Mentor Mentor { get; set; }  // Một User có thể là Mentor
         public Student Student { get; set; }  // Một User có thể là Student
+
     }
 
 

@@ -1,11 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "xTSk3dL3lwo98hou9t3QkcjvO6xHsE4fh/Y+gHtw+NcEvRpksBYSSkPHSG0JWOZjbz98DRRInMM8xgn/pzRZ4A==",
+  "dgSpecHash": "ZnOc5byLDlzbTgw9XGXKF6BYvRK3Qk4LbUOQAPQoK7nZAdIhxhY68YmE6r8L0L78mMMo/wFpniZr2Mq1mL32OQ==",
   "success": true,
   "projectFilePath": "D:\\code\\MentorBooking\\Group2_SWP391_SE1867_Backend\\SWP391_Mentor_Booking_System\\SWP391_Mentor_Booking_System_Service\\SWP391_Mentor_Booking_System_Service.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\ADMIN\\.nuget\\packages\\azure.core\\1.35.0\\azure.core.1.35.0.nupkg.sha512",
     "C:\\Users\\ADMIN\\.nuget\\packages\\azure.identity\\1.10.3\\azure.identity.1.10.3.nupkg.sha512",
+    "C:\\Users\\ADMIN\\.nuget\\packages\\bcrypt.net-next\\4.0.3\\bcrypt.net-next.4.0.3.nupkg.sha512",
     "C:\\Users\\ADMIN\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\8.0.8\\microsoft.aspnetcore.authentication.jwtbearer.8.0.8.nupkg.sha512",
     "C:\\Users\\ADMIN\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\1.1.1\\microsoft.bcl.asyncinterfaces.1.1.1.nupkg.sha512",
     "C:\\Users\\ADMIN\\.nuget\\packages\\microsoft.data.sqlclient\\5.1.5\\microsoft.data.sqlclient.5.1.5.nupkg.sha512",

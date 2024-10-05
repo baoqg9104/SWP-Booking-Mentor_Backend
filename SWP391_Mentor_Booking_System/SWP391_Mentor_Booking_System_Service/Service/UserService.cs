@@ -11,13 +11,16 @@ namespace SWP391_Mentor_Booking_System_Service.Service
     public class UserService
     {
         private readonly UserRepository _userRepository;
+        private readonly RefreshTokenRepository _refreshTokenRepository; 
         private readonly IConfiguration _configuration;
 
-        public UserService(UserRepository userRepository, IConfiguration configuration)
+        public UserService(UserRepository userRepository, RefreshTokenRepository refreshTokenRepository, IConfiguration configuration)
         {
             _userRepository = userRepository;
+            _refreshTokenRepository = refreshTokenRepository; 
             _configuration = configuration;
         }
+
 
         public bool IsUsernameTaken(string username)
         {
@@ -27,6 +30,7 @@ namespace SWP391_Mentor_Booking_System_Service.Service
         public void RegisterUser(User user)
         {
             user.RoleId = 1;
+            user.Password = BCrypt.Net.BCrypt.HashPassword(user.Password);
             _userRepository.AddUser(user);
             var student = new Student
             {
@@ -47,14 +51,53 @@ namespace SWP391_Mentor_Booking_System_Service.Service
         public User Authenticate(string username, string password)
         {
             var user = _userRepository.GetUserByUsername(username);
-            if (user == null || user.Password != password)
+            if (user == null || !BCrypt.Net.BCrypt.Verify(password, user.Password))
             {
-                return null;
+                return null; // Đăng nhập thất bại
             }
-            return user;
+            return user; // Đăng nhập thành công
+        }
+        public User GetUserByUsername(string username)
+        {
+            return _userRepository.GetUserByUsername(username);
+        }
+        // Tạo refresh token
+        public string GenerateRefreshToken()
+        {
+            var randomBytes = new byte[64];
+            using (var rng = new System.Security.Cryptography.RNGCryptoServiceProvider())
+            {
+                rng.GetBytes(randomBytes);
+            }
+            return Convert.ToBase64String(randomBytes);
         }
 
-      
+        // Lưu refresh token vào database
+        public void SaveRefreshToken(string userName, string refreshToken)
+        {
+            var newRefreshToken = new RefreshToken
+            {
+                Token = refreshToken,
+                ExpiryDate = DateTime.Now.AddDays(7), // Refresh token hết hạn sau 7 ngày
+                UserName = userName
+            };
+
+            _refreshTokenRepository.AddRefreshToken(newRefreshToken);
+        }
+
+        // Kiểm tra tính hợp lệ của refresh token
+        public RefreshToken GetRefreshToken(string token)
+        {
+            return _refreshTokenRepository.GetByToken(token);
+        }
+
+        // Xóa refresh token sau khi sử dụng
+        public void RevokeRefreshToken(string token)
+        {
+            _refreshTokenRepository.RemoveToken(token);
+        }
+
+
 
         private string GenerateToken(User user)
         {

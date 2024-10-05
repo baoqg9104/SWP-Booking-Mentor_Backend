@@ -1,11 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "AjpwZOGiCvl3VIF5NPu5/lUd/LdW+t+rVY+vq8tqCdcONvT5L2fu2wxd+GvKbXM4gokcuTTncH+jKbcBqzBVFw==",
+  "dgSpecHash": "aUGgAnhoibmt+Lkekdk5PAXMEtWgZ7O6tUimn1HPV+fcqZFcd3hLNwTr8/ua/X6eNU2jrY9zxbeJW1w06FOGAw==",
   "success": true,
   "projectFilePath": "D:\\code\\MentorBooking\\Group2_SWP391_SE1867_Backend\\SWP391_Mentor_Booking_System\\SWP391_Mentor_Booking_System_Data\\SWP391_Mentor_Booking_System_Data.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\ADMIN\\.nuget\\packages\\azure.core\\1.35.0\\azure.core.1.35.0.nupkg.sha512",
     "C:\\Users\\ADMIN\\.nuget\\packages\\azure.identity\\1.10.3\\azure.identity.1.10.3.nupkg.sha512",
+    "C:\\Users\\ADMIN\\.nuget\\packages\\bcrypt.net-next\\4.0.3\\bcrypt.net-next.4.0.3.nupkg.sha512",
     "C:\\Users\\ADMIN\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
     "C:\\Users\\ADMIN\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\8.0.8\\microsoft.aspnetcore.authentication.jwtbearer.8.0.8.nupkg.sha512",
     "C:\\Users\\ADMIN\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\6.0.0\\microsoft.bcl.asyncinterfaces.6.0.0.nupkg.sha512",

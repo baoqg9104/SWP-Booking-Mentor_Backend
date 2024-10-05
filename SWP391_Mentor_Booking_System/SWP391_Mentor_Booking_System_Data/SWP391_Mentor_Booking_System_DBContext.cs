@@ -23,6 +23,7 @@ namespace SWP391_Mentor_Booking_System_Data
         public DbSet<Topic> Topics { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<WalletTransaction> WalletTransactions { get; set; }
+        public DbSet<RefreshToken> RefreshTokens { get; set; }  // Thêm RefreshToken
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -150,6 +151,16 @@ namespace SWP391_Mentor_Booking_System_Data
                 .HasOne(wt => wt.BookingSlot)
                 .WithMany()
                 .HasForeignKey(wt => wt.BookingId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            // RefreshToken
+            modelBuilder.Entity<RefreshToken>()
+                .HasKey(rt => rt.Id);  // Đặt Id là khóa chính
+
+            modelBuilder.Entity<RefreshToken>()
+                .HasOne(rt => rt.User)  // Liên kết với bảng User
+                .WithMany()  // Một User có thể có nhiều RefreshToken
+                .HasForeignKey(rt => rt.UserName)  // Chỉ định rõ ràng khóa ngoại là UserName
                 .OnDelete(DeleteBehavior.Cascade);
         }
     }

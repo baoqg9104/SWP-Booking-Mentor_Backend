@@ -7,6 +7,7 @@ using SWP391_Mentor_Booking_System_Service.Service;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using BCrypt.Net;
 
 namespace SWP391_Mentor_Booking_System_API.Controllers
 {
@@ -56,12 +57,52 @@ namespace SWP391_Mentor_Booking_System_API.Controllers
                 return Unauthorized("Thông tin đăng nhập không đúng!");
             }
 
-            var tokenString = GenerateToken(user);
+            var accessToken = GenerateToken(user);
+            var refreshToken = _userService.GenerateRefreshToken();
 
-            return Ok(new { Token = tokenString });
+            _userService.SaveRefreshToken(user.UserName, refreshToken);
+
+            return Ok(new
+            {
+                AccessToken = accessToken,
+                RefreshToken = refreshToken
+            });
+        }
+        [HttpPost("refresh-token")]
+        public IActionResult RefreshToken([FromBody] string refreshToken)
+        {
+            var token = _userService.GetRefreshToken(refreshToken);
+
+            if (token == null || token.ExpiryDate < DateTime.Now)
+            {
+                return Unauthorized("Refresh token không hợp lệ hoặc đã hết hạn.");
+            }
+
+            // Lấy lại thông tin user bằng UserName lưu trong refresh token
+            var user = _userService.GetUserByUsername(token.UserName);
+            if (user == null)
+            {
+                return Unauthorized("User không tồn tại.");
+            }
+
+            // Tạo access token mới
+            var newAccessToken = GenerateToken(user);
+
+            // Xóa refresh token cũ
+            _userService.RevokeRefreshToken(refreshToken);
+
+            // Tạo và lưu refresh token mới
+            var newRefreshToken = _userService.GenerateRefreshToken();
+            _userService.SaveRefreshToken(user.UserName, newRefreshToken);
+
+            return Ok(new
+            {
+                AccessToken = newAccessToken,
+                RefreshToken = newRefreshToken
+            });
         }
 
-       
+
 
         private string GenerateToken(User user)
         {
