@@ -27,7 +27,7 @@ builder.Services.AddScoped<UserService>();
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
     {
-        options.RequireHttpsMetadata = false; // False n?u b?n mu?n h? tr? HTTP trong quá trình phát tri?n
+        options.RequireHttpsMetadata = false; 
         options.SaveToken = true;
         options.TokenValidationParameters = new TokenValidationParameters
         {
@@ -37,7 +37,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             ValidateIssuerSigningKey = true,
             ValidIssuer = "http://localhost:5000", 
             ValidAudience = "http://localhost:5000", 
-            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("wP@34UdJ%QW9&as*Fl8Pn1z^RT5xVN&2")) // Khóa bí m?t
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("wP@34UdJ%QW9&as*Fl8Pn1z^RT5xVN&2")) 
         };
     });
 

@@ -8,7 +8,7 @@ namespace SWP391_Mentor_Booking_System_Data.Data
 {
     public class MentorSlot
     {
-        public int Id { get; set; }
+        public int MentorSlotId { get; set; }
         public string MentorId { get; set; }
         public Mentor Mentor { get; set; }
 

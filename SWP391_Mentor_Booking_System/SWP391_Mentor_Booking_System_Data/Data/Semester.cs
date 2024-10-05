@@ -8,7 +8,7 @@ namespace SWP391_Mentor_Booking_System_Data.Data
 {
     public class Semester
     {
-        public string Id { get; set; }
+        public string SemesterId { get; set; }
         public string Code { get; set; }
         public string Name { get; set; }
         public DateTime StartDate { get; set; }

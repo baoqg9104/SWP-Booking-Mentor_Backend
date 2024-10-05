@@ -1,37 +1,44 @@
-﻿using SWP391_Mentor_Booking_System_Data.Data;
-using System;
-using System.Collections.Generic;
+﻿using Microsoft.EntityFrameworkCore;
+using SWP391_Mentor_Booking_System_Data.Data;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SWP391_Mentor_Booking_System_Data.Repositories
 {
     public class UserRepository
     {
-        private readonly SWP391_Mentor_Booking_System_DBContext _context; 
+        private readonly SWP391_Mentor_Booking_System_DBContext _context;
 
         public UserRepository(SWP391_Mentor_Booking_System_DBContext context)
         {
             _context = context;
         }
 
-        // Kiểm tra username có tồn tại hay không
         public bool UserExists(string username)
         {
-            return _context.Users.Any(u => u.Username == username);
+            return _context.Users.Any(u => u.UserName == username);
         }
 
-        // Thêm người dùng mới vào database
         public void AddUser(User user)
         {
             _context.Users.Add(user);
-            _context.SaveChanges(); // Lưu thay đổi vào database
+            _context.SaveChanges();
         }
+
+        public void AddStudent(Student student)
+        {
+            _context.Students.Add(student);
+            _context.SaveChanges();
+        }
+
         public User GetUserByUsername(string username)
         {
-            return _context.Users.FirstOrDefault(u => u.Username == username);
+            return _context.Users.FirstOrDefault(u => u.UserName == username);
         }
-        
+
+        public int GetTotalStudents()
+        {
+            return _context.Students.Count(); // Trả về số lượng sinh viên hiện tại
+        }
     }
+
 }

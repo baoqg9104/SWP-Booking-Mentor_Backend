@@ -28,7 +28,7 @@ namespace SWP391_Mentor_Booking_System_Data
         {
             // User
             modelBuilder.Entity<User>()
-                .HasKey(u => u.Id);
+                .HasKey(u => u.UserName); // Đặt Username là khóa chính
 
             modelBuilder.Entity<User>()
                 .HasOne(u => u.Role)
@@ -36,27 +36,15 @@ namespace SWP391_Mentor_Booking_System_Data
                 .HasForeignKey(u => u.RoleId)
                 .OnDelete(DeleteBehavior.Cascade);
 
-            modelBuilder.Entity<User>()
-                .HasOne(u => u.Mentor)
-                .WithOne(m => m.User)
-                .HasForeignKey<Mentor>(m => m.UserId)
-                .OnDelete(DeleteBehavior.Restrict);  // Chuyển từ Cascade sang Restrict
-
-            modelBuilder.Entity<User>()
-                .HasOne(u => u.Student)
-                .WithOne(s => s.User)
-                .HasForeignKey<Student>(s => s.UserId)
-                .OnDelete(DeleteBehavior.Restrict);  // Chuyển từ Cascade sang Restrict
-
             // Mentor
             modelBuilder.Entity<Mentor>()
-                .HasKey(m => m.Id);
+                .HasKey(m => m.MentorId); // Đặt MentorId là khóa chính
 
             modelBuilder.Entity<Mentor>()
                 .HasOne(m => m.User)
                 .WithOne(u => u.Mentor)
-                .HasForeignKey<Mentor>(m => m.UserId)  
-                .OnDelete(DeleteBehavior.Restrict);  // Thay đổi hành vi xóa tùy theo yêu cầu
+                .HasForeignKey<Mentor>(m => m.MentorName)  // Liên kết bằng MentorName
+                .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<Mentor>()
                 .HasMany(m => m.MentorSkills)
@@ -70,9 +58,25 @@ namespace SWP391_Mentor_Booking_System_Data
                 .HasForeignKey(ms => ms.MentorId)
                 .OnDelete(DeleteBehavior.Cascade);
 
+            // Student
+            modelBuilder.Entity<Student>()
+                .HasKey(s => s.StudentId); // Đặt StudentId là khóa chính
+
+            modelBuilder.Entity<Student>()
+                .HasOne(s => s.Group)
+                .WithMany(g => g.Students)
+                .HasForeignKey(s => s.GroupId)
+                .OnDelete(DeleteBehavior.SetNull);
+
+            modelBuilder.Entity<Student>()
+                .HasOne(s => s.User)
+                .WithOne(u => u.Student)
+                .HasForeignKey<Student>(s => s.StudentName)  // Liên kết bằng StudentName
+                .OnDelete(DeleteBehavior.Restrict);
+
             // MentorSkill
             modelBuilder.Entity<MentorSkill>()
-                .HasKey(ms => ms.Id);
+                .HasKey(ms => ms.MentorSkillId);
 
             modelBuilder.Entity<MentorSkill>()
                 .HasOne(ms => ms.Skill)
@@ -82,7 +86,7 @@ namespace SWP391_Mentor_Booking_System_Data
 
             // MentorSlot
             modelBuilder.Entity<MentorSlot>()
-                .HasKey(ms => ms.Id);
+                .HasKey(ms => ms.MentorSlotId);
 
             modelBuilder.Entity<MentorSlot>()
                 .HasMany(ms => ms.BookingSlots)
@@ -92,29 +96,29 @@ namespace SWP391_Mentor_Booking_System_Data
 
             // BookingSlot
             modelBuilder.Entity<BookingSlot>()
-                .HasKey(b => b.Id);
+                .HasKey(b => b.BookingId);
 
             modelBuilder.Entity<BookingSlot>()
                 .HasOne(b => b.Group)
                 .WithMany(g => g.BookingSlots)
                 .HasForeignKey(b => b.GroupId)
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.SetNull);
 
             modelBuilder.Entity<BookingSlot>()
                 .HasOne(b => b.MentorSlot)
                 .WithMany(ms => ms.BookingSlots)
                 .HasForeignKey(b => b.MentorSlotId)
-                .OnDelete(DeleteBehavior.Restrict); // Chuyển từ Cascade sang Restrict
+                .OnDelete(DeleteBehavior.Restrict);
 
             // Group
             modelBuilder.Entity<Group>()
-                .HasKey(g => g.Id);
+                .HasKey(g => g.GroupId);
 
             modelBuilder.Entity<Group>()
                 .HasOne(g => g.Topic)
                 .WithMany(t => t.Groups)
                 .HasForeignKey(g => g.TopicId)
-                .OnDelete(DeleteBehavior.Restrict); // Chuyển từ Cascade sang Restrict
+                .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<Group>()
                 .HasOne(g => g.SwpClass)
@@ -122,25 +126,9 @@ namespace SWP391_Mentor_Booking_System_Data
                 .HasForeignKey(g => g.SwpClassId)
                 .OnDelete(DeleteBehavior.Cascade);
 
-            // Semester
-            modelBuilder.Entity<Semester>()
-                .HasKey(s => s.Id);
-
-            modelBuilder.Entity<Semester>()
-                .HasMany(s => s.SwpClasses)
-                .WithOne(sc => sc.Semester)
-                .HasForeignKey(sc => sc.SemesterId)
-                .OnDelete(DeleteBehavior.Cascade);
-
-            modelBuilder.Entity<Semester>()
-                .HasMany(s => s.Topics)
-                .WithOne(t => t.Semester)
-                .HasForeignKey(t => t.SemesterId)
-                .OnDelete(DeleteBehavior.Cascade);
-
             // SwpClass
             modelBuilder.Entity<SwpClass>()
-                .HasKey(sc => sc.Id);
+                .HasKey(sc => sc.SwpClassId);
 
             modelBuilder.Entity<SwpClass>()
                 .HasOne(sc => sc.Mentor)
@@ -154,49 +142,9 @@ namespace SWP391_Mentor_Booking_System_Data
                 .HasForeignKey(sc => sc.SemesterId)
                 .OnDelete(DeleteBehavior.Cascade);
 
-            // Topic
-            modelBuilder.Entity<Topic>()
-                .HasKey(t => t.Id);
-
-            modelBuilder.Entity<Topic>()
-                .HasOne(t => t.Semester)
-                .WithMany(s => s.Topics)
-                .HasForeignKey(t => t.SemesterId)
-                .OnDelete(DeleteBehavior.Cascade);
-
-            // Role
-            modelBuilder.Entity<Role>()
-                .HasKey(r => r.Id);
-
-            modelBuilder.Entity<Role>()
-                .HasMany(r => r.Users)
-                .WithOne(u => u.Role)
-                .HasForeignKey(u => u.RoleId)
-                .OnDelete(DeleteBehavior.Cascade);
-
-            // Skill
-            modelBuilder.Entity<Skill>()
-                .HasKey(s => s.Id);
-
-            // Student
-            modelBuilder.Entity<Student>()
-                .HasKey(s => s.Id);
-
-            modelBuilder.Entity<Student>()
-                .HasOne(s => s.Group)
-                .WithMany(g => g.Students)
-                .HasForeignKey(s => s.GroupId)
-                .OnDelete(DeleteBehavior.Cascade);
-
-            modelBuilder.Entity<Student>()
-                .HasOne(s => s.User)
-                .WithOne(u => u.Student)
-                .HasForeignKey<Student>(s => s.UserId)
-                .OnDelete(DeleteBehavior.Restrict); // Chuyển từ Cascade sang Restrict
-
             // WalletTransaction
             modelBuilder.Entity<WalletTransaction>()
-                .HasKey(wt => wt.Id);
+                .HasKey(wt => wt.WalletId);
 
             modelBuilder.Entity<WalletTransaction>()
                 .HasOne(wt => wt.BookingSlot)

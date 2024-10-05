@@ -26,24 +26,21 @@ namespace SWP391_Mentor_Booking_System_API.Controllers
         [HttpPost("register")]
         public IActionResult Register([FromBody] RegisterDTO registerDTO)
         {
-            // Kiểm tra xem tên người dùng đã tồn tại chưa
-            if (_userService.IsUsernameTaken(registerDTO.Username))
+            if (_userService.IsUsernameTaken(registerDTO.UserName))
             {
                 return BadRequest("Username is already taken.");
             }
 
-            // Tạo người dùng mới mà không mã hóa mật khẩu
             var newUser = new User
             {
-                Id = Guid.NewGuid().ToString(), // Tạo ID ngẫu nhiên
-                Username = registerDTO.Username,
-                Password = registerDTO.Password, // Lưu mật khẩu trực tiếp
+                UserName = registerDTO.UserName,
+                Password = registerDTO.Password,
                 Email = registerDTO.Email,
                 Phone = registerDTO.Phone,
-                RoleId = 1 // Đặt RoleId mặc định là 1
+                RoleId = 1 // Mặc định là student
             };
 
-            // Đăng ký người dùng mới
+            // Đăng ký User và Student
             _userService.RegisterUser(newUser);
 
             return Ok("User registered successfully.");
@@ -59,25 +56,30 @@ namespace SWP391_Mentor_Booking_System_API.Controllers
                 return Unauthorized("Thông tin đăng nhập không đúng!");
             }
 
-            // Tạo token JWT
+            var tokenString = GenerateToken(user);
+
+            return Ok(new { Token = tokenString });
+        }
+
+       
+
+        private string GenerateToken(User user)
+        {
             var tokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]);
             var tokenDescriptor = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(new Claim[]
                 {
-                    new Claim(ClaimTypes.NameIdentifier, user.Id),
-                    new Claim(ClaimTypes.Name, user.Username),
+                    new Claim(ClaimTypes.Name, user.UserName),
                     new Claim(ClaimTypes.Role, user.RoleId.ToString())
                 }),
-                Expires = DateTime.UtcNow.AddMinutes(int.Parse(_configuration["Jwt:ExpireMinutes"])),
+                Expires = DateTime.UtcNow.AddMinutes(int.Parse(_configuration["Jwt:ExpireMinutes"])), 
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
             };
 
             var token = tokenHandler.CreateToken(tokenDescriptor);
-            var tokenString = tokenHandler.WriteToken(token);
-
-            return Ok(new { Token = tokenString });
+            return tokenHandler.WriteToken(token);
         }
     }
 }

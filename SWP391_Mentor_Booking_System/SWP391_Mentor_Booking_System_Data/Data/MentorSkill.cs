@@ -8,7 +8,7 @@ namespace SWP391_Mentor_Booking_System_Data.Data
 {
     public class MentorSkill
     {
-        public int Id { get; set; }
+        public int MentorSkillId { get; set; }
 
         // Foreign Keys
         public string MentorId { get; set; }

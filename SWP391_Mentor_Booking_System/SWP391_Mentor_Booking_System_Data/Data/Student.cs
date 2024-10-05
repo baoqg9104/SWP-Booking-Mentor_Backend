@@ -8,12 +8,12 @@ namespace SWP391_Mentor_Booking_System_Data.Data
 {
     public class Student
     {
-        public string Id { get; set; }  // ID của Student
-        public int GroupId { get; set; }  // Khóa ngoại liên kết với nhóm của sinh viên
-        public string UserId { get; set; }  // Khóa ngoại liên kết với User
+        public string StudentId { get; set; }
+        public string StudentName { get; set; }  // Tên sinh viên sẽ liên kết với username
+        public int? GroupId { get; set; }
 
-        public User User { get; set; }  // Student liên kết với một User
-        public Group Group { get; set; }  // Student liên kết với một nhóm (Group)
+        public User User { get; set; }  // Liên kết với Username bên User
+        public Group Group { get; set; }
     }
 
 

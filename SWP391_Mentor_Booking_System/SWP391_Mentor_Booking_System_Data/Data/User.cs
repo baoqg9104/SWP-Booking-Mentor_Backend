@@ -8,8 +8,8 @@ namespace SWP391_Mentor_Booking_System_Data.Data
 {
     public class User
     {
-        public string Id { get; set; }  // ID của User, có thể là string để linh động
-        public string Username { get; set; }  // Tên đăng nhập của người dùng
+        
+        public string UserName { get; set; }  // Tên đăng nhập của người dùng
         public string Password { get; set; }  // Mật khẩu đã được mã hóa
         public string Email { get; set; }
         public string Phone { get; set; }

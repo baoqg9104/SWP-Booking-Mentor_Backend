@@ -8,7 +8,7 @@ namespace SWP391_Mentor_Booking_System_Data.Data
 {
     public class Skill
     {
-        public int Id { get; set; }
+        public int SkillId { get; set; }
         public string Name { get; set; }
 
         // Relationships
