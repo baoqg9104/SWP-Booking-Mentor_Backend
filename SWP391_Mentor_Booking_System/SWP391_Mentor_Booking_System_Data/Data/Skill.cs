@@ -10,6 +10,11 @@ namespace SWP391_Mentor_Booking_System_Data.Data
     {
         public int SkillId { get; set; }
         public string Name { get; set; }
+
+        // Relationships
+        public ICollection<MentorSkill> MentorSkills { get; set; }
     }
+
+
 
 }

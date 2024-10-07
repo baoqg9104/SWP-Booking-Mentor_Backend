@@ -11,10 +11,11 @@ namespace SWP391_Mentor_Booking_System_Data.Data
         public int TopicId { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
-        public int SemesterId { get; set; }
+        public string SemesterId { get; set; }
+        public Semester Semester { get; set; }
         public bool Status { get; set; }
 
-        public Semester Semester { get; set; }
+        // Relationships
         public ICollection<Group> Groups { get; set; }
     }
 

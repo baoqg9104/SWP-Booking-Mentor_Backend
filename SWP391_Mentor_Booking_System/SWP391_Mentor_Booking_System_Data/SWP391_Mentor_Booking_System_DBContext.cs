@@ -23,44 +23,29 @@ namespace SWP391_Mentor_Booking_System_Data
         public DbSet<Topic> Topics { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<WalletTransaction> WalletTransactions { get; set; }
+        public DbSet<RefreshToken> RefreshTokens { get; set; }  // Thêm RefreshToken
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            // BookingSlot
-            modelBuilder.Entity<BookingSlot>()
-                .HasKey(b => b.BookingId);
+            // User
+            modelBuilder.Entity<User>()
+                .HasKey(u => u.UserName); // Đặt Username là khóa chính
 
-            modelBuilder.Entity<BookingSlot>()
-                .HasOne(b => b.Group)
-                .WithMany(g => g.BookingSlots)
-                .HasForeignKey(b => b.GroupId)
-                .OnDelete(DeleteBehavior.Cascade); // Keep cascade delete for Group
-
-            modelBuilder.Entity<BookingSlot>()
-                .HasOne(b => b.MentorSlot)
-                .WithMany()
-                .HasForeignKey(b => b.SlotId)
-                .OnDelete(DeleteBehavior.Restrict); // Change to Restrict or NoAction for MentorSlot
-
-            // Group
-            modelBuilder.Entity<Group>()
-                .HasKey(g => g.GroupId);
-
-            modelBuilder.Entity<Group>()
-                .HasOne(g => g.Topic)
-                .WithMany(t => t.Groups)
-                .HasForeignKey(g => g.TopicId)
-                .OnDelete(DeleteBehavior.Restrict);
-
-            modelBuilder.Entity<Group>()
-                .HasOne(g => g.SwpClass)
-                .WithMany(s => s.Groups)
-                .HasForeignKey(g => g.ClassId)
+            modelBuilder.Entity<User>()
+                .HasOne(u => u.Role)
+                .WithMany(r => r.Users)
+                .HasForeignKey(u => u.RoleId)
                 .OnDelete(DeleteBehavior.Cascade);
 
             // Mentor
             modelBuilder.Entity<Mentor>()
-                .HasKey(m => m.UserId);
+                .HasKey(m => m.MentorId); // Đặt MentorId là khóa chính
+
+            modelBuilder.Entity<Mentor>()
+                .HasOne(m => m.User)
+                .WithOne(u => u.Mentor)
+                .HasForeignKey<Mentor>(m => m.MentorName)  // Liên kết bằng MentorName
+                .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<Mentor>()
                 .HasMany(m => m.MentorSkills)
@@ -74,63 +59,77 @@ namespace SWP391_Mentor_Booking_System_Data
                 .HasForeignKey(ms => ms.MentorId)
                 .OnDelete(DeleteBehavior.Cascade);
 
+            // Student
+            modelBuilder.Entity<Student>()
+                .HasKey(s => s.StudentId); // Đặt StudentId là khóa chính
+
+            modelBuilder.Entity<Student>()
+                .HasOne(s => s.Group)
+                .WithMany(g => g.Students)
+                .HasForeignKey(s => s.GroupId)
+                .OnDelete(DeleteBehavior.SetNull);
+
+            modelBuilder.Entity<Student>()
+                .HasOne(s => s.User)
+                .WithOne(u => u.Student)
+                .HasForeignKey<Student>(s => s.StudentName)  // Liên kết bằng StudentName
+                .OnDelete(DeleteBehavior.Restrict);
+
             // MentorSkill
             modelBuilder.Entity<MentorSkill>()
                 .HasKey(ms => ms.MentorSkillId);
 
             modelBuilder.Entity<MentorSkill>()
                 .HasOne(ms => ms.Skill)
-                .WithMany()
+                .WithMany(s => s.MentorSkills)
                 .HasForeignKey(ms => ms.SkillId)
                 .OnDelete(DeleteBehavior.Cascade);
 
             // MentorSlot
             modelBuilder.Entity<MentorSlot>()
-                .HasKey(ms => ms.SlotId);
+                .HasKey(ms => ms.MentorSlotId);
 
-            // Role
-            modelBuilder.Entity<Role>()
-                .HasKey(r => r.RoleId);
-
-            modelBuilder.Entity<Role>()
-                .HasMany(r => r.Users)
-                .WithOne(u => u.Role)
-                .HasForeignKey(u => u.RoleId)
+            modelBuilder.Entity<MentorSlot>()
+                .HasMany(ms => ms.BookingSlots)
+                .WithOne(bs => bs.MentorSlot)
+                .HasForeignKey(bs => bs.MentorSlotId)
                 .OnDelete(DeleteBehavior.Cascade);
 
-            // Semester
-            modelBuilder.Entity<Semester>()
-                .HasKey(s => s.SemesterId);
+            // BookingSlot
+            modelBuilder.Entity<BookingSlot>()
+                .HasKey(b => b.BookingId);
 
-            modelBuilder.Entity<Semester>()
-                .HasMany(s => s.SwpClasses)
-                .WithOne(sc => sc.Semester)
-                .HasForeignKey(sc => sc.SemesterId)
-                .OnDelete(DeleteBehavior.Cascade);
+            modelBuilder.Entity<BookingSlot>()
+                .HasOne(b => b.Group)
+                .WithMany(g => g.BookingSlots)
+                .HasForeignKey(b => b.GroupId)
+                .OnDelete(DeleteBehavior.SetNull);
 
-            modelBuilder.Entity<Semester>()
-                .HasMany(s => s.Topics)
-                .WithOne(t => t.Semester)
-                .HasForeignKey(t => t.SemesterId)
-                .OnDelete(DeleteBehavior.Cascade);
+            modelBuilder.Entity<BookingSlot>()
+                .HasOne(b => b.MentorSlot)
+                .WithMany(ms => ms.BookingSlots)
+                .HasForeignKey(b => b.MentorSlotId)
+                .OnDelete(DeleteBehavior.Restrict);
 
-            // Skill
-            modelBuilder.Entity<Skill>()
-                .HasKey(s => s.SkillId);
+            // Group
+            modelBuilder.Entity<Group>()
+                .HasKey(g => g.GroupId);
 
-            // Student
-            modelBuilder.Entity<Student>()
-                .HasKey(s => new { s.UserId, s.GroupId });
+            modelBuilder.Entity<Group>()
+                .HasOne(g => g.Topic)
+                .WithMany(t => t.Groups)
+                .HasForeignKey(g => g.TopicId)
+                .OnDelete(DeleteBehavior.Restrict);
 
-            modelBuilder.Entity<Student>()
-                .HasOne(s => s.Group)
-                .WithMany(g => g.Students)
-                .HasForeignKey(s => s.GroupId)
+            modelBuilder.Entity<Group>()
+                .HasOne(g => g.SwpClass)
+                .WithMany(sc => sc.Groups)
+                .HasForeignKey(g => g.SwpClassId)
                 .OnDelete(DeleteBehavior.Cascade);
 
             // SwpClass
             modelBuilder.Entity<SwpClass>()
-                .HasKey(sc => sc.ClassId);
+                .HasKey(sc => sc.SwpClassId);
 
             modelBuilder.Entity<SwpClass>()
                 .HasOne(sc => sc.Mentor)
@@ -144,36 +143,25 @@ namespace SWP391_Mentor_Booking_System_Data
                 .HasForeignKey(sc => sc.SemesterId)
                 .OnDelete(DeleteBehavior.Cascade);
 
-            // Topic
-            modelBuilder.Entity<Topic>()
-                .HasKey(t => t.TopicId);
-
-            modelBuilder.Entity<Topic>()
-                .HasOne(t => t.Semester)
-                .WithMany(s => s.Topics)
-                .HasForeignKey(t => t.SemesterId)
-                .OnDelete(DeleteBehavior.Cascade);
-
-            // User
-            modelBuilder.Entity<User>()
-                .HasKey(u => u.UserId);
-
-            modelBuilder.Entity<User>()
-                .HasOne(u => u.Role)
-                .WithMany(r => r.Users)
-                .HasForeignKey(u => u.RoleId)
-                .OnDelete(DeleteBehavior.Cascade);
-
             // WalletTransaction
             modelBuilder.Entity<WalletTransaction>()
-                .HasKey(wt => new { wt.UserId, wt.BookingId });
+                .HasKey(wt => wt.WalletId);
 
             modelBuilder.Entity<WalletTransaction>()
                 .HasOne(wt => wt.BookingSlot)
-                .WithMany(bs => bs.WalletTransactions)
+                .WithMany()
                 .HasForeignKey(wt => wt.BookingId)
                 .OnDelete(DeleteBehavior.Cascade);
-        }
 
+            // RefreshToken
+            modelBuilder.Entity<RefreshToken>()
+                .HasKey(rt => rt.Id);  // Đặt Id là khóa chính
+
+            modelBuilder.Entity<RefreshToken>()
+                .HasOne(rt => rt.User)  // Liên kết với bảng User
+                .WithMany()  // Một User có thể có nhiều RefreshToken
+                .HasForeignKey(rt => rt.UserName)  // Chỉ định rõ ràng khóa ngoại là UserName
+                .OnDelete(DeleteBehavior.Cascade);
+        }
     }
 }
