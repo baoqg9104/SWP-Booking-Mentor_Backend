@@ -24,6 +24,16 @@ builder.Services.AddScoped<UserRepository>();
 builder.Services.AddScoped<RefreshTokenRepository>(); // Đăng ký RefreshTokenRepository
 builder.Services.AddScoped<UserService>();
 
+// Configure CORS
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowSpecificOrigin",
+        builder => builder
+            .WithOrigins("http://localhost:5173")
+            .AllowAnyHeader()
+            .AllowAnyMethod());
+});
+
 // Configure JWT Authentication
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
@@ -50,6 +60,9 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+//Enable the CORS policy
+app.UseCors("AllowSpecificOrigin");
 
 // Enable HTTPS redirection
 app.UseHttpsRedirection();
