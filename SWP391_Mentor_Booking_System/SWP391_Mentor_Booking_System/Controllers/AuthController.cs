@@ -27,40 +27,42 @@ namespace SWP391_Mentor_Booking_System_API.Controllers
         [HttpPost("register")]
         public IActionResult Register([FromBody] RegisterDTO registerDTO)
         {
-            if (_userService.IsUsernameTaken(registerDTO.UserName))
+            if (_userService.IsEmailExist(registerDTO.Email))
             {
-                return BadRequest("Username is already taken.");
+                return BadRequest("Email is already exist.");
             }
 
             var newUser = new User
             {
-                UserName = registerDTO.UserName,
+                FullName = registerDTO.FullName,
                 Password = registerDTO.Password,
                 Email = registerDTO.Email,
-                Phone = registerDTO.Phone,
-                RoleId = 1 // Mặc định là student
+                Phone = null,
+                Gender = null,
+                DateOfBirth = null,
+                RoleId = registerDTO.RoleId // Người dùng có thể chọn Student (1) hoặc Mentor (2)
             };
 
-            // Đăng ký User và Student
             _userService.RegisterUser(newUser);
 
             return Ok("User registered successfully.");
         }
 
+
         [HttpPost("login")]
         public IActionResult Login([FromBody] LoginUserDTO loginDto)
         {
-            var user = _userService.Authenticate(loginDto.Username, loginDto.Password);
+            var user = _userService.Authenticate(loginDto.Email, loginDto.Password); // Đăng nhập bằng email
 
             if (user == null)
             {
-                return Unauthorized("Thông tin đăng nhập không đúng!");
+                return Unauthorized("Thông tin đăng nhập không đúng hoặc mentor chưa được phê duyệt!"); // Cập nhật thông báo
             }
 
             var accessToken = GenerateToken(user);
             var refreshToken = _userService.GenerateRefreshToken();
 
-            _userService.SaveRefreshToken(user.UserName, refreshToken);
+            _userService.SaveRefreshToken(user.FullName, refreshToken);
 
             return Ok(new
             {
@@ -68,6 +70,8 @@ namespace SWP391_Mentor_Booking_System_API.Controllers
                 RefreshToken = refreshToken
             });
         }
+
+
         [HttpPost("refresh-token")]
         public IActionResult RefreshToken([FromBody] string refreshToken)
         {
@@ -93,7 +97,7 @@ namespace SWP391_Mentor_Booking_System_API.Controllers
 
             // Tạo và lưu refresh token mới
             var newRefreshToken = _userService.GenerateRefreshToken();
-            _userService.SaveRefreshToken(user.UserName, newRefreshToken);
+            _userService.SaveRefreshToken(user.FullName, newRefreshToken);
 
             return Ok(new
             {
@@ -112,15 +116,20 @@ namespace SWP391_Mentor_Booking_System_API.Controllers
             {
                 Subject = new ClaimsIdentity(new Claim[]
                 {
-                    new Claim(ClaimTypes.Name, user.UserName),
-                    new Claim(ClaimTypes.Role, user.RoleId.ToString())
+            new Claim(ClaimTypes.Name, user.FullName),
+            new Claim(ClaimTypes.Role, user.RoleId.ToString()),
+            new Claim("Email", user.Email), // Thêm email
+            new Claim("Phone", user.Phone ?? ""), // Thêm số điện thoại
+            new Claim("Gender", user.Gender ?? ""), // Thêm giới tính
+            new Claim("DateOfBirth", user.DateOfBirth?.ToString("yyyy-MM-dd") ?? "") // Thêm ngày sinh
                 }),
-                Expires = DateTime.UtcNow.AddMinutes(int.Parse(_configuration["Jwt:ExpireMinutes"])), 
+                Expires = DateTime.UtcNow.AddMinutes(int.Parse(_configuration["Jwt:ExpireMinutes"])),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
             };
 
             var token = tokenHandler.CreateToken(tokenDescriptor);
             return tokenHandler.WriteToken(token);
         }
+
     }
 }

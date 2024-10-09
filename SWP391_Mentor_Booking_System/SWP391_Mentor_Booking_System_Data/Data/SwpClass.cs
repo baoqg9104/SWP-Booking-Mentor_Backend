@@ -11,7 +11,7 @@ namespace SWP391_Mentor_Booking_System_Data.Data
         public int SwpClassId { get; set; }
         public string Name { get; set; }
 
-        public string MentorId { get; set; }
+        public string? MentorId { get; set; }
         public Mentor Mentor { get; set; }
 
         public string SemesterId { get; set; }
@@ -21,6 +21,7 @@ namespace SWP391_Mentor_Booking_System_Data.Data
 
         // Relationship with Group
         public ICollection<Group> Groups { get; set; }
+        public ICollection<Student> Students { get; set; }
 
     }
 
