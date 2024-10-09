@@ -8,7 +8,7 @@ namespace SWP391_Mentor_Booking_System_Data.DTO
 {
     public class LoginUserDTO
     {
-        public string Username { get; set; }
+        public string Email { get; set; }
         public string Password { get; set; }
     }
 }
