@@ -116,8 +116,8 @@ namespace SWP391_Mentor_Booking_System_API.Controllers
             {
                 Subject = new ClaimsIdentity(new Claim[]
                 {
-            new Claim(ClaimTypes.Name, user.FullName),
-            new Claim(ClaimTypes.Role, user.RoleId.ToString()),
+            new Claim("FullName", user.FullName),
+            new Claim("RoleId", user.RoleId.ToString()),
             new Claim("Email", user.Email), // Thêm email
             new Claim("Phone", user.Phone ?? ""), // Thêm số điện thoại
             new Claim("Gender", user.Gender ?? ""), // Thêm giới tính

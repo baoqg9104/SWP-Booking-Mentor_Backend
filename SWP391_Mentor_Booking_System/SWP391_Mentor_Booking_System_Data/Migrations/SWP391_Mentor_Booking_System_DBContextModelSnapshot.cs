@@ -24,13 +24,13 @@ namespace SWP391_Mentor_Booking_System_Data.Migrations
 
             modelBuilder.Entity("SWP391_Mentor_Booking_System_Data.Data.BookingSlot", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("BookingId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("BookingId"));
 
-                    b.Property<int>("GroupId")
+                    b.Property<int?>("GroupId")
                         .HasColumnType("int");
 
                     b.Property<int>("MentorSlotId")
@@ -39,7 +39,7 @@ namespace SWP391_Mentor_Booking_System_Data.Migrations
                     b.Property<bool>("Status")
                         .HasColumnType("bit");
 
-                    b.HasKey("Id");
+                    b.HasKey("BookingId");
 
                     b.HasIndex("GroupId");
 
@@ -50,11 +50,11 @@ namespace SWP391_Mentor_Booking_System_Data.Migrations
 
             modelBuilder.Entity("SWP391_Mentor_Booking_System_Data.Data.Group", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int?>("GroupId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int?>("GroupId"));
 
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
@@ -72,7 +72,7 @@ namespace SWP391_Mentor_Booking_System_Data.Migrations
                     b.Property<int>("WalletPoint")
                         .HasColumnType("int");
 
-                    b.HasKey("Id");
+                    b.HasKey("GroupId");
 
                     b.HasIndex("SwpClassId");
 
@@ -83,28 +83,28 @@ namespace SWP391_Mentor_Booking_System_Data.Migrations
 
             modelBuilder.Entity("SWP391_Mentor_Booking_System_Data.Data.Mentor", b =>
                 {
-                    b.Property<string>("Id")
+                    b.Property<string>("MentorId")
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<bool>("ApplyStatus")
                         .HasColumnType("bit");
 
-                    b.Property<int>("NumOfSlot")
+                    b.Property<string>("MentorName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int?>("NumOfSlot")
                         .HasColumnType("int");
 
-                    b.Property<int>("PointsReceived")
+                    b.Property<int?>("PointsReceived")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("RegistrationDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                    b.HasKey("MentorId");
 
-                    b.HasKey("Id");
-
-                    b.HasIndex("UserId")
+                    b.HasIndex("MentorName")
                         .IsUnique();
 
                     b.ToTable("Mentors");
@@ -112,11 +112,11 @@ namespace SWP391_Mentor_Booking_System_Data.Migrations
 
             modelBuilder.Entity("SWP391_Mentor_Booking_System_Data.Data.MentorSkill", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("MentorSkillId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("MentorSkillId"));
 
                     b.Property<int>("Level")
                         .HasColumnType("int");
@@ -128,7 +128,7 @@ namespace SWP391_Mentor_Booking_System_Data.Migrations
                     b.Property<int>("SkillId")
                         .HasColumnType("int");
 
-                    b.HasKey("Id");
+                    b.HasKey("MentorSkillId");
 
                     b.HasIndex("MentorId");
 
@@ -139,11 +139,11 @@ namespace SWP391_Mentor_Booking_System_Data.Migrations
 
             modelBuilder.Entity("SWP391_Mentor_Booking_System_Data.Data.MentorSlot", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("MentorSlotId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("MentorSlotId"));
 
                     b.Property<int>("BookingPoint")
                         .HasColumnType("int");
@@ -161,14 +161,14 @@ namespace SWP391_Mentor_Booking_System_Data.Migrations
                     b.Property<DateTime>("StartTime")
                         .HasColumnType("datetime2");
 
-                    b.HasKey("Id");
+                    b.HasKey("MentorSlotId");
 
                     b.HasIndex("MentorId");
 
                     b.ToTable("MentorSlots");
                 });
 
-            modelBuilder.Entity("SWP391_Mentor_Booking_System_Data.Data.Role", b =>
+            modelBuilder.Entity("SWP391_Mentor_Booking_System_Data.Data.RefreshToken", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -176,18 +176,44 @@ namespace SWP391_Mentor_Booking_System_Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<DateTime>("ExpiryDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Token")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserName");
+
+                    b.ToTable("RefreshTokens");
+                });
+
+            modelBuilder.Entity("SWP391_Mentor_Booking_System_Data.Data.Role", b =>
+                {
+                    b.Property<int>("RoleId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RoleId"));
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Id");
+                    b.HasKey("RoleId");
 
                     b.ToTable("Roles");
                 });
 
             modelBuilder.Entity("SWP391_Mentor_Booking_System_Data.Data.Semester", b =>
                 {
-                    b.Property<string>("Id")
+                    b.Property<string>("SemesterId")
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Code")
@@ -207,60 +233,64 @@ namespace SWP391_Mentor_Booking_System_Data.Migrations
                     b.Property<bool>("Status")
                         .HasColumnType("bit");
 
-                    b.HasKey("Id");
+                    b.HasKey("SemesterId");
 
                     b.ToTable("Semesters");
                 });
 
             modelBuilder.Entity("SWP391_Mentor_Booking_System_Data.Data.Skill", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("SkillId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("SkillId"));
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Id");
+                    b.HasKey("SkillId");
 
                     b.ToTable("Skills");
                 });
 
             modelBuilder.Entity("SWP391_Mentor_Booking_System_Data.Data.Student", b =>
                 {
-                    b.Property<string>("Id")
+                    b.Property<string>("StudentId")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<int>("GroupId")
+                    b.Property<int?>("GroupId")
                         .HasColumnType("int");
 
-                    b.Property<string>("UserId")
+                    b.Property<string>("StudentName")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
-                    b.HasKey("Id");
+                    b.Property<int?>("SwpClassId")
+                        .HasColumnType("int");
+
+                    b.HasKey("StudentId");
 
                     b.HasIndex("GroupId");
 
-                    b.HasIndex("UserId")
+                    b.HasIndex("StudentName")
                         .IsUnique();
+
+                    b.HasIndex("SwpClassId");
 
                     b.ToTable("Students");
                 });
 
             modelBuilder.Entity("SWP391_Mentor_Booking_System_Data.Data.SwpClass", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("SwpClassId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("SwpClassId"));
 
                     b.Property<string>("MentorId")
-                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Name")
@@ -274,7 +304,7 @@ namespace SWP391_Mentor_Booking_System_Data.Migrations
                     b.Property<bool>("Status")
                         .HasColumnType("bit");
 
-                    b.HasKey("Id");
+                    b.HasKey("SwpClassId");
 
                     b.HasIndex("MentorId");
 
@@ -285,11 +315,11 @@ namespace SWP391_Mentor_Booking_System_Data.Migrations
 
             modelBuilder.Entity("SWP391_Mentor_Booking_System_Data.Data.Topic", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("TopicId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("TopicId"));
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -306,7 +336,7 @@ namespace SWP391_Mentor_Booking_System_Data.Migrations
                     b.Property<bool>("Status")
                         .HasColumnType("bit");
 
-                    b.HasKey("Id");
+                    b.HasKey("TopicId");
 
                     b.HasIndex("SemesterId");
 
@@ -315,11 +345,17 @@ namespace SWP391_Mentor_Booking_System_Data.Migrations
 
             modelBuilder.Entity("SWP391_Mentor_Booking_System_Data.Data.User", b =>
                 {
-                    b.Property<string>("Id")
+                    b.Property<string>("FullName")
                         .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime?>("DateOfBirth")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Email")
                         .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Gender")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Password")
@@ -327,17 +363,12 @@ namespace SWP391_Mentor_Booking_System_Data.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Phone")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("RoleId")
                         .HasColumnType("int");
 
-                    b.Property<string>("Username")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
+                    b.HasKey("FullName");
 
                     b.HasIndex("RoleId");
 
@@ -346,11 +377,11 @@ namespace SWP391_Mentor_Booking_System_Data.Migrations
 
             modelBuilder.Entity("SWP391_Mentor_Booking_System_Data.Data.WalletTransaction", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("WalletId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("WalletId"));
 
                     b.Property<int>("BookingId")
                         .HasColumnType("int");
@@ -369,7 +400,7 @@ namespace SWP391_Mentor_Booking_System_Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Id");
+                    b.HasKey("WalletId");
 
                     b.HasIndex("BookingId");
 
@@ -381,8 +412,7 @@ namespace SWP391_Mentor_Booking_System_Data.Migrations
                     b.HasOne("SWP391_Mentor_Booking_System_Data.Data.Group", "Group")
                         .WithMany("BookingSlots")
                         .HasForeignKey("GroupId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.SetNull);
 
                     b.HasOne("SWP391_Mentor_Booking_System_Data.Data.MentorSlot", "MentorSlot")
                         .WithMany("BookingSlots")
@@ -418,7 +448,7 @@ namespace SWP391_Mentor_Booking_System_Data.Migrations
                 {
                     b.HasOne("SWP391_Mentor_Booking_System_Data.Data.User", "User")
                         .WithOne("Mentor")
-                        .HasForeignKey("SWP391_Mentor_Booking_System_Data.Data.Mentor", "UserId")
+                        .HasForeignKey("SWP391_Mentor_Booking_System_Data.Data.Mentor", "MentorName")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
@@ -455,21 +485,38 @@ namespace SWP391_Mentor_Booking_System_Data.Migrations
                     b.Navigation("Mentor");
                 });
 
+            modelBuilder.Entity("SWP391_Mentor_Booking_System_Data.Data.RefreshToken", b =>
+                {
+                    b.HasOne("SWP391_Mentor_Booking_System_Data.Data.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserName")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("SWP391_Mentor_Booking_System_Data.Data.Student", b =>
                 {
                     b.HasOne("SWP391_Mentor_Booking_System_Data.Data.Group", "Group")
                         .WithMany("Students")
                         .HasForeignKey("GroupId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("SWP391_Mentor_Booking_System_Data.Data.User", "User")
                         .WithOne("Student")
-                        .HasForeignKey("SWP391_Mentor_Booking_System_Data.Data.Student", "UserId")
+                        .HasForeignKey("SWP391_Mentor_Booking_System_Data.Data.Student", "StudentName")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
+                    b.HasOne("SWP391_Mentor_Booking_System_Data.Data.SwpClass", "SwpClass")
+                        .WithMany("Students")
+                        .HasForeignKey("SwpClassId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
                     b.Navigation("Group");
+
+                    b.Navigation("SwpClass");
 
                     b.Navigation("User");
                 });
@@ -479,8 +526,7 @@ namespace SWP391_Mentor_Booking_System_Data.Migrations
                     b.HasOne("SWP391_Mentor_Booking_System_Data.Data.Mentor", "Mentor")
                         .WithMany("SwpClasses")
                         .HasForeignKey("MentorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.SetNull);
 
                     b.HasOne("SWP391_Mentor_Booking_System_Data.Data.Semester", "Semester")
                         .WithMany("SwpClasses")
@@ -567,6 +613,8 @@ namespace SWP391_Mentor_Booking_System_Data.Migrations
             modelBuilder.Entity("SWP391_Mentor_Booking_System_Data.Data.SwpClass", b =>
                 {
                     b.Navigation("Groups");
+
+                    b.Navigation("Students");
                 });
 
             modelBuilder.Entity("SWP391_Mentor_Booking_System_Data.Data.Topic", b =>
