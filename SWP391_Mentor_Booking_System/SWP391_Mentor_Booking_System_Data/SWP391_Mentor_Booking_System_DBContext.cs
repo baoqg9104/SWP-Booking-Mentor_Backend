@@ -15,37 +15,25 @@ namespace SWP391_Mentor_Booking_System_Data
         public DbSet<Mentor> Mentors { get; set; }
         public DbSet<MentorSkill> MentorSkills { get; set; }
         public DbSet<MentorSlot> MentorSlots { get; set; }
-        public DbSet<Role> Roles { get; set; }
         public DbSet<Semester> Semesters { get; set; }
         public DbSet<Skill> Skills { get; set; }
         public DbSet<Student> Students { get; set; }
         public DbSet<SwpClass> SwpClasses { get; set; }
         public DbSet<Topic> Topics { get; set; }
-        public DbSet<User> Users { get; set; }
+        public DbSet<Admin> Admins { get; set; }
         public DbSet<WalletTransaction> WalletTransactions { get; set; }
-        public DbSet<RefreshToken> RefreshTokens { get; set; }  // Thêm RefreshToken
+        public DbSet<RefreshToken> RefreshTokens { get; set; }
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            // User
-            modelBuilder.Entity<User>()
-                .HasKey(u => u.FullName);
-
-            modelBuilder.Entity<User>()
-                .HasOne(u => u.Role)
-                .WithMany(r => r.Users)
-                .HasForeignKey(u => u.RoleId)
-                .OnDelete(DeleteBehavior.Cascade);
+  
 
             // Mentor
             modelBuilder.Entity<Mentor>()
                 .HasKey(m => m.MentorId);
 
-            modelBuilder.Entity<Mentor>()
-                .HasOne(m => m.User)
-                .WithOne(u => u.Mentor)
-                .HasForeignKey<Mentor>(m => m.MentorName)
-                .OnDelete(DeleteBehavior.Restrict);
+            
 
             modelBuilder.Entity<Mentor>()
                 .HasMany(m => m.MentorSkills)
@@ -69,17 +57,8 @@ namespace SWP391_Mentor_Booking_System_Data
                 .HasForeignKey(s => s.GroupId)
                 .OnDelete(DeleteBehavior.Restrict);
 
-            modelBuilder.Entity<Student>()
-               .HasOne(s => s.SwpClass)  // Thiết lập quan hệ với SwpClass
-               .WithMany(sc => sc.Students)  // Một lớp có nhiều học sinh
-               .HasForeignKey(s => s.SwpClassId)
-               .OnDelete(DeleteBehavior.Restrict);
 
-            modelBuilder.Entity<Student>()
-                .HasOne(s => s.User)
-                .WithOne(u => u.Student)
-                .HasForeignKey<Student>(s => s.StudentName)
-                .OnDelete(DeleteBehavior.Restrict);
+            
 
             // MentorSkill
             modelBuilder.Entity<MentorSkill>()
@@ -159,16 +138,11 @@ namespace SWP391_Mentor_Booking_System_Data
                 .HasForeignKey(wt => wt.BookingId)
                 .OnDelete(DeleteBehavior.Cascade);
 
-            // RefreshToken
-            modelBuilder.Entity<RefreshToken>()
-         .HasKey(rt => rt.Id);  // Khóa chính
+         
 
-            modelBuilder.Entity<RefreshToken>()
-                .HasOne(rt => rt.User)
-                .WithMany()  // Nếu bạn không có thuộc tính collection trong User, thì để trống
-                .HasForeignKey(rt => rt.UserName)  // Khóa ngoại
-                .HasPrincipalKey(u => u.FullName)  // Khóa chính của User
-                .OnDelete(DeleteBehavior.Cascade);
+           
+
+
         }
     }
 }

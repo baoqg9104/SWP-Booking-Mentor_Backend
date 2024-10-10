@@ -1,4 +1,5 @@
-﻿using SWP391_Mentor_Booking_System_Data.Data;
+﻿using Microsoft.EntityFrameworkCore;
+using SWP391_Mentor_Booking_System_Data.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,29 +17,26 @@ namespace SWP391_Mentor_Booking_System_Data.Repositories
             _context = context;
         }
 
-        // Lưu refresh token
         public void AddRefreshToken(RefreshToken refreshToken)
         {
             _context.RefreshTokens.Add(refreshToken);
-            _context.SaveChanges();
         }
 
-        // Lấy refresh token từ database
-        public RefreshToken GetByToken(string token)
+        public async Task<RefreshToken> GetRefreshTokenByUserIdAsync(string userId)
         {
-            return _context.RefreshTokens.FirstOrDefault(rt => rt.Token == token);
+            return await _context.RefreshTokens.FirstOrDefaultAsync(rt => rt.UserId == userId);
         }
 
-        // Xóa refresh token
-        public void RemoveToken(string token)
+        public void RemoveRefreshToken(RefreshToken refreshToken)
         {
-            var tokenEntity = GetByToken(token);
-            if (tokenEntity != null)
-            {
-                _context.RefreshTokens.Remove(tokenEntity);
-                _context.SaveChanges();
-            }
+            _context.RefreshTokens.Remove(refreshToken);
+        }
+
+        public async Task SaveChangesAsync()
+        {
+            await _context.SaveChangesAsync();
         }
     }
+
 
 }

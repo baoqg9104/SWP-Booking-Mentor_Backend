@@ -8,6 +8,7 @@ using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
+
 // Add services to the container.
 builder.Services.AddControllers();
 
@@ -20,9 +21,9 @@ builder.Services.AddDbContext<SWP391_Mentor_Booking_System_DBContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 // Add repository and services to DI container
-builder.Services.AddScoped<UserRepository>();
+builder.Services.AddScoped<AuthRepository>();
 builder.Services.AddScoped<RefreshTokenRepository>(); // Đăng ký RefreshTokenRepository
-builder.Services.AddScoped<UserService>();
+builder.Services.AddScoped<AuthService>();
 
 // Configure JWT Authentication
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)

@@ -10,11 +10,17 @@ namespace SWP391_Mentor_Booking_System_Data.Data
     {
         public string StudentId { get; set; }
         public string StudentName { get; set; }  // Tên sinh viên sẽ liên kết với username
+        public string Password { get; set; }
+        public string Email { get; set; }
+        public string? Phone { get; set; }
+        public string? Gender { get; set; }
+        public DateTime? DateOfBirth { get; set; }
         public int? GroupId { get; set; }
-        public int? SwpClassId { get; set; } // Khóa ngoại đến SwpClass
+        
 
-        public SwpClass SwpClass { get; set; }
-        public User User { get; set; }  // Liên kết với Username bên User
+       
+    
+        
         public Group Group { get; set; }
     }
 
