@@ -8,6 +8,6 @@ build_property.PlatformNeutralAssembly =
 build_property.EnforceExtendedAnalyzerRules = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = SWP391_Mentor_Booking_System_Data
-build_property.ProjectDir = D:\code\MentorBooking2\SWP391_Mentor_Booking_System\SWP391_Mentor_Booking_System_Data\
+build_property.ProjectDir = C:\Users\Admin\Documents\GitHub\Group2_SWP391_SE1867_Backend\SWP391_Mentor_Booking_System\SWP391_Mentor_Booking_System_Data\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
