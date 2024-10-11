@@ -195,6 +195,7 @@ namespace SWP391_Mentor_Booking_System_Service.Service
         new Claim("phone", student.Phone ?? string.Empty),
         new Claim("gender", student.Gender ?? string.Empty),
         new Claim("dateOfBirth", student.DateOfBirth?.ToString("o") ?? string.Empty), 
+        new Claim("GroupId", student.GroupId ?? string.Empty)
         // Thêm các claims khác nếu cần
     };
 

@@ -11,7 +11,7 @@ namespace SWP391_Mentor_Booking_System_Data.Data
         public int BookingId { get; set; }
 
         // Foreign Key
-        public int? GroupId { get; set; }
+        public string? GroupId { get; set; }
         public Group Group { get; set; }
 
         public int MentorSlotId { get; set; }

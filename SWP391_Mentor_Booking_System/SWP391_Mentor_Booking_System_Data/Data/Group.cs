@@ -8,7 +8,7 @@
     {
         public class Group
         {
-            public int? GroupId { get; set; }
+            public string? GroupId { get; set; }
             public string Name { get; set; }
 
             // Foreign Keys

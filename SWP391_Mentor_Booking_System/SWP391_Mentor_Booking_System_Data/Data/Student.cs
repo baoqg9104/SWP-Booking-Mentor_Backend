@@ -15,7 +15,7 @@ namespace SWP391_Mentor_Booking_System_Data.Data
         public string? Phone { get; set; }
         public string? Gender { get; set; }
         public DateTime? DateOfBirth { get; set; }
-        public int? GroupId { get; set; }
+        public string? GroupId { get; set; }
         
 
        
