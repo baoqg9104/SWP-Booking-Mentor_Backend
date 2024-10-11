@@ -24,6 +24,7 @@ builder.Services.AddDbContext<SWP391_Mentor_Booking_System_DBContext>(options =>
 builder.Services.AddScoped<AuthRepository>();
 builder.Services.AddScoped<RefreshTokenRepository>(); // Đăng ký RefreshTokenRepository
 builder.Services.AddScoped<AuthService>();
+builder.Services.AddScoped<UserService>();
 
 // Configure JWT Authentication
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)

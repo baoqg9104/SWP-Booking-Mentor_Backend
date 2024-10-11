@@ -427,3 +427,8 @@ D:\code\MentorBooking2\SWP391_Mentor_Booking_System\SWP391_Mentor_Booking_System
 D:\code\MentorBooking2\SWP391_Mentor_Booking_System\SWP391_Mentor_Booking_System\obj\Debug\net8.0\SWP391_Mentor_Booking_System_API.pdb
 D:\code\MentorBooking2\SWP391_Mentor_Booking_System\SWP391_Mentor_Booking_System\obj\Debug\net8.0\SWP391_Mentor_Booking_System_API.genruntimeconfig.cache
 D:\code\MentorBooking2\SWP391_Mentor_Booking_System\SWP391_Mentor_Booking_System\obj\Debug\net8.0\ref\SWP391_Mentor_Booking_System_API.dll
+C:\Users\Admin\Documents\GitHub\Group2_SWP391_SE1867_Backend\SWP391_Mentor_Booking_System\SWP391_Mentor_Booking_System\bin\Debug\net8.0\BCrypt.Net-Next.dll
+C:\Users\Admin\Documents\GitHub\Group2_SWP391_SE1867_Backend\SWP391_Mentor_Booking_System\SWP391_Mentor_Booking_System\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Users\Admin\Documents\GitHub\Group2_SWP391_SE1867_Backend\SWP391_Mentor_Booking_System\SWP391_Mentor_Booking_System\bin\Debug\net8.0\Microsoft.Bcl.TimeProvider.dll
+C:\Users\Admin\Documents\GitHub\Group2_SWP391_SE1867_Backend\SWP391_Mentor_Booking_System\SWP391_Mentor_Booking_System\bin\Debug\net8.0\SWP391_Mentor_Booking_System_Service.dll
+C:\Users\Admin\Documents\GitHub\Group2_SWP391_SE1867_Backend\SWP391_Mentor_Booking_System\SWP391_Mentor_Booking_System\bin\Debug\net8.0\SWP391_Mentor_Booking_System_Service.pdb
