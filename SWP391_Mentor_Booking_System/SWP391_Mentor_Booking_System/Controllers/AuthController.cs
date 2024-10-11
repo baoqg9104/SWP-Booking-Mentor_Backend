@@ -28,43 +28,33 @@ namespace SWP391_Mentor_Booking_System_API.Controllers
             }
         }
 
-        [HttpPost("login/student")]
-        public async Task<IActionResult> LoginStudent([FromBody] LoginDTO loginDto)
+        [HttpPost("login")]
+        public async Task<IActionResult> Login([FromBody] LoginDTO loginDto)
         {
             try
             {
-                var (accessToken, refreshToken) = await _authService.LoginStudentAsync(loginDto);
-                return Ok(new { AccessToken = accessToken, RefreshToken = refreshToken });
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
-        }
+                // Kiểm tra vai trò của người dùng từ LoginDTO
+                (string accessToken, string refreshToken) tokens;
 
+                if (loginDto.Role.Equals("Student", StringComparison.OrdinalIgnoreCase))
+                {
+                    tokens = await _authService.LoginStudentAsync(loginDto);
+                }
+                else if (loginDto.Role.Equals("Mentor", StringComparison.OrdinalIgnoreCase))
+                {
+                    tokens = await _authService.LoginMentorAsync(loginDto);
+                }
+                else if (loginDto.Role.Equals("Admin", StringComparison.OrdinalIgnoreCase))
+                {
+                    tokens = await _authService.LoginAdminAsync(loginDto);
+                }
+                else
+                {
+                    return BadRequest("Vai trò không hợp lệ.");
+                }
 
-        [HttpPost("login/mentor")]
-        public async Task<IActionResult> LoginMentor([FromBody] LoginDTO loginDto)
-        {
-            try
-            {
-                var (accessToken, refreshToken) = await _authService.LoginMentorAsync(loginDto);
-                return Ok(new { AccessToken = accessToken, RefreshToken = refreshToken });
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
-        }
-
-
-        [HttpPost("login/admin")]
-        public async Task<IActionResult> LoginAdmin([FromBody] LoginDTO loginDto)
-        {
-            try
-            {
-                var (accessToken, refreshToken) = await _authService.LoginAdminAsync(loginDto);
-                return Ok(new { AccessToken = accessToken, RefreshToken = refreshToken });
+                // Trả về token sau khi đăng nhập thành công
+                return Ok(new { AccessToken = tokens.accessToken, RefreshToken = tokens.refreshToken });
             }
             catch (Exception ex)
             {
