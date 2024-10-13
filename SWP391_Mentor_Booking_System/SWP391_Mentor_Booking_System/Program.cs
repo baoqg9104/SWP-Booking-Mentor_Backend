@@ -25,6 +25,9 @@ builder.Services.AddScoped<AuthRepository>();
 builder.Services.AddScoped<RefreshTokenRepository>(); // Đăng ký RefreshTokenRepository
 builder.Services.AddScoped<AuthService>();
 builder.Services.AddScoped<UserService>();
+builder.Services.AddScoped<MentorSlotService>();
+builder.Services.AddScoped<MentorService>();
+
 
 // Configure JWT Authentication
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
