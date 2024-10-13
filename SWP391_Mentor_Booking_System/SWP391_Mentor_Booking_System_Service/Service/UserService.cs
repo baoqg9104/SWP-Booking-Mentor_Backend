@@ -58,6 +58,40 @@ namespace SWP391_Mentor_Booking_System_Service.Service
 
             return false;
         }
+
+        public async Task<bool> ChangePasswordAsync(ChangePassDTO changePassDto)
+        {
+            if (changePassDto.Role == "Student")
+            {
+                var student = await _context.Students.FirstOrDefaultAsync(s => s.StudentId == changePassDto.Id);
+                if (student == null || !BCrypt.Net.BCrypt.Verify(changePassDto.OldPassword, student.Password))
+                    return false;
+
+                var hashedNewPassword = BCrypt.Net.BCrypt.HashPassword(changePassDto.NewPassword);
+                student.Password = hashedNewPassword;
+                await _context.SaveChangesAsync();
+
+                return true;
+            }
+
+            if (changePassDto.Role == "Mentor")
+            {
+                var mentor = await _context.Mentors.FirstOrDefaultAsync(s => s.MentorId == changePassDto.Id);
+                if (mentor == null || !BCrypt.Net.BCrypt.Verify(changePassDto.OldPassword, mentor.Password))
+                    return false;
+
+                var hashedNewPassword = BCrypt.Net.BCrypt.HashPassword(changePassDto.NewPassword);
+                mentor.Password = hashedNewPassword;
+                await _context.SaveChangesAsync();
+
+                return true;
+            }
+
+            return false;
+        }
+
+
+
     }
 
 }
