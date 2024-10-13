@@ -49,8 +49,24 @@
   },
   {
     "ContainingType": "SWP391_Mentor_Booking_System_API.Controllers.UserController",
+    "Method": "ChangePassword",
+    "RelativePath": "api/User/change-password",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "changePassDto",
+        "Type": "SWP391_Mentor_Booking_System_Data.DTO.ChangePassDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "SWP391_Mentor_Booking_System_API.Controllers.UserController",
     "Method": "UpdateUser",
-    "RelativePath": "api/User/update",
+    "RelativePath": "api/User/update-user",
     "HttpMethod": "PUT",
     "IsController": true,
     "Order": 0,
