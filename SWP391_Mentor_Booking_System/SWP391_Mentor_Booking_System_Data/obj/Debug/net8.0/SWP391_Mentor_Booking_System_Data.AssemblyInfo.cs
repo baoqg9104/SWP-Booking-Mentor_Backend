@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("SWP391_Mentor_Booking_System_Data")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+7b731e695766011e2fe8089ae9780cbfcd8eb2a2")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+90b8b9f039e2b5bc657a9bf091ecf6359e82557b")]
 [assembly: System.Reflection.AssemblyProductAttribute("SWP391_Mentor_Booking_System_Data")]
 [assembly: System.Reflection.AssemblyTitleAttribute("SWP391_Mentor_Booking_System_Data")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
