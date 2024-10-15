@@ -15,5 +15,6 @@ namespace SWP391_Mentor_Booking_System_Data.DTO
         public string? Phone { get; set; }
         public string? Gender { get; set; }
         public DateTime? DateOfBirth { get; set; }
+        public string? MeetUrl { get; set; }
     }
 }

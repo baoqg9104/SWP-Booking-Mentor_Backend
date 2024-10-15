@@ -588,3 +588,15 @@ D:\code\MentorBooking3\Group2_SWP391_SE1867_Backend\SWP391_Mentor_Booking_System
 D:\code\MentorBooking3\Group2_SWP391_SE1867_Backend\SWP391_Mentor_Booking_System\SWP391_Mentor_Booking_System\obj\Debug\net8.0\SWP391_Mentor_Booking_System_API.csproj.CopyComplete
 D:\code\MentorBooking3\Group2_SWP391_SE1867_Backend\SWP391_Mentor_Booking_System\SWP391_Mentor_Booking_System\obj\Debug\net8.0\SWP391_Mentor_Booking_System_API.genruntimeconfig.cache
 D:\code\MentorBooking3\Group2_SWP391_SE1867_Backend\SWP391_Mentor_Booking_System\SWP391_Mentor_Booking_System\obj\Debug\net8.0\ref\SWP391_Mentor_Booking_System_API.dll
+C:\Users\Admin\Documents\GitHub\Group2_SWP391_SE1867_Backend\SWP391_Mentor_Booking_System\SWP391_Mentor_Booking_System\bin\Debug\net8.0\Microsoft.Extensions.Caching.Memory.dll
+C:\Users\Admin\Documents\GitHub\Group2_SWP391_SE1867_Backend\SWP391_Mentor_Booking_System\SWP391_Mentor_Booking_System\bin\Debug\net8.0\Microsoft.Extensions.DependencyInjection.dll
+C:\Users\Admin\Documents\GitHub\Group2_SWP391_SE1867_Backend\SWP391_Mentor_Booking_System\SWP391_Mentor_Booking_System\bin\Debug\net8.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+C:\Users\Admin\Documents\GitHub\Group2_SWP391_SE1867_Backend\SWP391_Mentor_Booking_System\SWP391_Mentor_Booking_System\bin\Debug\net8.0\Microsoft.Extensions.Diagnostics.Abstractions.dll
+C:\Users\Admin\Documents\GitHub\Group2_SWP391_SE1867_Backend\SWP391_Mentor_Booking_System\SWP391_Mentor_Booking_System\bin\Debug\net8.0\Microsoft.Extensions.Diagnostics.HealthChecks.dll
+C:\Users\Admin\Documents\GitHub\Group2_SWP391_SE1867_Backend\SWP391_Mentor_Booking_System\SWP391_Mentor_Booking_System\bin\Debug\net8.0\Microsoft.Extensions.Diagnostics.HealthChecks.Abstractions.dll
+C:\Users\Admin\Documents\GitHub\Group2_SWP391_SE1867_Backend\SWP391_Mentor_Booking_System\SWP391_Mentor_Booking_System\bin\Debug\net8.0\Microsoft.Extensions.Diagnostics.HealthChecks.EntityFrameworkCore.dll
+C:\Users\Admin\Documents\GitHub\Group2_SWP391_SE1867_Backend\SWP391_Mentor_Booking_System\SWP391_Mentor_Booking_System\bin\Debug\net8.0\Microsoft.Extensions.Hosting.Abstractions.dll
+C:\Users\Admin\Documents\GitHub\Group2_SWP391_SE1867_Backend\SWP391_Mentor_Booking_System\SWP391_Mentor_Booking_System\bin\Debug\net8.0\Microsoft.Extensions.Logging.dll
+C:\Users\Admin\Documents\GitHub\Group2_SWP391_SE1867_Backend\SWP391_Mentor_Booking_System\SWP391_Mentor_Booking_System\bin\Debug\net8.0\Microsoft.Extensions.Logging.Abstractions.dll
+C:\Users\Admin\Documents\GitHub\Group2_SWP391_SE1867_Backend\SWP391_Mentor_Booking_System\SWP391_Mentor_Booking_System\bin\Debug\net8.0\Microsoft.Extensions.Options.dll
+C:\Users\Admin\Documents\GitHub\Group2_SWP391_SE1867_Backend\SWP391_Mentor_Booking_System\SWP391_Mentor_Booking_System\bin\Debug\net8.0\System.ClientModel.dll
