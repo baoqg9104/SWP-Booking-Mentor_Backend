@@ -49,6 +49,7 @@ namespace SWP391_Mentor_Booking_System_Service.Service
                 user.Phone = updateUserDto.Phone;
                 user.Gender = updateUserDto.Gender;
                 user.DateOfBirth = updateUserDto.DateOfBirth;
+                user.MeetUrl = updateUserDto.MeetUrl;
 
                 _context.Mentors.Update(user);
                 await _context.SaveChangesAsync();

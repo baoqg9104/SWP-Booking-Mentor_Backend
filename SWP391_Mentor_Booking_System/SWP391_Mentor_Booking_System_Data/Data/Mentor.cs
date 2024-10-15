@@ -18,7 +18,7 @@ namespace SWP391_Mentor_Booking_System_Data.Data
         public int? PointsReceived { get; set; }
         public int? NumOfSlot { get; set; }
         public DateTime RegistrationDate { get; set; }
-        
+        public string? MeetUrl { get; set; }
         public bool ApplyStatus { get; set; } = false;
 
     
