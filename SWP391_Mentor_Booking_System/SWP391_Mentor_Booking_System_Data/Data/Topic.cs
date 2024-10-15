@@ -13,6 +13,7 @@ namespace SWP391_Mentor_Booking_System_Data.Data
         public string Description { get; set; }
         public string SemesterId { get; set; }
         public Semester Semester { get; set; }
+        public string Actors {  get; set; }
         public bool Status { get; set; }
 
         // Relationships

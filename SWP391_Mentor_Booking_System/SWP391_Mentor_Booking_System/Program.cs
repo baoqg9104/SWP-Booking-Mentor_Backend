@@ -29,8 +29,7 @@ builder.Services.AddScoped<MentorSlotService>();
 builder.Services.AddScoped<MentorService>();
 builder.Services.AddScoped<StudentService>();
 builder.Services.AddScoped<StudentRepository>();
-
-
+builder.Services.AddScoped<SemesterService>();
 
 // Configure JWT Authentication
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
