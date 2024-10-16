@@ -30,6 +30,14 @@ builder.Services.AddScoped<MentorService>();
 builder.Services.AddScoped<StudentService>();
 builder.Services.AddScoped<StudentRepository>();
 builder.Services.AddScoped<SemesterService>();
+builder.Services.AddScoped<TopicService>();
+
+builder.Services.AddControllers()
+    .AddJsonOptions(options =>
+    {
+        options.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.Preserve;
+    });
+
 
 // Configure JWT Authentication
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
