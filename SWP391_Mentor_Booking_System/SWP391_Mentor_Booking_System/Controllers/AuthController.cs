@@ -76,7 +76,24 @@ namespace SWP391_Mentor_Booking_System_API.Controllers
             }
         }
 
+        [HttpGet("validate-token")]
+        public async Task<IActionResult> ValidateToken([FromHeader] string token)
+        {
+            if (string.IsNullOrEmpty(token))
+            {
+                return BadRequest("Token không được để trống.");
+            }
 
+            var isValid = _authService.IsTokenValid(token);
+            if (isValid)
+            {
+                return Ok("Token hợp lệ.");
+            }
+            else
+            {
+                return Unauthorized("Token không hợp lệ."); 
+            }
+        }
 
     }
 }
