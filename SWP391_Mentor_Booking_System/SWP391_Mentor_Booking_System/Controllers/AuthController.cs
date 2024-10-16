@@ -14,6 +14,7 @@ namespace SWP391_Mentor_Booking_System_API.Controllers
         {
             _authService = authService;
         }
+
         [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody] RegisterDTO registerDto)
         {

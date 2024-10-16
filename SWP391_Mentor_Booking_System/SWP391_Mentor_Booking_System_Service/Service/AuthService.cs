@@ -1,11 +1,11 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Text;
+using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using SWP391_Mentor_Booking_System_Data.Data;
 using SWP391_Mentor_Booking_System_Data.DTO;
 using SWP391_Mentor_Booking_System_Data.Repositories;
-using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
-using System.Text;
 
 namespace SWP391_Mentor_Booking_System_Service.Service
 {
@@ -14,13 +14,20 @@ namespace SWP391_Mentor_Booking_System_Service.Service
         private readonly AuthRepository _authRepository;
         private readonly RefreshTokenRepository _refreshTokenRepository;
         private readonly IConfiguration _configuration;
+        private readonly SymmetricSecurityKey _key;
 
-        public AuthService(AuthRepository authRepository, IConfiguration configuration, RefreshTokenRepository refreshTokenRepository)
+        public AuthService(
+            AuthRepository authRepository,
+            IConfiguration configuration,
+            RefreshTokenRepository refreshTokenRepository
+        )
         {
             _authRepository = authRepository;
             _configuration = configuration;
             _refreshTokenRepository = refreshTokenRepository;
+            _key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JWT:SigningKey"]));
         }
+
         public async Task RegisterAsync(RegisterDTO registerDto)
         {
             if (_authRepository.EmailExists(registerDto.Email))
@@ -59,8 +66,10 @@ namespace SWP391_Mentor_Booking_System_Service.Service
                     PointsReceived = null,
                     NumOfSlot = null,
                     RegistrationDate = DateTime.Now,
-                  
-                    ApplyStatus = false // Đặt ApplyStatus là false
+
+                    ApplyStatus =
+                        false // Đặt ApplyStatus là false
+                    ,
                     // Các trường khác để null
                 };
                 _authRepository.AddMentor(mentor);
@@ -70,7 +79,9 @@ namespace SWP391_Mentor_Booking_System_Service.Service
         }
 
         // Phương thức đăng nhập cho Student
-        public async Task<(string accessToken, string refreshToken)> LoginStudentAsync(LoginDTO loginDto)
+        public async Task<(string accessToken, string refreshToken)> LoginStudentAsync(
+            LoginDTO loginDto
+        )
         {
             var student = await _authRepository.GetStudentByEmailAsync(loginDto.Email);
             if (student == null)
@@ -84,7 +95,7 @@ namespace SWP391_Mentor_Booking_System_Service.Service
             }
 
             // Tạo token mới
-            var accessToken = GenerateToken(student);
+            var accessToken = CreateToken(student, "Student");
             var refreshToken = GenerateRefreshToken(student.StudentId);
 
             // Lưu refresh token vào cơ sở dữ liệu
@@ -92,7 +103,10 @@ namespace SWP391_Mentor_Booking_System_Service.Service
             {
                 Token = refreshToken,
                 UserId = student.StudentId,
-                ExpiryDate = DateTime.UtcNow.AddDays(7) // Thời gian hết hạn 7 ngày
+                ExpiryDate = DateTime.UtcNow.AddDays(
+                    7
+                ) // Thời gian hết hạn 7 ngày
+                ,
             };
             _refreshTokenRepository.AddRefreshToken(refreshTokenEntity);
             await _refreshTokenRepository.SaveChangesAsync();
@@ -101,7 +115,9 @@ namespace SWP391_Mentor_Booking_System_Service.Service
         }
 
         // Phương thức đăng nhập cho Mentor
-        public async Task<(string accessToken, string refreshToken)> LoginMentorAsync(LoginDTO loginDto)
+        public async Task<(string accessToken, string refreshToken)> LoginMentorAsync(
+            LoginDTO loginDto
+        )
         {
             var mentor = await _authRepository.GetMentorByEmailAsync(loginDto.Email);
 
@@ -120,7 +136,7 @@ namespace SWP391_Mentor_Booking_System_Service.Service
                 throw new Exception("Đợi admin approved.");
             }
 
-            var accessToken = GenerateToken(mentor);
+            var accessToken = CreateToken(mentor, "Mentor");
             var refreshToken = GenerateRefreshToken(mentor.MentorId);
 
             // Lưu refresh token vào cơ sở dữ liệu
@@ -128,7 +144,10 @@ namespace SWP391_Mentor_Booking_System_Service.Service
             {
                 Token = refreshToken,
                 UserId = mentor.MentorId,
-                ExpiryDate = DateTime.UtcNow.AddDays(7) // Hết hạn sau 7 ngày
+                ExpiryDate = DateTime.UtcNow.AddDays(
+                    7
+                ) // Hết hạn sau 7 ngày
+                ,
             };
             _refreshTokenRepository.AddRefreshToken(refreshTokenEntity);
             await _refreshTokenRepository.SaveChangesAsync();
@@ -137,7 +156,9 @@ namespace SWP391_Mentor_Booking_System_Service.Service
         }
 
         // Phương thức đăng nhập cho Admin
-        public async Task<(string accessToken, string refreshToken)> LoginAdminAsync(LoginDTO loginDto)
+        public async Task<(string accessToken, string refreshToken)> LoginAdminAsync(
+            LoginDTO loginDto
+        )
         {
             var admin = await _authRepository.GetAdminByEmailAsync(loginDto.Email);
 
@@ -153,20 +174,24 @@ namespace SWP391_Mentor_Booking_System_Service.Service
             }
 
             // Tạo token cho admin
-            var accessToken = GenerateToken(admin);
+            var accessToken = CreateToken(admin, "Admin");
             var refreshToken = GenerateRefreshToken(admin.AdminId);
 
             var refreshTokenEntity = new RefreshToken
             {
                 Token = refreshToken,
                 UserId = admin.AdminId,
-                ExpiryDate = DateTime.UtcNow.AddDays(7) // Hết hạn sau 7 ngày
+                ExpiryDate = DateTime.UtcNow.AddDays(
+                    7
+                ) // Hết hạn sau 7 ngày
+                ,
             };
             _refreshTokenRepository.AddRefreshToken(refreshTokenEntity);
             await _refreshTokenRepository.SaveChangesAsync();
 
             return (accessToken, refreshToken);
         }
+
         private string GenerateMentorId()
         {
             int count = _authRepository.GetTotalMentors();
@@ -179,79 +204,49 @@ namespace SWP391_Mentor_Booking_System_Service.Service
             return $"SE{count + 1:000}";
         }
 
-        // Tạo token JWT (phương thức mẫu, bạn thay thế với logic của mình)
-       
-
-
-        private string GenerateToken(Student student)
+        private string CreateToken<T>(T user, string role) where T : class
         {
-            var claims = new[]
+            var claims = new List<Claim>();
+
+            // Kiểm tra các thuộc tính cụ thể của user và thêm vào claims
+            if (typeof(T) == typeof(Student))
             {
-        new Claim(JwtRegisteredClaimNames.Sub, student.StudentId),
-        new Claim("accountType", "Student"),
-        new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-        new Claim("fullName", student.StudentName),
-        new Claim("email", student.Email),
-        new Claim("phone", student.Phone ?? string.Empty),
-        new Claim("gender", student.Gender ?? string.Empty),
-        new Claim("dateOfBirth", student.DateOfBirth?.ToString("o") ?? string.Empty), 
-        new Claim("GroupId", student.GroupId ?? string.Empty)
-        // Thêm các claims khác nếu cần
-    };
-
-            return CreateToken(claims);
-        }
-
-        private string GenerateToken(Mentor mentor)
-        {
-            var claims = new[]
+                var student = user as Student;
+                claims.Add(new Claim(JwtRegisteredClaimNames.Email, student.Email));
+                claims.Add(new Claim("fullName", student.StudentName));
+            }
+            else if (typeof(T) == typeof(Mentor))
             {
-        new Claim(JwtRegisteredClaimNames.Sub, mentor.MentorId),
-        new Claim("accountType", "Mentor"),
-        new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-        new Claim("fullName", mentor.MentorName),
-        new Claim("email", mentor.Email),
-        new Claim("phone", mentor.Phone ?? string.Empty),
-        new Claim("gender", mentor.Gender ?? string.Empty),
-        new Claim("dateOfBirth", mentor.DateOfBirth?.ToString("o") ?? string.Empty),
-        new Claim("pointsReceived", mentor.PointsReceived?.ToString() ?? "0"),
-        new Claim("numOfSlot", mentor.NumOfSlot?.ToString() ?? "0"),
-        new Claim("registrationDate", mentor.RegistrationDate.ToString("o"))
-    };
-
-            return CreateToken(claims);
-        }
-
-        private string GenerateToken(Admin admin)
-        {
-            var claims = new[]
+                var mentor = user as Mentor;
+                new Claim(JwtRegisteredClaimNames.Email, mentor.Email);
+                new Claim("fullName", mentor.MentorName);
+            }
+            else if (typeof (T) == typeof(Admin))
             {
-        new Claim(JwtRegisteredClaimNames.Sub, admin.AdminId),
-        new Claim("accountType", "Admin"),
-        new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-        new Claim("email", admin.Email)
-        // Thêm các claims khác nếu cần
-    };
+                var admin = user as Admin;
+                new Claim(JwtRegisteredClaimNames.Email, admin.Email);
+                new Claim("fullName", admin.AdminName);
+            }
 
-            return CreateToken(claims);
+            claims.Add(new Claim("role", role));
+
+            var creds = new SigningCredentials(_key, SecurityAlgorithms.HmacSha512Signature);
+
+            var tokenDescriptor = new SecurityTokenDescriptor
+            {
+                Subject = new ClaimsIdentity(claims),
+                Expires = DateTime.Now.AddDays(7),
+                SigningCredentials = creds,
+                Issuer = _configuration["JWT:Issuer"],
+                Audience = _configuration["JWT:Audience"]
+            };
+
+            var tokenHandler = new JwtSecurityTokenHandler();
+
+            var token = tokenHandler.CreateToken(tokenDescriptor);
+
+            return tokenHandler.WriteToken(token);
         }
-
-        // Phương thức tạo token chung
-        private string CreateToken(IEnumerable<Claim> claims)
-        {
-            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]));
-            var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
-
-            var token = new JwtSecurityToken(
-                issuer: _configuration["Jwt:Issuer"],
-                audience: _configuration["Jwt:Audience"],
-                claims: claims,
-                expires: DateTime.Now.AddMinutes(30),
-                signingCredentials: creds);
-
-            return new JwtSecurityTokenHandler().WriteToken(token);
-        }
-
 
         private string GenerateRefreshToken(string userId)
         {
@@ -273,20 +268,18 @@ namespace SWP391_Mentor_Booking_System_Service.Service
             if (student != null)
             {
                 // Tạo access token mới cho Student
-                return GenerateToken(student);
+                return CreateToken(student, "Student");
             }
 
             var mentor = await _authRepository.GetMentorByIdAsync(refreshToken.UserId);
             if (mentor != null)
             {
                 // Tạo access token mới cho Mentor
-                return GenerateToken(mentor);
+                return CreateToken(mentor, "Mentor");
             }
 
             // Nếu không tìm thấy người dùng, ném ra ngoại lệ
             throw new Exception("Người dùng không tồn tại.");
         }
-
-
     }
 }

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SWP391_Mentor_Booking_System_Data.DTO;
 using SWP391_Mentor_Booking_System_Service.Service;
@@ -7,6 +8,7 @@ namespace SWP391_Mentor_Booking_System_API.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
+    [Authorize]
     public class UserController : ControllerBase
     {
         private readonly UserService _userService;

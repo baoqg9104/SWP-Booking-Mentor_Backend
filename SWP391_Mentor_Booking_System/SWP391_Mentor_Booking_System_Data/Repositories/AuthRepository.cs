@@ -54,6 +54,7 @@ namespace SWP391_Mentor_Booking_System_Data.Repositories
         {
             _context.Mentors.Add(mentor);
         }
+
         public async Task<Student> GetStudentByIdAsync(string userId)
         {
             return await _context.Students.FirstOrDefaultAsync(s => s.StudentId == userId);
