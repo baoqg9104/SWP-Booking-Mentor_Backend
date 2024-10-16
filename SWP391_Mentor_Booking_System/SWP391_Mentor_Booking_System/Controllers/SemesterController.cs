@@ -74,5 +74,4 @@ namespace SWP391_Mentor_Booking_System_API.Controllers
             return Ok();
         }
     }
-
 }

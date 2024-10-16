@@ -24,7 +24,7 @@ namespace SWP391_Mentor_Booking_System_Service.Service
         {
             var semester = new Semester
             {
-                SemesterId = createSemesterDto.SemesterId,
+                SemesterId = Guid.NewGuid().ToString(), // Auto-generate SemesterId
                 Code = createSemesterDto.Code,
                 Name = createSemesterDto.Name,
                 StartDate = createSemesterDto.StartDate,
@@ -37,15 +37,39 @@ namespace SWP391_Mentor_Booking_System_Service.Service
         }
 
         // Read by Id
-        public async Task<Semester> GetSemesterByIdAsync(string semesterId)
+        public async Task<SemesterDTO> GetSemesterByIdAsync(string semesterId)
         {
-            return await _context.Semesters.FirstOrDefaultAsync(s => s.SemesterId == semesterId);
+            var semester = await _context.Semesters
+                .FirstOrDefaultAsync(s => s.SemesterId == semesterId);
+
+            if (semester == null)
+                return null;
+
+            return new SemesterDTO
+            {
+                SemesterId = semester.SemesterId,
+                Code = semester.Code,
+                Name = semester.Name,
+                StartDate = semester.StartDate,
+                EndDate = semester.EndDate,
+                Status = semester.Status
+            };
         }
 
         // Read all
-        public async Task<List<Semester>> GetAllSemestersAsync()
+        public async Task<List<SemesterDTO>> GetAllSemestersAsync()
         {
-            return await _context.Semesters.ToListAsync();
+            return await _context.Semesters
+                .Select(s => new SemesterDTO
+                {
+                    SemesterId = s.SemesterId,
+                    Code = s.Code,
+                    Name = s.Name,
+                    StartDate = s.StartDate,
+                    EndDate = s.EndDate,
+                    Status = s.Status
+                })
+                .ToListAsync();
         }
 
         // Update
@@ -56,7 +80,6 @@ namespace SWP391_Mentor_Booking_System_Service.Service
             if (existingSemester == null)
                 return false;
 
-            existingSemester.SemesterId = updateSemesterDto.SemesterId;
             existingSemester.Code = updateSemesterDto.Code;
             existingSemester.Name = updateSemesterDto.Name;
             existingSemester.StartDate = updateSemesterDto.StartDate;
@@ -78,5 +101,6 @@ namespace SWP391_Mentor_Booking_System_Service.Service
             return await _context.SaveChangesAsync() > 0;
         }
     }
+
 
 }
