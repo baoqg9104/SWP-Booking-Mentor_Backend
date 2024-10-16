@@ -289,5 +289,43 @@ namespace SWP391_Mentor_Booking_System_Service.Service
             // Nếu không tìm thấy người dùng, ném ra ngoại lệ
             throw new Exception("Người dùng không tồn tại.");
         }
+
+        public bool IsTokenValid(string token)
+        {
+            var tokenHandler = new JwtSecurityTokenHandler();
+
+            // Kiểm tra nếu token có đúng định dạng hay không
+            if (!tokenHandler.CanReadToken(token))
+            {
+                return false; // Token không hợp lệ
+            }
+
+            try
+            {
+                var key = Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]);
+
+                // Kiểm tra và giải mã token
+                tokenHandler.ValidateToken(token, new TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(key),
+                    ValidateIssuer = false,
+                    ValidateAudience = false,
+                    ClockSkew = TimeSpan.Zero
+                }, out SecurityToken validatedToken);
+
+                return true;
+            }
+            catch (SecurityTokenExpiredException)
+            {
+                
+                return false;
+            }
+            catch (Exception)
+            {
+                
+                return false;
+            }
+        }
     }
 }

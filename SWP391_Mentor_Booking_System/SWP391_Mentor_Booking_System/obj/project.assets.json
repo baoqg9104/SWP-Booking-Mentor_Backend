@@ -8392,11 +8392,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\code\\Booking4\\Group2_SWP391_SE1867_Backend\\SWP391_Mentor_Booking_System\\SWP391_Mentor_Booking_System\\SWP391_Mentor_Booking_System_API.csproj",
+      "projectUniqueName": "D:\\code\\booking5\\Group2_SWP391_SE1867_Backend\\SWP391_Mentor_Booking_System\\SWP391_Mentor_Booking_System\\SWP391_Mentor_Booking_System_API.csproj",
       "projectName": "SWP391_Mentor_Booking_System_API",
-      "projectPath": "D:\\code\\Booking4\\Group2_SWP391_SE1867_Backend\\SWP391_Mentor_Booking_System\\SWP391_Mentor_Booking_System\\SWP391_Mentor_Booking_System_API.csproj",
+      "projectPath": "D:\\code\\booking5\\Group2_SWP391_SE1867_Backend\\SWP391_Mentor_Booking_System\\SWP391_Mentor_Booking_System\\SWP391_Mentor_Booking_System_API.csproj",
       "packagesPath": "C:\\Users\\ADMIN\\.nuget\\packages\\",
-      "outputPath": "D:\\code\\Booking4\\Group2_SWP391_SE1867_Backend\\SWP391_Mentor_Booking_System\\SWP391_Mentor_Booking_System\\obj\\",
+      "outputPath": "D:\\code\\booking5\\Group2_SWP391_SE1867_Backend\\SWP391_Mentor_Booking_System\\SWP391_Mentor_Booking_System\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\ADMIN\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -8414,11 +8414,11 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "D:\\code\\Booking4\\Group2_SWP391_SE1867_Backend\\SWP391_Mentor_Booking_System\\SWP391_Mentor_Booking_System_Data\\SWP391_Mentor_Booking_System_Data.csproj": {
-              "projectPath": "D:\\code\\Booking4\\Group2_SWP391_SE1867_Backend\\SWP391_Mentor_Booking_System\\SWP391_Mentor_Booking_System_Data\\SWP391_Mentor_Booking_System_Data.csproj"
+            "D:\\code\\booking5\\Group2_SWP391_SE1867_Backend\\SWP391_Mentor_Booking_System\\SWP391_Mentor_Booking_System_Data\\SWP391_Mentor_Booking_System_Data.csproj": {
+              "projectPath": "D:\\code\\booking5\\Group2_SWP391_SE1867_Backend\\SWP391_Mentor_Booking_System\\SWP391_Mentor_Booking_System_Data\\SWP391_Mentor_Booking_System_Data.csproj"
             },
-            "D:\\code\\Booking4\\Group2_SWP391_SE1867_Backend\\SWP391_Mentor_Booking_System\\SWP391_Mentor_Booking_System_Service\\SWP391_Mentor_Booking_System_Service.csproj": {
-              "projectPath": "D:\\code\\Booking4\\Group2_SWP391_SE1867_Backend\\SWP391_Mentor_Booking_System\\SWP391_Mentor_Booking_System_Service\\SWP391_Mentor_Booking_System_Service.csproj"
+            "D:\\code\\booking5\\Group2_SWP391_SE1867_Backend\\SWP391_Mentor_Booking_System\\SWP391_Mentor_Booking_System_Service\\SWP391_Mentor_Booking_System_Service.csproj": {
+              "projectPath": "D:\\code\\booking5\\Group2_SWP391_SE1867_Backend\\SWP391_Mentor_Booking_System\\SWP391_Mentor_Booking_System_Service\\SWP391_Mentor_Booking_System_Service.csproj"
             }
           }
         }
