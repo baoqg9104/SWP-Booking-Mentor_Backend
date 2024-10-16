@@ -257,10 +257,18 @@ namespace SWP391_Mentor_Booking_System_Service.Service
         // Thêm phương thức refresh token
         public async Task<string> RefreshTokenAsync(string token)
         {
-            var refreshToken = await _refreshTokenRepository.GetRefreshTokenByUserIdAsync(token);
-            if (refreshToken == null || refreshToken.ExpiryDate < DateTime.UtcNow)
+            var refreshToken = await _refreshTokenRepository.GetRefreshTokenByTokenAsync(token); // Lấy refresh token từ DB bằng token
+            if (refreshToken == null)
             {
-                throw new Exception("Refresh token không hợp lệ hoặc đã hết hạn.");
+                throw new Exception("Refresh token không hợp lệ.");
+            }
+
+            // Ghi log để kiểm tra ExpiryDate
+            Console.WriteLine($"ExpiryDate: {refreshToken.ExpiryDate}, CurrentTime: {DateTime.UtcNow}");
+
+            if (refreshToken.ExpiryDate < DateTime.UtcNow)
+            {
+                throw new Exception("Refresh token đã hết hạn.");
             }
 
             // Lấy thông tin người dùng dựa trên UserId
