@@ -127,6 +127,7 @@ builder.Services.AddSwaggerGen(option =>
 
 // Add repository and services to DI container
 builder.Services.AddScoped<AuthRepository>();
+builder.Services.AddScoped<MentorRepository>();
 builder.Services.AddScoped<RefreshTokenRepository>(); // Đăng ký RefreshTokenRepository
 builder.Services.AddScoped<AuthService>();
 builder.Services.AddScoped<UserService>();
