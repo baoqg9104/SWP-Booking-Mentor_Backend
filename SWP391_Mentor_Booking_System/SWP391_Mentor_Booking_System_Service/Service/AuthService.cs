@@ -218,14 +218,14 @@ namespace SWP391_Mentor_Booking_System_Service.Service
             else if (typeof(T) == typeof(Mentor))
             {
                 var mentor = user as Mentor;
-                new Claim(JwtRegisteredClaimNames.Email, mentor.Email);
-                new Claim("fullName", mentor.MentorName);
+                claims.Add(new Claim(JwtRegisteredClaimNames.Email, mentor.Email));
+                claims.Add(new Claim("fullName", mentor.MentorName));
             }
             else if (typeof (T) == typeof(Admin))
             {
                 var admin = user as Admin;
-                new Claim(JwtRegisteredClaimNames.Email, admin.Email);
-                new Claim("fullName", admin.AdminName);
+                claims.Add(new Claim(JwtRegisteredClaimNames.Email, admin.Email));
+                claims.Add(new Claim("fullName", admin.AdminName));
             }
 
             claims.Add(new Claim("role", role));

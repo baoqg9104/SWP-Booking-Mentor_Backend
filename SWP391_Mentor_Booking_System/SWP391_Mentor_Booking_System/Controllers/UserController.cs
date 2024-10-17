@@ -8,7 +8,6 @@ namespace SWP391_Mentor_Booking_System_API.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    [Authorize]
     public class UserController : ControllerBase
     {
         private readonly UserService _userService;
@@ -19,6 +18,7 @@ namespace SWP391_Mentor_Booking_System_API.Controllers
         }
 
         [HttpPut("update-user")]
+        [Authorize(Policy = "AllPolicy")]
         public async Task<IActionResult> UpdateUser([FromBody] UpdateUserDTO updateUserDto)
         {
             try
@@ -40,6 +40,7 @@ namespace SWP391_Mentor_Booking_System_API.Controllers
         }
 
         [HttpPut("change-password")]
+        [Authorize(Policy = "AllPolicy")]
         public async Task<IActionResult> ChangePassword([FromBody] ChangePassDTO changePassDto)
         {
             if (!ModelState.IsValid)

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SWP391_Mentor_Booking_System_Service.Service;
 
@@ -16,6 +17,7 @@ namespace SWP391_Mentor_Booking_System_API.Controllers
         }
 
         [HttpGet("all")]
+        [Authorize(Policy = "AdminOnly")]
         public async Task<IActionResult> GetAllStudents()
         {
             var students = await _studentService.GetAllStudentsAsync();
@@ -23,6 +25,7 @@ namespace SWP391_Mentor_Booking_System_API.Controllers
         }
 
         [HttpGet("{id}")]
+        [Authorize(Policy = "StudentOrAdmin")]
         public async Task<IActionResult> GetStudentById(string id)
         {
             var student = await _studentService.GetStudentByIdAsync(id);
@@ -34,6 +37,7 @@ namespace SWP391_Mentor_Booking_System_API.Controllers
         }
 
         [HttpDelete("delete/{id}")]
+        [Authorize(Policy = "AdminOnly")]
         public async Task<IActionResult> DeleteStudent(string id)
         {
             try

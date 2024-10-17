@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SWP391_Mentor_Booking_System_Data.DTO.Semester;
 using SWP391_Mentor_Booking_System_Service.Service;
@@ -18,6 +19,7 @@ namespace SWP391_Mentor_Booking_System_API.Controllers
 
         // Create
         [HttpPost("create")]
+        [Authorize(Policy = "AdminOnly")]
         public async Task<IActionResult> CreateSemester([FromBody] CreateSemesterDTO createSemesterDto)
         {
             if (!ModelState.IsValid)
@@ -32,6 +34,7 @@ namespace SWP391_Mentor_Booking_System_API.Controllers
 
         // Read by Id
         [HttpGet("get/{id}")]
+        [Authorize(Policy = "AllPolicy")]
         public async Task<IActionResult> GetSemesterById(string id)
         {
             var semester = await _semesterService.GetSemesterByIdAsync(id);
@@ -43,6 +46,7 @@ namespace SWP391_Mentor_Booking_System_API.Controllers
 
         // Read all
         [HttpGet("all")]
+        [Authorize(Policy = "AllPolicy")]
         public async Task<IActionResult> GetAllSemesters()
         {
             var semesters = await _semesterService.GetAllSemestersAsync();
@@ -51,6 +55,7 @@ namespace SWP391_Mentor_Booking_System_API.Controllers
 
         // Update
         [HttpPut("update")]
+        [Authorize(Policy = "AdminOnly")]
         public async Task<IActionResult> UpdateSemester([FromBody] UpdateSemesterDTO updateSemesterDto)
         {
             if (!ModelState.IsValid)
@@ -65,6 +70,7 @@ namespace SWP391_Mentor_Booking_System_API.Controllers
 
         // Delete
         [HttpDelete("delete/{id}")]
+        [Authorize(Policy = "AdminOnly")]
         public async Task<IActionResult> DeleteSemester(string id)
         {
             var result = await _semesterService.DeleteSemesterAsync(id);

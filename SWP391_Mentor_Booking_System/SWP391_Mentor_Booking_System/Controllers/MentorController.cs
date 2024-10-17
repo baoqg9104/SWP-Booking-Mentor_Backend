@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SWP391_Mentor_Booking_System_Service.Service;
 
@@ -17,6 +18,7 @@ namespace SWP391_Mentor_Booking_System_API.Controllers
 
         // Endpoint to change apply status
         [HttpPut("change-apply-status/{mentorId}")]
+        [Authorize(Policy = "AdminOnly")]
         public async Task<IActionResult> ChangeApplyStatus(string mentorId)
         {
             var result = await _mentorService.ChangeMentorApplyStatusAsync(mentorId);

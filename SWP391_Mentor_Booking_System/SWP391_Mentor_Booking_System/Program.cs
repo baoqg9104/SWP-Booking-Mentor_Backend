@@ -66,6 +66,26 @@ builder
         options.IncludeErrorDetails = true;
     });
 
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("AdminOnly", policy => policy.RequireRole("Admin"));
+    options.AddPolicy("MentorOnly", policy => policy.RequireRole("Mentor"));
+    options.AddPolicy("StudentOnly", policy => policy.RequireRole("Student"));
+    options.AddPolicy("StudentOrAdmin", policy =>
+        policy.RequireAssertion(context =>
+            context.User.IsInRole("Student") || context.User.IsInRole("Admin")));
+    options.AddPolicy("StudentOrMentor", policy =>
+        policy.RequireAssertion(context =>
+            context.User.IsInRole("Student") || context.User.IsInRole("Mentor")));
+    options.AddPolicy("MentorOrAdmin", policy =>
+        policy.RequireAssertion(context =>
+            context.User.IsInRole("Mentor") || context.User.IsInRole("Admin")));
+    options.AddPolicy("AllPolicy", policy =>
+        policy.RequireAssertion(context =>
+            context.User.IsInRole("Student") || context.User.IsInRole("Admin") || context.User.IsInRole("Mentor")));
+});
+
+
 // Add services to the container.
 builder.Services.AddControllers();
 
