@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SWP391_Mentor_Booking_System_Data.DTO;
 using SWP391_Mentor_Booking_System_Service.Service;
@@ -18,6 +19,7 @@ namespace SWP391_Mentor_Booking_System_API.Controllers
 
         // Create
         [HttpPost("create")]
+        [Authorize(Policy = "MentorOnly")]
         public async Task<IActionResult> CreateMentorSlot([FromBody] CreateMentorSlotDTO createMentorSlotDto)
         {
             if (!ModelState.IsValid)
@@ -32,6 +34,7 @@ namespace SWP391_Mentor_Booking_System_API.Controllers
 
         // Read by MentorSlotId
         [HttpGet("get-by-id/{id}")]
+        [Authorize(Policy = "AllPolicy")]
         public async Task<IActionResult> GetMentorSlotById(int id)
         {
             var mentorSlot = await _mentorSlotService.GetMentorSlotByIdAsync(id);
@@ -43,6 +46,7 @@ namespace SWP391_Mentor_Booking_System_API.Controllers
 
         // Read all
         [HttpGet("all")]
+        [Authorize(Policy = "AllPolicy")]
         public async Task<IActionResult> GetAllMentorSlots()
         {
             var mentorSlots = await _mentorSlotService.GetAllMentorSlotsAsync();
@@ -51,6 +55,7 @@ namespace SWP391_Mentor_Booking_System_API.Controllers
 
         // Read by MentorId
         [HttpGet("get-by-mentor-id/{mentorId}")]
+        [Authorize(Policy = "AllPolicy")]
         public async Task<IActionResult> GetMentorSlotsByMentorId(string mentorId)
         {
             var mentorSlots = await _mentorSlotService.GetMentorSlotsByMentorIdAsync(mentorId);
@@ -59,6 +64,7 @@ namespace SWP391_Mentor_Booking_System_API.Controllers
 
         // Update
         [HttpPut("update")]
+        [Authorize(Policy = "MentorOnly")]
         public async Task<IActionResult> UpdateMentorSlot([FromBody] UpdateMentorSlotDTO updateMentorSlotDto)
         {
             if (!ModelState.IsValid)
@@ -73,6 +79,7 @@ namespace SWP391_Mentor_Booking_System_API.Controllers
 
         // Delete
         [HttpDelete("delete/{id}")]
+        [Authorize(Policy = "MentorOnly")]
         public async Task<IActionResult> DeleteMentorSlot(int id)
         {
             var result = await _mentorSlotService.DeleteMentorSlotAsync(id);
