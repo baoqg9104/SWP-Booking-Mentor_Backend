@@ -19,17 +19,17 @@ namespace SWP391_Mentor_Booking_System_API.Controllers
 
         // Create
         [HttpPost("create")]
-        [Authorize(Policy = "MentorOnly")]
         public async Task<IActionResult> CreateMentorSlot([FromBody] CreateMentorSlotDTO createMentorSlotDto)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            var result = await _mentorSlotService.CreateMentorSlotAsync(createMentorSlotDto);
-            if (!result)
-                return BadRequest("Mentor ID does not exist or other validation failed.");
+            var (success, error) = await _mentorSlotService.CreateMentorSlotAsync(createMentorSlotDto);
 
-            return Ok("Mentor Slot creation complete");
+            if (!success)
+                return BadRequest($"Error: {error}");
+
+            return Ok();
         }
 
         // Read by MentorSlotId
@@ -64,17 +64,17 @@ namespace SWP391_Mentor_Booking_System_API.Controllers
 
         // Update
         [HttpPut("update")]
-        [Authorize(Policy = "MentorOnly")]
         public async Task<IActionResult> UpdateMentorSlot([FromBody] UpdateMentorSlotDTO updateMentorSlotDto)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            var result = await _mentorSlotService.UpdateMentorSlotAsync(updateMentorSlotDto);
-            if (!result)
-                return NotFound();
+            var (success, error) = await _mentorSlotService.UpdateMentorSlotAsync(updateMentorSlotDto);
 
-            return Ok("Mentor Slot Updated Successfully");
+            if (!success)
+                return BadRequest($"Error: {error}");
+
+            return Ok();
         }
 
         // Delete
