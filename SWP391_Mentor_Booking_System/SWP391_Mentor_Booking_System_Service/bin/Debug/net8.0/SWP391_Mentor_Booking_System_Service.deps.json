@@ -624,7 +624,10 @@
           "Microsoft.EntityFrameworkCore.SqlServer": "8.0.10"
         },
         "runtime": {
-          "SWP391_Mentor_Booking_System_Data.dll": {}
+          "SWP391_Mentor_Booking_System_Data.dll": {
+            "assemblyVersion": "1.0.0",
+            "fileVersion": "1.0.0.0"
+          }
         }
       }
     }
