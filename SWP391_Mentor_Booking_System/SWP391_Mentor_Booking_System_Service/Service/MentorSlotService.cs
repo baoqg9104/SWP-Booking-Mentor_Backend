@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SWP391_Mentor_Booking_System_Data;
 using SWP391_Mentor_Booking_System_Data.Data;
-using SWP391_Mentor_Booking_System_Data.DTO;
+using SWP391_Mentor_Booking_System_Data.DTO.MentorSlot;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,11 +20,30 @@ namespace SWP391_Mentor_Booking_System_Service.Service
         }
 
         // Create
-        public async Task<bool> CreateMentorSlotAsync(CreateMentorSlotDTO createMentorSlotDto)
+        public async Task<(bool Success, string Error)> CreateMentorSlotAsync(CreateMentorSlotDTO createMentorSlotDto)
         {
-            var mentor = await _context.Mentors.FirstOrDefaultAsync(m => m.MentorId == createMentorSlotDto.MentorId);
-            if (mentor == null)
-                return false; // MentorId does not exist
+            // Check for overlapping slots for the mentor
+            var overlappingMentorSlots = await _context.MentorSlots
+                .Where(ms => ms.MentorId == createMentorSlotDto.MentorId &&
+                             ms.StartTime < createMentorSlotDto.EndTime &&
+                             createMentorSlotDto.StartTime < ms.EndTime)
+                .ToListAsync();
+
+            if (overlappingMentorSlots.Any())
+                return (false, "Overlapping mentor slots");
+
+            // Check for overlapping slots in the room
+            if (!string.IsNullOrEmpty(createMentorSlotDto.Room))
+            {
+                var overlappingRoomSlots = await _context.MentorSlots
+                    .Where(ms => ms.room == createMentorSlotDto.Room &&
+                                 ms.StartTime < createMentorSlotDto.EndTime &&
+                                 createMentorSlotDto.StartTime < ms.EndTime)
+                    .ToListAsync();
+
+                if (overlappingRoomSlots.Any())
+                    return (false, "Overlapping room slots");
+            }
 
             var mentorSlot = new MentorSlot
             {
@@ -37,7 +56,8 @@ namespace SWP391_Mentor_Booking_System_Service.Service
             };
 
             _context.MentorSlots.Add(mentorSlot);
-            return await _context.SaveChangesAsync() > 0;
+            await _context.SaveChangesAsync();
+            return (true, null);
         }
 
         // Read by MentorSlotId
@@ -98,13 +118,37 @@ namespace SWP391_Mentor_Booking_System_Service.Service
         }
 
         // Update
-        public async Task<bool> UpdateMentorSlotAsync(UpdateMentorSlotDTO updateMentorSlotDto)
+        public async Task<(bool Success, string Error)> UpdateMentorSlotAsync(UpdateMentorSlotDTO updateMentorSlotDto)
         {
-            var existingMentorSlot = await _context.MentorSlots
-                .FirstOrDefaultAsync(ms => ms.MentorSlotId == updateMentorSlotDto.MentorSlotId);
+            var existingMentorSlot = await _context.MentorSlots.FirstOrDefaultAsync(ms => ms.MentorSlotId == updateMentorSlotDto.MentorSlotId);
 
             if (existingMentorSlot == null)
-                return false;
+                return (false, "Mentor slot not found");
+
+            // Check for overlapping slots for the mentor
+            var overlappingMentorSlots = await _context.MentorSlots
+                .Where(ms => ms.MentorId == updateMentorSlotDto.MentorId &&
+                             ms.MentorSlotId != updateMentorSlotDto.MentorSlotId &&
+                             ms.StartTime < updateMentorSlotDto.EndTime &&
+                             updateMentorSlotDto.StartTime < ms.EndTime)
+                .ToListAsync();
+
+            if (overlappingMentorSlots.Any())
+                return (false, "Overlapping mentor slots");
+
+            // Check for overlapping slots in the room
+            if (!string.IsNullOrEmpty(updateMentorSlotDto.Room))
+            {
+                var overlappingRoomSlots = await _context.MentorSlots
+                    .Where(ms => ms.room == updateMentorSlotDto.Room &&
+                                 ms.MentorSlotId != updateMentorSlotDto.MentorSlotId &&
+                                 ms.StartTime < updateMentorSlotDto.EndTime &&
+                                 updateMentorSlotDto.StartTime < ms.EndTime)
+                    .ToListAsync();
+
+                if (overlappingRoomSlots.Any())
+                    return (false, "Overlapping room slots");
+            }
 
             existingMentorSlot.StartTime = updateMentorSlotDto.StartTime;
             existingMentorSlot.EndTime = updateMentorSlotDto.EndTime;
@@ -112,8 +156,10 @@ namespace SWP391_Mentor_Booking_System_Service.Service
             existingMentorSlot.isOnline = updateMentorSlotDto.IsOnline;
             existingMentorSlot.room = updateMentorSlotDto.Room;
 
-            return await _context.SaveChangesAsync() > 0;
+            await _context.SaveChangesAsync();
+            return (true, null);
         }
+
 
         // Delete
         public async Task<bool> DeleteMentorSlotAsync(int mentorSlotId)
