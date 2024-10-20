@@ -137,6 +137,7 @@ builder.Services.AddScoped<StudentService>();
 builder.Services.AddScoped<StudentRepository>();
 builder.Services.AddScoped<SemesterService>();
 builder.Services.AddScoped<TopicService>();
+builder.Services.AddScoped<SwpClassService>();
 
 var app = builder.Build();
 
