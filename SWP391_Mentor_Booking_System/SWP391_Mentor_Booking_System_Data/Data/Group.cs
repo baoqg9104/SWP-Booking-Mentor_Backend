@@ -15,7 +15,7 @@
             public int TopicId { get; set; }
             public Topic Topic { get; set; }
 
-            public int SwpClassId { get; set; }
+            public string SwpClassId { get; set; }
             public SwpClass SwpClass { get; set; }
 
             public int WalletPoint { get; set; }
