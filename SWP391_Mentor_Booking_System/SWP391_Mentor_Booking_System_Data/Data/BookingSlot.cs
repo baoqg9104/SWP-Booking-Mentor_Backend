@@ -17,7 +17,7 @@ namespace SWP391_Mentor_Booking_System_Data.Data
         public int MentorSlotId { get; set; }
         public MentorSlot MentorSlot { get; set; }
 
-        public bool Status { get; set; }
+        public string Status { get; set; }
     }
 
 

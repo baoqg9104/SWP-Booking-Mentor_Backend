@@ -24,7 +24,7 @@ namespace SWP391_Mentor_Booking_System_Service.Service
         {
             var semester = new Semester
             {
-                SemesterId = Guid.NewGuid().ToString(), // Auto-generate SemesterId
+                SemesterId = createSemesterDto.SemesterId, // Auto-generate SemesterId
                 Code = createSemesterDto.Code,
                 Name = createSemesterDto.Name,
                 StartDate = createSemesterDto.StartDate,
