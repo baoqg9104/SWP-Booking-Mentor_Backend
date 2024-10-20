@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SWP391_Mentor_Booking_System_Data;
 using SWP391_Mentor_Booking_System_Data.Data;
-using SWP391_Mentor_Booking_System_Data.DTO;
+using SWP391_Mentor_Booking_System_Data.DTO.MentorSlot;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,6 +22,10 @@ namespace SWP391_Mentor_Booking_System_Service.Service
         // Create
         public async Task<(bool Success, string Error)> CreateMentorSlotAsync(CreateMentorSlotDTO createMentorSlotDto)
         {
+            // Check if the slot is in the past
+            if (createMentorSlotDto.StartTime < DateTime.Now)
+                return (false, "The start time of the mentor slot cannot be in the past");
+
             // Check for overlapping slots for the mentor
             var overlappingMentorSlots = await _context.MentorSlots
                 .Where(ms => ms.MentorId == createMentorSlotDto.MentorId &&
@@ -125,9 +129,14 @@ namespace SWP391_Mentor_Booking_System_Service.Service
             if (existingMentorSlot == null)
                 return (false, "Mentor slot not found");
 
+            // Check if the slot is in the past
+            if (updateMentorSlotDto.StartTime < DateTime.Now)
+                return (false, "The start time of the mentor slot cannot be in the past");
+
             // Check for overlapping slots for the mentor
             var overlappingMentorSlots = await _context.MentorSlots
-                .Where(ms => ms.MentorSlotId != updateMentorSlotDto.MentorSlotId &&
+                .Where(ms => 
+                             ms.MentorSlotId != updateMentorSlotDto.MentorSlotId &&
                              ms.StartTime < updateMentorSlotDto.EndTime &&
                              updateMentorSlotDto.StartTime < ms.EndTime)
                 .ToListAsync();
@@ -159,8 +168,8 @@ namespace SWP391_Mentor_Booking_System_Service.Service
             return (true, null);
         }
 
-        // Delete
-        public async Task<bool> DeleteMentorSlotAsync(int mentorSlotId)
+            // Delete
+            public async Task<bool> DeleteMentorSlotAsync(int mentorSlotId)
         {
             var mentorSlot = await _context.MentorSlots
                 .FirstOrDefaultAsync(ms => ms.MentorSlotId == mentorSlotId);
