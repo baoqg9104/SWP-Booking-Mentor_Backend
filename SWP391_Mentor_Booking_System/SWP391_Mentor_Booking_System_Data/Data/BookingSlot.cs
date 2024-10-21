@@ -20,6 +20,7 @@ namespace SWP391_Mentor_Booking_System_Data.Data
         public DateTime BookingTime { get; set; }
 
         public string Status { get; set; }
+        public Feedback Feedback { get; set; }
     }
 
 

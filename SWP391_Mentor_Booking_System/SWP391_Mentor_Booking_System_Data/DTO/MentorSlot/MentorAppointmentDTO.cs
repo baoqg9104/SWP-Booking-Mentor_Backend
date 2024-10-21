@@ -18,5 +18,6 @@ namespace SWP391_Mentor_Booking_System_Data.DTO.MentorSlot
         public int Bookings { get; set; }
         public string? Status { get; set; }
         public string? Group { get; set; }
+        public string? Class {  get; set; }
     }
 }

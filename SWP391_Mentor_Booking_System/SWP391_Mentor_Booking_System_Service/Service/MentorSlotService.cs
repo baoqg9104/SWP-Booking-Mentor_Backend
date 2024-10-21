@@ -204,7 +204,9 @@ namespace SWP391_Mentor_Booking_System_Service.Service
             return await _context.SaveChangesAsync() > 0;
         }
 
-        public async Task<List<MentorAppointmentDTO>> GetMentorAppointmentsByMentorIdAsync(string mentorId)
+        public async Task<List<MentorAppointmentDTO>> GetMentorAppointmentsByMentorIdAsync(
+            string mentorId
+        )
         {
             var mentorAppointments = await _context
                 .MentorSlots.Where(ms => ms.MentorId == mentorId)
@@ -222,16 +224,19 @@ namespace SWP391_Mentor_Booking_System_Service.Service
 
             foreach (var slot in mentorAppointments)
             {
-                var numOfPending = await _context.BookingSlots
-                    .Where(bs => bs.MentorSlotId == slot.MentorSlotId && bs.Status == "Pending")
+                var numOfPending = await _context
+                    .BookingSlots.Where(bs =>
+                        bs.MentorSlotId == slot.MentorSlotId && bs.Status == "Pending"
+                    )
                     .CountAsync();
 
-                var numOfApproved = await _context.BookingSlots
-                    .SingleOrDefaultAsync(bs => bs.MentorSlotId == slot.MentorSlotId && bs.Status == "Approved");
+                var approvedBooking = await _context.BookingSlots.SingleOrDefaultAsync(bs =>
+                    bs.MentorSlotId == slot.MentorSlotId && bs.Status == "Approved"
+                );
 
-                var completedBookings = await _context.BookingSlots
-                     .SingleOrDefaultAsync(bs => bs.MentorSlotId == slot.MentorSlotId && bs.Status == "Completed");
-
+                var completedBooking = await _context.BookingSlots.SingleOrDefaultAsync(bs =>
+                    bs.MentorSlotId == slot.MentorSlotId && bs.Status == "Completed"
+                );
 
                 //var groupId = await _context.BookingSlots
                 //    .SingleOrDefaultAsync(bs => bs.MentorSlotId == slot.MentorSlotId && bs.Status == "Completed")
@@ -241,17 +246,28 @@ namespace SWP391_Mentor_Booking_System_Service.Service
                     slot.Status = "Pending";
                     slot.Bookings = numOfPending;
                 }
-                else if (numOfApproved != null)
+                else if (approvedBooking != null)
                 {
                     slot.Status = "Approved";
+                    var group = await _context.Groups.SingleOrDefaultAsync(g =>
+                        g.GroupId == approvedBooking.GroupId
+                    );
+                    slot.Group = group.Name;
+
+                    var swpClass = await _context.SwpClasses.SingleOrDefaultAsync(c => c.SwpClassId == group.SwpClassId);
+                    slot.Class = swpClass.Name;
                 }
-                else if (completedBookings != null)
+                else if (completedBooking != null)
                 {
                     slot.Status = "Completed";
-                    var group = await _context.Groups.SingleOrDefaultAsync(g => g.GroupId == completedBookings.GroupId);
+                    var group = await _context.Groups.SingleOrDefaultAsync(g =>
+                        g.GroupId == completedBooking.GroupId
+                    );
                     slot.Group = group.Name;
-                }
 
+                    var swpClass = await _context.SwpClasses.SingleOrDefaultAsync(c => c.SwpClassId == group.SwpClassId);
+                    slot.Class = swpClass.Name;
+                }
             }
 
             return mentorAppointments;
