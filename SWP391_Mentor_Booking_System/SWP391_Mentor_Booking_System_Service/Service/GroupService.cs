@@ -27,8 +27,14 @@ namespace SWP391_Mentor_Booking_System_Service.Service
             if (!topicExists)
                 return (false, "TopicId does not exist");
 
+            // Auto-generate GroupId
+            var lastGroup = await _context.Groups.OrderByDescending(g => g.GroupId).FirstOrDefaultAsync();
+            var nextIdNumber = lastGroup == null ? 1 : int.Parse(lastGroup.GroupId.Substring(2)) + 1;
+            var groupId = $"GR{nextIdNumber:D3}";
+
             var group = new Group
             {
+                GroupId = groupId,
                 Name = createGroupDto.Name,
                 TopicId = createGroupDto.TopicId,
                 SwpClassId = createGroupDto.SwpClassId,
