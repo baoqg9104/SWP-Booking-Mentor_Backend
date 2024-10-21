@@ -11,7 +11,7 @@ namespace SWP391_Mentor_Booking_System_Data.DTO.Topic
         public int TopicId { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
-        public string SemesterId { get; set; }
+        public int SemesterId { get; set; }
         public string Actors { get; set; }
         public bool Status { get; set; }
     }

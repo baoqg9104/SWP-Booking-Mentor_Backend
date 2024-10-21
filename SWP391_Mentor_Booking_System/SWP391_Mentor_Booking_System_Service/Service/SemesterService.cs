@@ -24,7 +24,7 @@ namespace SWP391_Mentor_Booking_System_Service.Service
         {
             var semester = new Semester
             {
-                SemesterId = createSemesterDto.SemesterId, // Auto-generate SemesterId
+                //SemesterId = createSemesterDto.SemesterId,
                 Code = createSemesterDto.Code,
                 Name = createSemesterDto.Name,
                 StartDate = createSemesterDto.StartDate,
@@ -37,7 +37,7 @@ namespace SWP391_Mentor_Booking_System_Service.Service
         }
 
         // Read by Id
-        public async Task<SemesterDTO> GetSemesterByIdAsync(string semesterId)
+        public async Task<SemesterDTO> GetSemesterByIdAsync(int semesterId)
         {
             var semester = await _context.Semesters
                 .FirstOrDefaultAsync(s => s.SemesterId == semesterId);
@@ -47,7 +47,6 @@ namespace SWP391_Mentor_Booking_System_Service.Service
 
             return new SemesterDTO
             {
-                SemesterId = semester.SemesterId,
                 Code = semester.Code,
                 Name = semester.Name,
                 StartDate = semester.StartDate,
@@ -62,7 +61,6 @@ namespace SWP391_Mentor_Booking_System_Service.Service
             return await _context.Semesters
                 .Select(s => new SemesterDTO
                 {
-                    SemesterId = s.SemesterId,
                     Code = s.Code,
                     Name = s.Name,
                     StartDate = s.StartDate,
@@ -90,7 +88,7 @@ namespace SWP391_Mentor_Booking_System_Service.Service
         }
 
         // Delete
-        public async Task<bool> DeleteSemesterAsync(string semesterId)
+        public async Task<bool> DeleteSemesterAsync(int semesterId)
         {
             var semester = await _context.Semesters.FirstOrDefaultAsync(s => s.SemesterId == semesterId);
 

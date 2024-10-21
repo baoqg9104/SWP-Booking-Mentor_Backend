@@ -62,6 +62,16 @@ namespace SWP391_Mentor_Booking_System_API.Controllers
             return Ok(mentorSlots);
         }
 
+        // Read by MentorId
+        [HttpGet("get-mentor-appointments-by-mentor-id/{mentorId}")]
+        [Authorize(Policy = "MentorOnly")]
+        public async Task<IActionResult> GetMentorAppointmentsByMentorId(string mentorId)
+        {
+            var mentorAppointments = await _mentorSlotService.GetMentorAppointmentsByMentorIdAsync(mentorId);
+            return Ok(mentorAppointments);
+        }
+
+
         // Update
         [HttpPut("update")]
         public async Task<IActionResult> UpdateMentorSlot([FromBody] UpdateMentorSlotDTO updateMentorSlotDto)
@@ -88,6 +98,7 @@ namespace SWP391_Mentor_Booking_System_API.Controllers
 
             return Ok("This mentor slot is deleted");
         }
+
     }
 
 }

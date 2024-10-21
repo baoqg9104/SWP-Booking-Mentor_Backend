@@ -33,7 +33,7 @@ namespace SWP391_Mentor_Booking_System_API.Controllers
 
         // Read class by Id
         [HttpGet("get/{id}")]
-        public async Task<IActionResult> GetClassById(string id)
+        public async Task<IActionResult> GetClassById(int id)
         {
             var swpClass = await _swpClassService.GetClassByIdAsync(id);
             if (swpClass == null)
@@ -52,7 +52,7 @@ namespace SWP391_Mentor_Booking_System_API.Controllers
 
         [HttpPut("update/{id}")]
         
-        public async Task<IActionResult> UpdateClassById(string id, [FromBody] UpdateSwpClassDTO updateSwpClassDto)
+        public async Task<IActionResult> UpdateClassById(int id, [FromBody] UpdateSwpClassDTO updateSwpClassDto)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
@@ -67,7 +67,7 @@ namespace SWP391_Mentor_Booking_System_API.Controllers
 
         // Delete class
         [HttpDelete("delete/{id}")]
-        public async Task<IActionResult> DeleteClass(string id)
+        public async Task<IActionResult> DeleteClass(int id)
         {
             var result = await _swpClassService.DeleteClassAsync(id);
             if (!result)

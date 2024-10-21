@@ -8,10 +8,9 @@ namespace SWP391_Mentor_Booking_System_Data.DTO.SwpClass
 {
     public class SwpClassDTO
     {
-        public string SwpClassId { get; set; }
+        public int SwpClassId { get; set; }
         public string Name { get; set; }
-        public string SemesterId { get; set; }
-        public string MentorId { get; set; }
+        public int SemesterId { get; set; }
         public bool Status { get; set; }
     }
 }

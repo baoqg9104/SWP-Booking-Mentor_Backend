@@ -25,7 +25,9 @@ namespace SWP391_Mentor_Booking_System_Service.Service
             _authRepository = authRepository;
             _configuration = configuration;
             _refreshTokenRepository = refreshTokenRepository;
-            _key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JWT:SigningKey"]));
+            _key = new SymmetricSecurityKey(
+                Encoding.UTF8.GetBytes(_configuration["JWT:SigningKey"])
+            );
         }
 
         public async Task RegisterAsync(RegisterDTO registerDto)
@@ -63,8 +65,8 @@ namespace SWP391_Mentor_Booking_System_Service.Service
                     Phone = null,
                     Gender = null,
                     DateOfBirth = null,
-                    PointsReceived = null,
-                    NumOfSlot = null,
+                    PointsReceived = 0,
+                    NumOfSlot = 10,
                     RegistrationDate = DateTime.Now,
 
                     ApplyStatus =
@@ -204,7 +206,8 @@ namespace SWP391_Mentor_Booking_System_Service.Service
             return $"SE{count + 1:000}";
         }
 
-        private string CreateToken<T>(T user, string role) where T : class
+        private string CreateToken<T>(T user, string role)
+            where T : class
         {
             var claims = new List<Claim>();
 
@@ -223,7 +226,7 @@ namespace SWP391_Mentor_Booking_System_Service.Service
                 claims.Add(new Claim(JwtRegisteredClaimNames.Email, mentor.Email));
                 claims.Add(new Claim("fullName", mentor.MentorName));
             }
-            else if (typeof (T) == typeof(Admin))
+            else if (typeof(T) == typeof(Admin))
             {
                 var admin = user as Admin;
                 claims.Add(new Claim("id", admin.AdminId));
@@ -241,7 +244,7 @@ namespace SWP391_Mentor_Booking_System_Service.Service
                 Expires = DateTime.Now.AddDays(7),
                 SigningCredentials = creds,
                 Issuer = _configuration["JWT:Issuer"],
-                Audience = _configuration["JWT:Audience"]
+                Audience = _configuration["JWT:Audience"],
             };
 
             var tokenHandler = new JwtSecurityTokenHandler();
@@ -267,7 +270,9 @@ namespace SWP391_Mentor_Booking_System_Service.Service
             }
 
             // Ghi log để kiểm tra ExpiryDate
-            Console.WriteLine($"ExpiryDate: {refreshToken.ExpiryDate}, CurrentTime: {DateTime.UtcNow}");
+            Console.WriteLine(
+                $"ExpiryDate: {refreshToken.ExpiryDate}, CurrentTime: {DateTime.UtcNow}"
+            );
 
             if (refreshToken.ExpiryDate < DateTime.UtcNow)
             {
@@ -308,25 +313,27 @@ namespace SWP391_Mentor_Booking_System_Service.Service
                 var key = Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]);
 
                 // Kiểm tra và giải mã token
-                tokenHandler.ValidateToken(token, new TokenValidationParameters
-                {
-                    ValidateIssuerSigningKey = true,
-                    IssuerSigningKey = new SymmetricSecurityKey(key),
-                    ValidateIssuer = false,
-                    ValidateAudience = false,
-                    ClockSkew = TimeSpan.Zero
-                }, out SecurityToken validatedToken);
+                tokenHandler.ValidateToken(
+                    token,
+                    new TokenValidationParameters
+                    {
+                        ValidateIssuerSigningKey = true,
+                        IssuerSigningKey = new SymmetricSecurityKey(key),
+                        ValidateIssuer = false,
+                        ValidateAudience = false,
+                        ClockSkew = TimeSpan.Zero,
+                    },
+                    out SecurityToken validatedToken
+                );
 
                 return true;
             }
             catch (SecurityTokenExpiredException)
             {
-                
                 return false;
             }
             catch (Exception)
             {
-                
                 return false;
             }
         }
