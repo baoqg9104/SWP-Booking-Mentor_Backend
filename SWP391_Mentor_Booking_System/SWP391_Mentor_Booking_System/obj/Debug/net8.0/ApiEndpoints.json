@@ -64,6 +64,54 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "SWP391_Mentor_Booking_System_API.Controllers.BookingController",
+    "Method": "CreateBooking",
+    "RelativePath": "api/Booking/create",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "createBookingDto",
+        "Type": "SWP391_Mentor_Booking_System_Data.DTO.BookingSlot.CreateBookingDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "SWP391_Mentor_Booking_System_API.Controllers.BookingController",
+    "Method": "GetBookingsByMentorSlotId",
+    "RelativePath": "api/Booking/get-by-mentorslot/{mentorSlotId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "mentorSlotId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "SWP391_Mentor_Booking_System_API.Controllers.BookingController",
+    "Method": "UpdateBookingStatus",
+    "RelativePath": "api/Booking/update-status",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "updateBookingStatusDto",
+        "Type": "SWP391_Mentor_Booking_System_Data.DTO.BookingSlot.UpdateBookingStatusDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "SWP391_Mentor_Booking_System_API.Controllers.GroupController",
     "Method": "GetAllGroups",
     "RelativePath": "api/Group/all",
@@ -396,6 +444,85 @@
       {
         "Name": "id",
         "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "SWP391_Mentor_Booking_System_API.Controllers.SwpClassController",
+    "Method": "GetAllClasses",
+    "RelativePath": "api/SwpClass/all",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "SWP391_Mentor_Booking_System_API.Controllers.SwpClassController",
+    "Method": "CreateClass",
+    "RelativePath": "api/SwpClass/create",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "createSwpClassDto",
+        "Type": "SWP391_Mentor_Booking_System_Data.DTO.SwpClass.CreateSwpClassDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "SWP391_Mentor_Booking_System_API.Controllers.SwpClassController",
+    "Method": "DeleteClass",
+    "RelativePath": "api/SwpClass/delete/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "SWP391_Mentor_Booking_System_API.Controllers.SwpClassController",
+    "Method": "GetClassById",
+    "RelativePath": "api/SwpClass/get/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "SWP391_Mentor_Booking_System_API.Controllers.SwpClassController",
+    "Method": "UpdateClassById",
+    "RelativePath": "api/SwpClass/update/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.String",
+        "IsRequired": true
+      },
+      {
+        "Name": "updateSwpClassDto",
+        "Type": "SWP391_Mentor_Booking_System_Data.DTO.SwpClass.UpdateSwpClassDTO",
         "IsRequired": true
       }
     ],
