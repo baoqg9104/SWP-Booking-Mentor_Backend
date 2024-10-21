@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SWP391_Mentor_Booking_System_Data;
 
@@ -11,9 +12,11 @@ using SWP391_Mentor_Booking_System_Data;
 namespace SWP391_Mentor_Booking_System_Data.Migrations
 {
     [DbContext(typeof(SWP391_Mentor_Booking_System_DBContext))]
-    partial class SWP391_Mentor_Booking_System_DBContextModelSnapshot : ModelSnapshot
+    [Migration("20241021201357_2")]
+    partial class _2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -78,37 +81,6 @@ namespace SWP391_Mentor_Booking_System_Data.Migrations
                     b.HasIndex("MentorSlotId");
 
                     b.ToTable("BookingSlots");
-                });
-
-            modelBuilder.Entity("SWP391_Mentor_Booking_System_Data.Data.Feedback", b =>
-                {
-                    b.Property<int>("FeedbackId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("FeedbackId"));
-
-                    b.Property<int>("BookingId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("GroupFeedback")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("GroupRating")
-                        .HasColumnType("int");
-
-                    b.Property<string>("MentorFeedback")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("MentorRating")
-                        .HasColumnType("int");
-
-                    b.HasKey("FeedbackId");
-
-                    b.HasIndex("BookingId")
-                        .IsUnique();
-
-                    b.ToTable("Feedbacks");
                 });
 
             modelBuilder.Entity("SWP391_Mentor_Booking_System_Data.Data.Group", b =>
@@ -466,17 +438,6 @@ namespace SWP391_Mentor_Booking_System_Data.Migrations
                     b.Navigation("MentorSlot");
                 });
 
-            modelBuilder.Entity("SWP391_Mentor_Booking_System_Data.Data.Feedback", b =>
-                {
-                    b.HasOne("SWP391_Mentor_Booking_System_Data.Data.BookingSlot", "BookingSlot")
-                        .WithOne("Feedback")
-                        .HasForeignKey("SWP391_Mentor_Booking_System_Data.Data.Feedback", "BookingId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("BookingSlot");
-                });
-
             modelBuilder.Entity("SWP391_Mentor_Booking_System_Data.Data.Group", b =>
                 {
                     b.HasOne("SWP391_Mentor_Booking_System_Data.Data.SwpClass", "SwpClass")
@@ -567,12 +528,6 @@ namespace SWP391_Mentor_Booking_System_Data.Migrations
                         .IsRequired();
 
                     b.Navigation("BookingSlot");
-                });
-
-            modelBuilder.Entity("SWP391_Mentor_Booking_System_Data.Data.BookingSlot", b =>
-                {
-                    b.Navigation("Feedback")
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("SWP391_Mentor_Booking_System_Data.Data.Group", b =>

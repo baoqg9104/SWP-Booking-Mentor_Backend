@@ -23,6 +23,7 @@ namespace SWP391_Mentor_Booking_System_Data
         public DbSet<Admin> Admins { get; set; }
         public DbSet<WalletTransaction> WalletTransactions { get; set; }
         public DbSet<RefreshToken> RefreshTokens { get; set; }
+        public DbSet<Feedback> Feedbacks { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -132,8 +133,16 @@ namespace SWP391_Mentor_Booking_System_Data
                 .HasForeignKey(wt => wt.BookingId)
                 .OnDelete(DeleteBehavior.Cascade);
 
-        
-           
+
+            modelBuilder.Entity<Feedback>()
+                .HasKey(f => f.FeedbackId);
+
+            modelBuilder.Entity<Feedback>()
+                .HasOne(f => f.BookingSlot)
+                .WithOne(b => b.Feedback)
+                .HasForeignKey<Feedback>(f => f.BookingId);
+
+
 
 
         }
