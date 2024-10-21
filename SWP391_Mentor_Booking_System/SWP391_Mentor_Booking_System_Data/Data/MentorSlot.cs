@@ -16,7 +16,8 @@ namespace SWP391_Mentor_Booking_System_Data.Data
         public DateTime EndTime { get; set; }
         public int BookingPoint { get; set; }
         public bool isOnline { get; set; }
-        public string? room {  get; set; } 
+        public string? room {  get; set; }
+        public string? Status { get; set; }
 
         // Relationship with BookingSlot
         public ICollection<BookingSlot> BookingSlots { get; set; }

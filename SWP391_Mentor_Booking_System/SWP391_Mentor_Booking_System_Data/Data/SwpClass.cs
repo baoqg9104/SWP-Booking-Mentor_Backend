@@ -8,13 +8,10 @@ namespace SWP391_Mentor_Booking_System_Data.Data
 {
     public class SwpClass
     {
-        public string SwpClassId { get; set; }
+        public int SwpClassId { get; set; }
         public string Name { get; set; }
 
-        public string? MentorId { get; set; }
-        public Mentor Mentor { get; set; }
-
-        public string SemesterId { get; set; }
+        public int SemesterId { get; set; }
         public Semester Semester { get; set; }
 
         public bool Status { get; set; }

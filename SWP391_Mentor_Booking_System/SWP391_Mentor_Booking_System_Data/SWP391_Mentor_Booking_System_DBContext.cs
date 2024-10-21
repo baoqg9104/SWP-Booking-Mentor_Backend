@@ -117,12 +117,6 @@ namespace SWP391_Mentor_Booking_System_Data
                 .HasKey(sc => sc.SwpClassId);
 
             modelBuilder.Entity<SwpClass>()
-                .HasOne(sc => sc.Mentor)
-                .WithMany(m => m.SwpClasses)
-                .HasForeignKey(sc => sc.MentorId)
-                .OnDelete(DeleteBehavior.SetNull);
-
-            modelBuilder.Entity<SwpClass>()
                 .HasOne(sc => sc.Semester)
                 .WithMany(s => s.SwpClasses)
                 .HasForeignKey(sc => sc.SemesterId)
@@ -138,8 +132,7 @@ namespace SWP391_Mentor_Booking_System_Data
                 .HasForeignKey(wt => wt.BookingId)
                 .OnDelete(DeleteBehavior.Cascade);
 
-         
-
+        
            
 
 

@@ -21,10 +21,9 @@ namespace SWP391_Mentor_Booking_System_Service.Service
         {
             var newClass = new SwpClass
             {
-                SwpClassId = createSwpClassDto.SwpClassId,
+                //SwpClassId = createSwpClassDto.SwpClassId,
                 Name = createSwpClassDto.Name,
                 SemesterId = createSwpClassDto.SemesterId,
-                MentorId = null,
                 Status = createSwpClassDto.Status
             };
 
@@ -33,7 +32,7 @@ namespace SWP391_Mentor_Booking_System_Service.Service
         }
 
         // Read by Id
-        public async Task<SwpClassDTO> GetClassByIdAsync(string classId)
+        public async Task<SwpClassDTO> GetClassByIdAsync(int classId)
         {
             var swpClass = await _context.SwpClasses.FirstOrDefaultAsync(c => c.SwpClassId == classId);
 
@@ -61,7 +60,7 @@ namespace SWP391_Mentor_Booking_System_Service.Service
                 })
                 .ToListAsync();
         }
-        public async Task<bool> UpdateClassByIdAsync(string swpClassId, UpdateSwpClassDTO updateSwpClassDto)
+        public async Task<bool> UpdateClassByIdAsync(int swpClassId, UpdateSwpClassDTO updateSwpClassDto)
         {
             var existingClass = await _context.SwpClasses.FirstOrDefaultAsync(c => c.SwpClassId == swpClassId);
 
@@ -78,7 +77,7 @@ namespace SWP391_Mentor_Booking_System_Service.Service
 
 
         // Delete
-        public async Task<bool> DeleteClassAsync(string classId)
+        public async Task<bool> DeleteClassAsync(int classId)
         {
             var swpClass = await _context.SwpClasses.FirstOrDefaultAsync(c => c.SwpClassId == classId);
 

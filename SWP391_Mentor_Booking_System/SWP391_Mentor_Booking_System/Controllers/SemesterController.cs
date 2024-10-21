@@ -35,7 +35,7 @@ namespace SWP391_Mentor_Booking_System_API.Controllers
         // Read by Id
         [HttpGet("get/{id}")]
         [Authorize(Policy = "AllPolicy")]
-        public async Task<IActionResult> GetSemesterById(string id)
+        public async Task<IActionResult> GetSemesterById(int id)
         {
             var semester = await _semesterService.GetSemesterByIdAsync(id);
             if (semester == null)
@@ -71,7 +71,7 @@ namespace SWP391_Mentor_Booking_System_API.Controllers
         // Delete
         [HttpDelete("delete/{id}")]
         [Authorize(Policy = "AdminOnly")]
-        public async Task<IActionResult> DeleteSemester(string id)
+        public async Task<IActionResult> DeleteSemester(int id)
         {
             var result = await _semesterService.DeleteSemesterAsync(id);
             if (!result)

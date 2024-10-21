@@ -9,7 +9,7 @@ namespace SWP391_Mentor_Booking_System_Data.DTO.SwpClass
     public class UpdateSwpClassDTO
     {   
         public string Name { get; set; }
-        public string SemesterId { get; set; }
+        public int SemesterId { get; set; }
         public bool Status { get; set; }
     }
 }
