@@ -226,6 +226,7 @@ namespace SWP391_Mentor_Booking_System_Data.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     GroupId = table.Column<string>(type: "nvarchar(450)", nullable: true),
                     MentorSlotId = table.Column<int>(type: "int", nullable: false),
+                    SkillId = table.Column<int>(type: "int", nullable: false),
                     BookingTime = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Status = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
@@ -238,6 +239,12 @@ namespace SWP391_Mentor_Booking_System_Data.Migrations
                         principalTable: "Groups",
                         principalColumn: "GroupId",
                         onDelete: ReferentialAction.SetNull);
+                    table.ForeignKey(
+                        name: "FK_BookingSlots_MentorSkills_SkillId",
+                        column: x => x.SkillId,
+                        principalTable: "MentorSkills",
+                        principalColumn: "MentorSkillId",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_BookingSlots_MentorSlots_MentorSlotId",
                         column: x => x.MentorSlotId,
@@ -268,6 +275,29 @@ namespace SWP391_Mentor_Booking_System_Data.Migrations
                         principalTable: "Groups",
                         principalColumn: "GroupId",
                         onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Feedbacks",
+                columns: table => new
+                {
+                    FeedbackId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    BookingId = table.Column<int>(type: "int", nullable: false),
+                    GroupRating = table.Column<int>(type: "int", nullable: false),
+                    MentorRating = table.Column<int>(type: "int", nullable: false),
+                    GroupFeedback = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    MentorFeedback = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Feedbacks", x => x.FeedbackId);
+                    table.ForeignKey(
+                        name: "FK_Feedbacks_BookingSlots_BookingId",
+                        column: x => x.BookingId,
+                        principalTable: "BookingSlots",
+                        principalColumn: "BookingId",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -302,6 +332,17 @@ namespace SWP391_Mentor_Booking_System_Data.Migrations
                 name: "IX_BookingSlots_MentorSlotId",
                 table: "BookingSlots",
                 column: "MentorSlotId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_BookingSlots_SkillId",
+                table: "BookingSlots",
+                column: "SkillId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Feedbacks_BookingId",
+                table: "Feedbacks",
+                column: "BookingId",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Groups_SwpClassId",
@@ -356,7 +397,7 @@ namespace SWP391_Mentor_Booking_System_Data.Migrations
                 name: "Admins");
 
             migrationBuilder.DropTable(
-                name: "MentorSkills");
+                name: "Feedbacks");
 
             migrationBuilder.DropTable(
                 name: "RefreshTokens");
@@ -368,13 +409,13 @@ namespace SWP391_Mentor_Booking_System_Data.Migrations
                 name: "WalletTransactions");
 
             migrationBuilder.DropTable(
-                name: "Skills");
-
-            migrationBuilder.DropTable(
                 name: "BookingSlots");
 
             migrationBuilder.DropTable(
                 name: "Groups");
+
+            migrationBuilder.DropTable(
+                name: "MentorSkills");
 
             migrationBuilder.DropTable(
                 name: "MentorSlots");
@@ -384,6 +425,9 @@ namespace SWP391_Mentor_Booking_System_Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "Topics");
+
+            migrationBuilder.DropTable(
+                name: "Skills");
 
             migrationBuilder.DropTable(
                 name: "Mentors");
