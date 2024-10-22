@@ -37,12 +37,25 @@ namespace SWP391_Mentor_Booking_System_Service.Service
             // Check if the slot is in the past
             if (mentorSlot.StartTime < DateTime.Now)
                 return (false, "Cannot book a slot in the past");
+            // Check for overlapping bookings for the group
+            var overlappingBooking = await _context.BookingSlots
+                .Include(b => b.MentorSlot) 
+                .FirstOrDefaultAsync(b => b.GroupId == createBookingDto.GroupId
+                && b.MentorSlot.StartTime < mentorSlot.EndTime
+                && b.MentorSlot.EndTime > mentorSlot.StartTime);
+
+
+            if (overlappingBooking != null)
+                return (false, "The group already has a booking that overlaps with the selected slot");
+
+
 
             // Create the booking
             var booking = new BookingSlot
             {
                 GroupId = createBookingDto.GroupId,
                 MentorSlotId = createBookingDto.MentorSlotId,
+                SkillId = createBookingDto.SkillId,
                 BookingTime = DateTime.Now,
                 Status = "Pending"
             };

@@ -12,8 +12,8 @@ using SWP391_Mentor_Booking_System_Data;
 namespace SWP391_Mentor_Booking_System_Data.Migrations
 {
     [DbContext(typeof(SWP391_Mentor_Booking_System_DBContext))]
-    [Migration("20241021202118_3")]
-    partial class _3
+    [Migration("20241022040020_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -70,6 +70,9 @@ namespace SWP391_Mentor_Booking_System_Data.Migrations
                     b.Property<int>("MentorSlotId")
                         .HasColumnType("int");
 
+                    b.Property<int>("SkillId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Status")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -79,6 +82,8 @@ namespace SWP391_Mentor_Booking_System_Data.Migrations
                     b.HasIndex("GroupId");
 
                     b.HasIndex("MentorSlotId");
+
+                    b.HasIndex("SkillId");
 
                     b.ToTable("BookingSlots");
                 });
@@ -464,7 +469,15 @@ namespace SWP391_Mentor_Booking_System_Data.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
+                    b.HasOne("SWP391_Mentor_Booking_System_Data.Data.MentorSkill", "MentorSkill")
+                        .WithMany("BookingSlots")
+                        .HasForeignKey("SkillId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("Group");
+
+                    b.Navigation("MentorSkill");
 
                     b.Navigation("MentorSlot");
                 });
@@ -590,6 +603,11 @@ namespace SWP391_Mentor_Booking_System_Data.Migrations
                     b.Navigation("MentorSkills");
 
                     b.Navigation("MentorSlots");
+                });
+
+            modelBuilder.Entity("SWP391_Mentor_Booking_System_Data.Data.MentorSkill", b =>
+                {
+                    b.Navigation("BookingSlots");
                 });
 
             modelBuilder.Entity("SWP391_Mentor_Booking_System_Data.Data.MentorSlot", b =>

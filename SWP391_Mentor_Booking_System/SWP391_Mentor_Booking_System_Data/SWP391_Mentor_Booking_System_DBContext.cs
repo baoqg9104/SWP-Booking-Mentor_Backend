@@ -28,13 +28,13 @@ namespace SWP391_Mentor_Booking_System_Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-  
+
 
             // Mentor
             modelBuilder.Entity<Mentor>()
                 .HasKey(m => m.MentorId);
 
-            
+
 
             modelBuilder.Entity<Mentor>()
                 .HasMany(m => m.MentorSkills)
@@ -59,7 +59,7 @@ namespace SWP391_Mentor_Booking_System_Data
                 .OnDelete(DeleteBehavior.Restrict);
 
 
-            
+
 
             // MentorSkill
             modelBuilder.Entity<MentorSkill>()
@@ -69,6 +69,12 @@ namespace SWP391_Mentor_Booking_System_Data
                 .HasOne(ms => ms.Skill)
                 .WithMany(s => s.MentorSkills)
                 .HasForeignKey(ms => ms.SkillId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<MentorSkill>()
+                .HasMany(ms => ms.BookingSlots)
+                .WithOne(bs => bs.MentorSkill)
+                .HasForeignKey(bs => bs.SkillId)
                 .OnDelete(DeleteBehavior.Cascade);
 
             // MentorSlot
@@ -96,6 +102,10 @@ namespace SWP391_Mentor_Booking_System_Data
                 .WithMany(ms => ms.BookingSlots)
                 .HasForeignKey(b => b.MentorSlotId)
                 .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<BookingSlot>()
+                .HasOne(bs => bs.MentorSkill)      // Mỗi BookingSlot thuộc về một MentorSkill
+                .WithMany(ms => ms.BookingSlots);  // MentorSkill có nhiều BookingSlot
 
             // Group
             modelBuilder.Entity<Group>()
@@ -141,6 +151,7 @@ namespace SWP391_Mentor_Booking_System_Data
                 .HasOne(f => f.BookingSlot)
                 .WithOne(b => b.Feedback)
                 .HasForeignKey<Feedback>(f => f.BookingId);
+
 
 
 
