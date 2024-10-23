@@ -218,6 +218,7 @@ namespace SWP391_Mentor_Booking_System_Service.Service
                 claims.Add(new Claim("id", student.StudentId));
                 claims.Add(new Claim(JwtRegisteredClaimNames.Email, student.Email));
                 claims.Add(new Claim("fullName", student.StudentName));
+                claims.Add(new Claim("groupId", student.GroupId ?? string.Empty));
             }
             else if (typeof(T) == typeof(Mentor))
             {

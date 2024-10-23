@@ -23,9 +23,21 @@ namespace SWP391_Mentor_Booking_System_Service.Service
         public async Task<(bool Success, string Error)> CreateGroupAsync(CreateGroupDTO createGroupDto)
         {
             // Check if TopicId exists
-            var topicExists = await _context.Topics.AnyAsync(t => t.TopicId == createGroupDto.TopicId);
+            var topicExists = await _context.Topics.AnyAsync(t => t.TopicId == createGroupDto.TopicId && t.Status == true);
             if (!topicExists)
                 return (false, "TopicId does not exist");
+
+            // Check if SwpClassId exists
+            var classExists = await _context.SwpClasses.AnyAsync(c => c.SwpClassId == createGroupDto.SwpClassId && c.Status == true);
+            if (!classExists)
+                return (false, "SwpClassId does not exist");
+
+            // Check LeaderId
+            var student = await _context.Students.FirstOrDefaultAsync(s => s.StudentId == createGroupDto.LeaderId);
+            if (student.GroupId != null)
+            {
+                return (false, "Student has joined the group");
+            }
 
             // Auto-generate GroupId
             var lastGroup = await _context.Groups.OrderByDescending(g => g.GroupId).FirstOrDefaultAsync();
@@ -37,6 +49,8 @@ namespace SWP391_Mentor_Booking_System_Service.Service
                 GroupId = groupId,
                 Name = createGroupDto.Name,
                 TopicId = createGroupDto.TopicId,
+                LeaderId = createGroupDto.LeaderId,
+                Progress = 0,
                 SwpClassId = createGroupDto.SwpClassId,
                 WalletPoint = 10,
                 CreatedDate = DateTime.Now
@@ -123,6 +137,7 @@ namespace SWP391_Mentor_Booking_System_Service.Service
             _context.Groups.Remove(group);
             return await _context.SaveChangesAsync() > 0;
         }
+
     }
 
 }
