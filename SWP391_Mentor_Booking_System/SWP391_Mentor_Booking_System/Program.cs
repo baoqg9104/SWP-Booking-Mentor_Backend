@@ -140,6 +140,7 @@ builder.Services.AddScoped<TopicService>();
 builder.Services.AddScoped<SwpClassService>();
 builder.Services.AddScoped<BookingService>();
 builder.Services.AddScoped<GroupService>();
+builder.Services.AddScoped<SkillService>();
 
 var app = builder.Build();
 
