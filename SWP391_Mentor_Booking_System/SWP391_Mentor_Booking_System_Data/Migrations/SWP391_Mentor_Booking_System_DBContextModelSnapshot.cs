@@ -126,10 +126,6 @@ namespace SWP391_Mentor_Booking_System_Data.Migrations
 
                     b.Property<string>("LeaderId")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("LeaderStudentId")
-                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Name")
@@ -150,7 +146,7 @@ namespace SWP391_Mentor_Booking_System_Data.Migrations
 
                     b.HasKey("GroupId");
 
-                    b.HasIndex("LeaderStudentId");
+                    b.HasIndex("LeaderId");
 
                     b.HasIndex("SwpClassId");
 
@@ -507,8 +503,8 @@ namespace SWP391_Mentor_Booking_System_Data.Migrations
                 {
                     b.HasOne("SWP391_Mentor_Booking_System_Data.Data.Student", "Leader")
                         .WithMany()
-                        .HasForeignKey("LeaderStudentId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .HasForeignKey("LeaderId")
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("SWP391_Mentor_Booking_System_Data.Data.SwpClass", "SwpClass")
@@ -565,7 +561,7 @@ namespace SWP391_Mentor_Booking_System_Data.Migrations
                     b.HasOne("SWP391_Mentor_Booking_System_Data.Data.Group", "Group")
                         .WithMany("Students")
                         .HasForeignKey("GroupId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.SetNull);
 
                     b.Navigation("Group");
                 });

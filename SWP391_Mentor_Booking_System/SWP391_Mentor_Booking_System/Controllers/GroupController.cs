@@ -28,7 +28,7 @@ namespace SWP391_Mentor_Booking_System_API.Controllers
             if (!success)
                 return BadRequest($"Error: {error}");
 
-            return Ok();
+            return Ok(error);
         }
 
         // Read by Id

@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using SWP391_Mentor_Booking_System_Data.Data;
+using System.ComponentModel.DataAnnotations;
 
 namespace SWP391_Mentor_Booking_System_Service.Service
 {
@@ -34,10 +35,24 @@ namespace SWP391_Mentor_Booking_System_Service.Service
 
             // Check LeaderId
             var student = await _context.Students.FirstOrDefaultAsync(s => s.StudentId == createGroupDto.LeaderId);
+            if (student == null)
+            {
+                return (false, "Student does not exist");
+            }
+
             if (student.GroupId != null)
             {
                 return (false, "Student has joined the group");
             }
+
+
+            // Check Group topic in a Class
+            var groupTopic = await _context.Groups.AnyAsync(g => g.SwpClassId == createGroupDto.SwpClassId && g.TopicId == createGroupDto.TopicId);
+            if (groupTopic)
+            {
+                return (false, "Dupplicate topic in the same class");
+            }
+            
 
             // Auto-generate GroupId
             var lastGroup = await _context.Groups.OrderByDescending(g => g.GroupId).FirstOrDefaultAsync();
@@ -57,8 +72,11 @@ namespace SWP391_Mentor_Booking_System_Service.Service
             };
 
             _context.Groups.Add(group);
+            student.GroupId = group.GroupId;
             await _context.SaveChangesAsync();
-            return (true, null);
+
+
+            return (true, group.GroupId);
         }
 
         // Read by Id
@@ -81,6 +99,7 @@ namespace SWP391_Mentor_Booking_System_Service.Service
                 SwpClassId = group.SwpClassId,
                 SwpClassName = group.SwpClass.Name,
                 WalletPoint = group.WalletPoint,
+                Progress = group.Progress,
                 CreatedDate = group.CreatedDate
             };
         }
@@ -100,6 +119,7 @@ namespace SWP391_Mentor_Booking_System_Service.Service
                     SwpClassId = g.SwpClassId,
                     SwpClassName = g.SwpClass.Name,
                     WalletPoint = g.WalletPoint,
+                    Progress = g.Progress,
                     CreatedDate = g.CreatedDate
                 })
                 .ToListAsync();

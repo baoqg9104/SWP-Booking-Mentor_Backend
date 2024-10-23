@@ -12,8 +12,8 @@ using SWP391_Mentor_Booking_System_Data;
 namespace SWP391_Mentor_Booking_System_Data.Migrations
 {
     [DbContext(typeof(SWP391_Mentor_Booking_System_DBContext))]
-    [Migration("20241023085344_InitiateCreate")]
-    partial class InitiateCreate
+    [Migration("20241023151750_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -127,9 +127,16 @@ namespace SWP391_Mentor_Booking_System_Data.Migrations
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("LeaderId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Progress")
+                        .HasColumnType("int");
 
                     b.Property<int>("SwpClassId")
                         .HasColumnType("int");
@@ -141,6 +148,8 @@ namespace SWP391_Mentor_Booking_System_Data.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("GroupId");
+
+                    b.HasIndex("LeaderId");
 
                     b.HasIndex("SwpClassId");
 
@@ -495,6 +504,12 @@ namespace SWP391_Mentor_Booking_System_Data.Migrations
 
             modelBuilder.Entity("SWP391_Mentor_Booking_System_Data.Data.Group", b =>
                 {
+                    b.HasOne("SWP391_Mentor_Booking_System_Data.Data.Student", "Leader")
+                        .WithMany()
+                        .HasForeignKey("LeaderId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
                     b.HasOne("SWP391_Mentor_Booking_System_Data.Data.SwpClass", "SwpClass")
                         .WithMany("Groups")
                         .HasForeignKey("SwpClassId")
@@ -506,6 +521,8 @@ namespace SWP391_Mentor_Booking_System_Data.Migrations
                         .HasForeignKey("TopicId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
+
+                    b.Navigation("Leader");
 
                     b.Navigation("SwpClass");
 
@@ -547,7 +564,7 @@ namespace SWP391_Mentor_Booking_System_Data.Migrations
                     b.HasOne("SWP391_Mentor_Booking_System_Data.Data.Group", "Group")
                         .WithMany("Students")
                         .HasForeignKey("GroupId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.SetNull);
 
                     b.Navigation("Group");
                 });
