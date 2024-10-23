@@ -9,7 +9,7 @@ namespace SWP391_Mentor_Booking_System_Data.Data
     public class Student
     {
         public string StudentId { get; set; }
-        public string StudentName { get; set; }  // Tên sinh viên sẽ liên kết với username
+        public string StudentName { get; set; } 
         public string Password { get; set; }
         public string Email { get; set; }
         public string? Phone { get; set; }
