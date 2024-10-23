@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace SWP391_Mentor_Booking_System_Data.Migrations
 {
     /// <inheritdoc />
-    public partial class InitiateCreate : Migration
+    public partial class InitialCreate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -191,34 +191,6 @@ namespace SWP391_Mentor_Booking_System_Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Groups",
-                columns: table => new
-                {
-                    GroupId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    TopicId = table.Column<int>(type: "int", nullable: false),
-                    SwpClassId = table.Column<int>(type: "int", nullable: false),
-                    WalletPoint = table.Column<int>(type: "int", nullable: false),
-                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Groups", x => x.GroupId);
-                    table.ForeignKey(
-                        name: "FK_Groups_SwpClasses_SwpClassId",
-                        column: x => x.SwpClassId,
-                        principalTable: "SwpClasses",
-                        principalColumn: "SwpClassId",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Groups_Topics_TopicId",
-                        column: x => x.TopicId,
-                        principalTable: "Topics",
-                        principalColumn: "TopicId",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "BookingSlots",
                 columns: table => new
                 {
@@ -234,12 +206,6 @@ namespace SWP391_Mentor_Booking_System_Data.Migrations
                 {
                     table.PrimaryKey("PK_BookingSlots", x => x.BookingId);
                     table.ForeignKey(
-                        name: "FK_BookingSlots_Groups_GroupId",
-                        column: x => x.GroupId,
-                        principalTable: "Groups",
-                        principalColumn: "GroupId",
-                        onDelete: ReferentialAction.SetNull);
-                    table.ForeignKey(
                         name: "FK_BookingSlots_MentorSkills_SkillId",
                         column: x => x.SkillId,
                         principalTable: "MentorSkills",
@@ -250,30 +216,6 @@ namespace SWP391_Mentor_Booking_System_Data.Migrations
                         column: x => x.MentorSlotId,
                         principalTable: "MentorSlots",
                         principalColumn: "MentorSlotId",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Students",
-                columns: table => new
-                {
-                    StudentId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    StudentName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Password = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Phone = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Gender = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    DateOfBirth = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    GroupId = table.Column<string>(type: "nvarchar(450)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Students", x => x.StudentId);
-                    table.ForeignKey(
-                        name: "FK_Students_Groups_GroupId",
-                        column: x => x.GroupId,
-                        principalTable: "Groups",
-                        principalColumn: "GroupId",
                         onDelete: ReferentialAction.Restrict);
                 });
 
@@ -323,6 +265,60 @@ namespace SWP391_Mentor_Booking_System_Data.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Groups",
+                columns: table => new
+                {
+                    GroupId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    LeaderId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    TopicId = table.Column<int>(type: "int", nullable: false),
+                    SwpClassId = table.Column<int>(type: "int", nullable: false),
+                    WalletPoint = table.Column<int>(type: "int", nullable: false),
+                    Progress = table.Column<int>(type: "int", nullable: false),
+                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Groups", x => x.GroupId);
+                    table.ForeignKey(
+                        name: "FK_Groups_SwpClasses_SwpClassId",
+                        column: x => x.SwpClassId,
+                        principalTable: "SwpClasses",
+                        principalColumn: "SwpClassId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Groups_Topics_TopicId",
+                        column: x => x.TopicId,
+                        principalTable: "Topics",
+                        principalColumn: "TopicId",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Students",
+                columns: table => new
+                {
+                    StudentId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    StudentName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Password = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Phone = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Gender = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    DateOfBirth = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    GroupId = table.Column<string>(type: "nvarchar(450)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Students", x => x.StudentId);
+                    table.ForeignKey(
+                        name: "FK_Students_Groups_GroupId",
+                        column: x => x.GroupId,
+                        principalTable: "Groups",
+                        principalColumn: "GroupId",
+                        onDelete: ReferentialAction.SetNull);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_BookingSlots_GroupId",
                 table: "BookingSlots",
@@ -343,6 +339,11 @@ namespace SWP391_Mentor_Booking_System_Data.Migrations
                 table: "Feedbacks",
                 column: "BookingId",
                 unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Groups_LeaderId",
+                table: "Groups",
+                column: "LeaderId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Groups_SwpClassId",
@@ -388,11 +389,31 @@ namespace SWP391_Mentor_Booking_System_Data.Migrations
                 name: "IX_WalletTransactions_BookingId",
                 table: "WalletTransactions",
                 column: "BookingId");
+
+            migrationBuilder.AddForeignKey(
+                name: "FK_BookingSlots_Groups_GroupId",
+                table: "BookingSlots",
+                column: "GroupId",
+                principalTable: "Groups",
+                principalColumn: "GroupId",
+                onDelete: ReferentialAction.SetNull);
+
+            migrationBuilder.AddForeignKey(
+                name: "FK_Groups_Students_LeaderId",
+                table: "Groups",
+                column: "LeaderId",
+                principalTable: "Students",
+                principalColumn: "StudentId",
+                onDelete: ReferentialAction.Restrict);
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropForeignKey(
+                name: "FK_Students_Groups_GroupId",
+                table: "Students");
+
             migrationBuilder.DropTable(
                 name: "Admins");
 
@@ -403,16 +424,10 @@ namespace SWP391_Mentor_Booking_System_Data.Migrations
                 name: "RefreshTokens");
 
             migrationBuilder.DropTable(
-                name: "Students");
-
-            migrationBuilder.DropTable(
                 name: "WalletTransactions");
 
             migrationBuilder.DropTable(
                 name: "BookingSlots");
-
-            migrationBuilder.DropTable(
-                name: "Groups");
 
             migrationBuilder.DropTable(
                 name: "MentorSkills");
@@ -421,16 +436,22 @@ namespace SWP391_Mentor_Booking_System_Data.Migrations
                 name: "MentorSlots");
 
             migrationBuilder.DropTable(
-                name: "SwpClasses");
-
-            migrationBuilder.DropTable(
-                name: "Topics");
-
-            migrationBuilder.DropTable(
                 name: "Skills");
 
             migrationBuilder.DropTable(
                 name: "Mentors");
+
+            migrationBuilder.DropTable(
+                name: "Groups");
+
+            migrationBuilder.DropTable(
+                name: "Students");
+
+            migrationBuilder.DropTable(
+                name: "SwpClasses");
+
+            migrationBuilder.DropTable(
+                name: "Topics");
 
             migrationBuilder.DropTable(
                 name: "Semesters");

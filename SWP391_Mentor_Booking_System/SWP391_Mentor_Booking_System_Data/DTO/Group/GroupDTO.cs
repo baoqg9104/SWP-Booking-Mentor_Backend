@@ -15,6 +15,7 @@ namespace SWP391_Mentor_Booking_System_Data.DTO.Group
         public int SwpClassId { get; set; }
         public string SwpClassName { get; set; }
         public int WalletPoint { get; set; }
+        public int Progress { get; set; }
         public DateTime CreatedDate { get; set; }
     }
 
