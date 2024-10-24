@@ -37,6 +37,7 @@ namespace SWP391_Mentor_Booking_System_Service.Service
             // Check if the slot is in the past
             if (mentorSlot.StartTime < DateTime.Now)
                 return (false, "Cannot book a slot in the past");
+
             // Check for overlapping bookings for the group
             var overlappingBooking = await _context.BookingSlots
                 .Include(b => b.MentorSlot) 
@@ -95,6 +96,25 @@ namespace SWP391_Mentor_Booking_System_Service.Service
                 GroupId = bs.GroupId,
                 GroupName = _context.Groups.FirstOrDefault(g => g.GroupId == bs.GroupId)?.Name ?? "Unknown",
                 MentorSlotId = bs.MentorSlotId,
+                SkillName = _context.Skills.FirstOrDefault(s => s.SkillId == bs.SkillId).Name,
+                BookingTime = bs.BookingTime,
+                Status = bs.Status
+            }).ToList();
+        }
+
+        public async Task<List<BookingDTO>> GetBookingByGroupIdAsync(string groupId)
+        {
+            var bookings = await _context.BookingSlots
+                .Where(bs => bs.GroupId == groupId)
+                .ToListAsync();
+
+            return bookings.Select(bs => new BookingDTO
+            {
+                BookingId = bs.BookingId,
+                GroupId = bs.GroupId,
+                GroupName = _context.Groups.FirstOrDefault(g => g.GroupId == bs.GroupId)?.Name ?? "Unknown",
+                MentorSlotId = bs.MentorSlotId,
+                SkillName = _context.Skills.FirstOrDefault(s => s.SkillId == bs.SkillId).Name,
                 BookingTime = bs.BookingTime,
                 Status = bs.Status
             }).ToList();
