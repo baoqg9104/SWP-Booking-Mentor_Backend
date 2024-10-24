@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
+using NuGet.Versioning;
 using SWP391_Mentor_Booking_System_Data.DTO.Skill;
 using SWP391_Mentor_Booking_System_Service.Service;
 
@@ -66,6 +68,17 @@ namespace SWP391_Mentor_Booking_System_API.Controllers
             if (!result)
                 return NotFound();
 
+            return Ok();
+        }
+
+        [HttpDelete("mentorskill/delete/{mentorSkillId}")]
+        public async Task<IActionResult> DeleteMentorSkill(int mentorSkillId)
+        {
+            var result = await _skillService.DeleteMentorSkillAsync(mentorSkillId);
+            if (!result)
+            {
+                return NotFound();
+            }
             return Ok();
         }
 

@@ -11,6 +11,7 @@ namespace SWP391_Mentor_Booking_System_Data.DTO.Skill
         public int MentorSkillId { get; set; }
         public string MentorId { get; set; }
         public int SkillId { get; set; }
+        public string SkillName { get; set; }
         public int Level { get; set; }
 
     }

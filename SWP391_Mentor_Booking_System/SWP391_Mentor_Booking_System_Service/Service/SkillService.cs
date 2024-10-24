@@ -91,6 +91,14 @@ namespace SWP391_Mentor_Booking_System_Service.Service
                 throw new Exception("Mentor hoặc Skill không tồn tại.");
             }
 
+            // Check duplicate skill 
+            var skillExists = await _context.MentorSkills.AnyAsync(ms => ms.MentorId == dto.MentorId && ms.SkillId == dto.SkillId);
+            
+            if (skillExists)
+            {
+                throw new Exception("Skill already exists."); 
+            }
+
             var mentorSkill = new MentorSkill
             {
                 MentorId = dto.MentorId,
@@ -127,15 +135,31 @@ namespace SWP391_Mentor_Booking_System_Service.Service
             // Lấy danh sách kỹ năng của mentor
             var mentorSkills = await _context.MentorSkills
                 .Where(ms => ms.MentorId == mentorId.ToString())
+                .Include(ms => ms.Skill)
                 .Select(ms => new MentorSkillDTO
                 {
                     MentorSkillId = ms.MentorSkillId,
                     MentorId = ms.MentorId,
                     SkillId = ms.SkillId,
+                    SkillName = ms.Skill.Name,
                     Level = ms.Level
                 }).ToListAsync();
 
             return mentorSkills;
+        }
+
+        public async Task<bool> DeleteMentorSkillAsync(int mentorSkillId)
+        {
+            var mentorSkill = await _context.MentorSkills.FirstOrDefaultAsync(ms => ms.MentorSkillId == mentorSkillId);
+
+            if (mentorSkill == null)
+            {
+                return false;
+            }
+
+            _context.MentorSkills.Remove(mentorSkill);
+
+            return await _context.SaveChangesAsync() > 0;
         }
 
     }

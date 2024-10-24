@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using SWP391_Mentor_Booking_System_Data.Data;
 using SWP391_Mentor_Booking_System_Data.DTO.BookingSlot;
 using SWP391_Mentor_Booking_System_Service.Service;
 
@@ -50,6 +51,13 @@ namespace SWP391_Mentor_Booking_System_API.Controllers
         public async Task<IActionResult> GetBookingsByMentorSlotId(int mentorSlotId)
         {
             var bookings = await _bookingService.GetBookingsByMentorSlotIdAsync(mentorSlotId);
+            return Ok(bookings);
+        }
+
+        [HttpGet("get-bookings-by-groupId/{groupId}")]
+        public async Task<IActionResult> GetBookingsByGroupId(string groupId)
+        {
+            var bookings = await _bookingService.GetBookingByGroupIdAsync(groupId);
             return Ok(bookings);
         }
     }
