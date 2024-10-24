@@ -82,5 +82,21 @@ namespace SWP391_Mentor_Booking_System_API.Controllers
                 return BadRequest(ex.Message);
             }
         }
+
+        [HttpGet("mentorskill/{mentorId}")]
+        public async Task<IActionResult> GetMentorSkillsByMentorId(string mentorId)
+        {
+            try
+            {
+                var mentorSkills = await _skillService.GetMentorSkillsByMentorIdAsync(mentorId);
+                return Ok(mentorSkills);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { message = ex.Message });
+            }
+        }
+
+
     }
 }
