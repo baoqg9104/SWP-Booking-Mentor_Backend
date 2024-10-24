@@ -101,5 +101,42 @@ namespace SWP391_Mentor_Booking_System_Service.Service
             _context.MentorSkills.Add(mentorSkill);
             await _context.SaveChangesAsync();
         }
+
+        public async Task<IEnumerable<MentorSkillDTO>> GetAllMentorSkillsAsync()
+        {
+            return await _context.MentorSkills
+                .Select(s => new MentorSkillDTO
+                {
+                    MentorSkillId = s.MentorSkillId,
+                    MentorId = s.MentorId,
+                    SkillId = s.SkillId,
+                    Level = s.Level
+                })
+                .ToListAsync();
+        }
+
+        public async Task<IEnumerable<MentorSkillDTO>> GetMentorSkillsByMentorIdAsync(string mentorId)
+        {
+            // Kiểm tra mentorId có tồn tại không
+            var mentor = await _context.Mentors.FindAsync(mentorId);
+            if (mentor == null)
+            {
+                throw new Exception("Mentor không tồn tại");
+            }
+
+            // Lấy danh sách kỹ năng của mentor
+            var mentorSkills = await _context.MentorSkills
+                .Where(ms => ms.MentorId == mentorId.ToString())
+                .Select(ms => new MentorSkillDTO
+                {
+                    MentorSkillId = ms.MentorSkillId,
+                    MentorId = ms.MentorId,
+                    SkillId = ms.SkillId,
+                    Level = ms.Level
+                }).ToListAsync();
+
+            return mentorSkills;
+        }
+
     }
 }
