@@ -12,6 +12,11 @@ namespace SWP391_Mentor_Booking_System_Data.DTO.BookingSlot
         public string? GroupId { get; set; }
         public string GroupName { get; set; }
         public int MentorSlotId { get; set; }
+        public string MentorName { get; set; }
+        public DateTime StartTime { get; set; }
+        public DateTime EndTime { get; set; }
+        public string Room {  get; set; }
+        public bool IsOnline { get; set; }
         public string SkillName {  get; set; }
         public DateTime BookingTime { get; set; }
         public string Status { get; set; }
