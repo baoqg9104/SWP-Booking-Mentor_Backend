@@ -40,7 +40,7 @@ namespace SWP391_Mentor_Booking_System_Service.Service
 
             // Check for overlapping bookings for the group
             var overlappingBooking = await _context.BookingSlots
-                .Include(b => b.MentorSlot) 
+                .Include(b => b.MentorSlot)
                 .FirstOrDefaultAsync(b => b.GroupId == createBookingDto.GroupId
                 && b.MentorSlot.StartTime < mentorSlot.EndTime
                 && b.MentorSlot.EndTime > mentorSlot.StartTime);
@@ -56,7 +56,7 @@ namespace SWP391_Mentor_Booking_System_Service.Service
             {
                 GroupId = createBookingDto.GroupId,
                 MentorSlotId = createBookingDto.MentorSlotId,
-                SkillId = createBookingDto.SkillId,
+                MentorSkillId = createBookingDto.MentorSkillId,
                 BookingTime = DateTime.Now,
                 Status = "Pending"
             };
@@ -87,6 +87,7 @@ namespace SWP391_Mentor_Booking_System_Service.Service
         public async Task<List<BookingDTO>> GetBookingsByMentorSlotIdAsync(int mentorSlotId)
         {
             var bookings = await _context.BookingSlots
+                .Include(bs => bs.MentorSkill)
                 .Where(bs => bs.MentorSlotId == mentorSlotId)
                 .ToListAsync();
 
@@ -96,7 +97,7 @@ namespace SWP391_Mentor_Booking_System_Service.Service
                 GroupId = bs.GroupId,
                 GroupName = _context.Groups.FirstOrDefault(g => g.GroupId == bs.GroupId)?.Name ?? "Unknown",
                 MentorSlotId = bs.MentorSlotId,
-                SkillName = _context.Skills.FirstOrDefault(s => s.SkillId == bs.SkillId).Name,
+                SkillName = _context.Skills.FirstOrDefault(s => s.SkillId == bs.MentorSkill.SkillId).Name,
                 BookingTime = bs.BookingTime,
                 Status = bs.Status
             }).ToList();
@@ -105,6 +106,7 @@ namespace SWP391_Mentor_Booking_System_Service.Service
         public async Task<List<BookingDTO>> GetBookingByGroupIdAsync(string groupId)
         {
             var bookings = await _context.BookingSlots
+                .Include(bs => bs.MentorSkill)
                 .Where(bs => bs.GroupId == groupId)
                 .ToListAsync();
 
@@ -114,7 +116,23 @@ namespace SWP391_Mentor_Booking_System_Service.Service
                 GroupId = bs.GroupId,
                 GroupName = _context.Groups.FirstOrDefault(g => g.GroupId == bs.GroupId)?.Name ?? "Unknown",
                 MentorSlotId = bs.MentorSlotId,
-                SkillName = _context.Skills.FirstOrDefault(s => s.SkillId == bs.SkillId).Name,
+                MentorName = _context.MentorSlots
+                .Where(ms => ms.MentorSlotId == bs.MentorSlotId)
+                .Select(ms => ms.Mentor.MentorName)
+                .FirstOrDefault() ?? "Unknown",
+                StartTime = _context.MentorSlots
+                .FirstOrDefault(ms => ms.MentorSlotId == bs.MentorSlotId)
+                .StartTime,
+                EndTime = _context.MentorSlots
+                .FirstOrDefault(ms => ms.MentorSlotId == bs.MentorSlotId)
+                .EndTime,
+                Room = _context.MentorSlots
+                .FirstOrDefault(ms => ms.MentorSlotId == bs.MentorSlotId)
+                .room,
+                IsOnline = _context.MentorSlots
+                .FirstOrDefault(ms => ms.MentorSlotId == bs.MentorSlotId)
+                .isOnline,
+                SkillName = _context.Skills.FirstOrDefault(s => s.SkillId == bs.MentorSkill.SkillId).Name,
                 BookingTime = bs.BookingTime,
                 Status = bs.Status
             }).ToList();

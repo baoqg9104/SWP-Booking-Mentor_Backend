@@ -10,7 +10,7 @@ namespace SWP391_Mentor_Booking_System_Data.DTO.BookingSlot
     {
         public string? GroupId { get; set; }
         public int MentorSlotId { get; set; }
-        public int SkillId { get; set; }
+        public int MentorSkillId { get; set; }
     }
 
 }

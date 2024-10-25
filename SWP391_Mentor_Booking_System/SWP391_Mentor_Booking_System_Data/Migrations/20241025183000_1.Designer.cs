@@ -12,8 +12,8 @@ using SWP391_Mentor_Booking_System_Data;
 namespace SWP391_Mentor_Booking_System_Data.Migrations
 {
     [DbContext(typeof(SWP391_Mentor_Booking_System_DBContext))]
-    [Migration("20241023151750_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20241025183000_1")]
+    partial class _1
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -67,10 +67,10 @@ namespace SWP391_Mentor_Booking_System_Data.Migrations
                     b.Property<string>("GroupId")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<int>("MentorSlotId")
+                    b.Property<int>("MentorSkillId")
                         .HasColumnType("int");
 
-                    b.Property<int>("SkillId")
+                    b.Property<int>("MentorSlotId")
                         .HasColumnType("int");
 
                     b.Property<string>("Status")
@@ -81,9 +81,9 @@ namespace SWP391_Mentor_Booking_System_Data.Migrations
 
                     b.HasIndex("GroupId");
 
-                    b.HasIndex("MentorSlotId");
+                    b.HasIndex("MentorSkillId");
 
-                    b.HasIndex("SkillId");
+                    b.HasIndex("MentorSlotId");
 
                     b.ToTable("BookingSlots");
                 });
@@ -472,16 +472,16 @@ namespace SWP391_Mentor_Booking_System_Data.Migrations
                         .HasForeignKey("GroupId")
                         .OnDelete(DeleteBehavior.SetNull);
 
+                    b.HasOne("SWP391_Mentor_Booking_System_Data.Data.MentorSkill", "MentorSkill")
+                        .WithMany("BookingSlots")
+                        .HasForeignKey("MentorSkillId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("SWP391_Mentor_Booking_System_Data.Data.MentorSlot", "MentorSlot")
                         .WithMany("BookingSlots")
                         .HasForeignKey("MentorSlotId")
                         .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("SWP391_Mentor_Booking_System_Data.Data.MentorSkill", "MentorSkill")
-                        .WithMany("BookingSlots")
-                        .HasForeignKey("SkillId")
-                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Group");

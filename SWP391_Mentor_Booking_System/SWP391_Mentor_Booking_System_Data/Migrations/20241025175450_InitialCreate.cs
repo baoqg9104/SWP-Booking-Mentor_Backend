@@ -198,7 +198,7 @@ namespace SWP391_Mentor_Booking_System_Data.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     GroupId = table.Column<string>(type: "nvarchar(450)", nullable: true),
                     MentorSlotId = table.Column<int>(type: "int", nullable: false),
-                    SkillId = table.Column<int>(type: "int", nullable: false),
+                    MentorSkillId = table.Column<int>(type: "int", nullable: false),
                     BookingTime = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Status = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
@@ -206,8 +206,8 @@ namespace SWP391_Mentor_Booking_System_Data.Migrations
                 {
                     table.PrimaryKey("PK_BookingSlots", x => x.BookingId);
                     table.ForeignKey(
-                        name: "FK_BookingSlots_MentorSkills_SkillId",
-                        column: x => x.SkillId,
+                        name: "FK_BookingSlots_MentorSkills_MentorSkillId",
+                        column: x => x.MentorSkillId,
                         principalTable: "MentorSkills",
                         principalColumn: "MentorSkillId",
                         onDelete: ReferentialAction.Cascade);
@@ -325,14 +325,14 @@ namespace SWP391_Mentor_Booking_System_Data.Migrations
                 column: "GroupId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_BookingSlots_MentorSkillId",
+                table: "BookingSlots",
+                column: "MentorSkillId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_BookingSlots_MentorSlotId",
                 table: "BookingSlots",
                 column: "MentorSlotId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_BookingSlots_SkillId",
-                table: "BookingSlots",
-                column: "SkillId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Feedbacks_BookingId",
