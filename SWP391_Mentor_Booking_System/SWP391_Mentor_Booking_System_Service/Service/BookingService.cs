@@ -79,6 +79,20 @@ namespace SWP391_Mentor_Booking_System_Service.Service
                 return false;
 
             existingBooking.Status = updateBookingStatusDto.Status;
+            
+            if (updateBookingStatusDto.Status.Equals("Approved"))
+            {
+                var mentorSlot = await _context.BookingSlots
+                    .FirstOrDefaultAsync(bs => bs.BookingId == updateBookingStatusDto.BookingId);
+
+                var otherBookingsSameSlot = await _context.BookingSlots
+                    .Where(bs => bs.BookingId != updateBookingStatusDto.BookingId && bs.MentorSlotId == mentorSlot.MentorSlotId).ToListAsync();
+
+                foreach (var booking in otherBookingsSameSlot)
+                {
+                    booking.Status = "Denied";  
+                }
+            }
 
             return await _context.SaveChangesAsync() > 0;
         }
@@ -96,9 +110,27 @@ namespace SWP391_Mentor_Booking_System_Service.Service
                 BookingId = bs.BookingId,
                 GroupId = bs.GroupId,
                 GroupName = _context.Groups.FirstOrDefault(g => g.GroupId == bs.GroupId)?.Name ?? "Unknown",
+                SwpClass = _context.SwpClasses.FirstOrDefault(c => c.SwpClassId == bs.Group.SwpClassId).Name,
                 MentorSlotId = bs.MentorSlotId,
+                MentorName = _context.MentorSlots
+                .Where(ms => ms.MentorSlotId == bs.MentorSlotId)
+                .Select(ms => ms.Mentor.MentorName)
+                .FirstOrDefault() ?? "Unknown",
+                StartTime = _context.MentorSlots
+                .FirstOrDefault(ms => ms.MentorSlotId == bs.MentorSlotId)
+                .StartTime,
+                EndTime = _context.MentorSlots
+                .FirstOrDefault(ms => ms.MentorSlotId == bs.MentorSlotId)
+                .EndTime,
+                Room = _context.MentorSlots
+                .FirstOrDefault(ms => ms.MentorSlotId == bs.MentorSlotId)
+                .room,
+                IsOnline = _context.MentorSlots
+                .FirstOrDefault(ms => ms.MentorSlotId == bs.MentorSlotId)
+                .isOnline,
                 SkillName = _context.Skills.FirstOrDefault(s => s.SkillId == bs.MentorSkill.SkillId).Name,
                 BookingTime = bs.BookingTime,
+                TopicName = _context.Topics.FirstOrDefault(t => t.TopicId == bs.Group.TopicId).Name,
                 Status = bs.Status
             }).ToList();
         }
