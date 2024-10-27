@@ -60,6 +60,13 @@ namespace SWP391_Mentor_Booking_System_API.Controllers
             var bookings = await _bookingService.GetBookingByGroupIdAsync(groupId);
             return Ok(bookings);
         }
+
+        [HttpGet("get-bookings")]
+        public async Task<IActionResult> GetBookingsAsync()
+        {
+            var bookings = await _bookingService.GetBookingsAsync();
+            return Ok(bookings);
+        }
     }
 
 }

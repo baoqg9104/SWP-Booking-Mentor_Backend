@@ -15,5 +15,6 @@ namespace SWP391_Mentor_Booking_System_Data.DTO.MentorSlot
         public int BookingPoint { get; set; }
         public bool isOnline { get; set; }
         public string? room { get; set; }
+        public string Status { get; set; }
     }
 }
