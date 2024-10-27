@@ -4,19 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SWP391_Mentor_Booking_System_Data.Data
+namespace SWP391_Mentor_Booking_System_Data.DTO.Transaction
 {
-    public class WalletTransaction
+    public class TransactionDTO
     {
-        public int WalletId { get; set; }
-
-        // Foreign Key
         public int BookingId { get; set; }
-        public BookingSlot BookingSlot { get; set; }
         public int Point { get; set; }
         public DateTime DateTime { get; set; }
+        public string GroupName { get; set; }
+        public string SwpClassName { get; set; }
+        public string MentorName { get; set; }
     }
-
-
-
 }

@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using SWP391_Mentor_Booking_System_Data.DTO.Group;
 using SWP391_Mentor_Booking_System_Service.Service;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace SWP391_Mentor_Booking_System_API.Controllers
 {
@@ -50,6 +51,15 @@ namespace SWP391_Mentor_Booking_System_API.Controllers
             return Ok(groups);
         }
 
+        // Get members
+        [HttpGet("get-members/{groupId}")]
+        public async Task<IActionResult> GetMembers(string groupId)
+        {
+            var members = await _groupService.GetMembersAsync(groupId);
+            return Ok(members);
+        }
+
+
         // Update
         [HttpPut("update")]
         public async Task<IActionResult> UpdateGroup([FromBody] UpdateGroupDTO updateGroupDto)
@@ -58,6 +68,21 @@ namespace SWP391_Mentor_Booking_System_API.Controllers
                 return BadRequest(ModelState);
 
             var (success, error) = await _groupService.UpdateGroupAsync(updateGroupDto);
+
+            if (!success)
+                return BadRequest($"Error: {error}");
+
+            return Ok();
+        }
+
+        // Add member
+        [HttpPut("add-member")]
+        public async Task<IActionResult> AddMember(AddMemberDTO addMemberDto)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+            
+            var (success, error) = await _groupService.AddMemberAsync(addMemberDto);
 
             if (!success)
                 return BadRequest($"Error: {error}");

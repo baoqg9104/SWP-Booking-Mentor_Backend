@@ -52,7 +52,7 @@ namespace SWP391_Mentor_Booking_System_Service.Service
             {
                 return (false, "Dupplicate topic in the same class");
             }
-            
+
 
             // Auto-generate GroupId
             var lastGroup = await _context.Groups.OrderByDescending(g => g.GroupId).FirstOrDefaultAsync();
@@ -156,6 +156,57 @@ namespace SWP391_Mentor_Booking_System_Service.Service
 
             _context.Groups.Remove(group);
             return await _context.SaveChangesAsync() > 0;
+        }
+
+        public async Task<(bool Success, string Error)> AddMemberAsync(AddMemberDTO addMemberDTO)
+        {
+            var student = await _context.Students.FirstOrDefaultAsync(s => s.Email == addMemberDTO.Email);
+
+            var group = await _context.Groups.FirstOrDefaultAsync(g => g.GroupId == addMemberDTO.GroupId);
+
+            if (student == null || group == null)
+            {
+                return (false, "Student not found");
+            }
+
+            if (student.GroupId != null)
+            {
+                return (false, "Student has joined another group");
+            }
+
+            var numOfMembers = await _context.Students
+                .Where(s => s.GroupId == addMemberDTO.GroupId)
+                .CountAsync();
+
+            if (numOfMembers > 6)
+            {
+                return (false, "Your group is at maximum members.");
+            }
+
+            student.GroupId = group.GroupId;
+
+            await _context.SaveChangesAsync();
+            return (true, "");
+        }
+
+        public async Task<List<MemberDTO>> GetMembersAsync(string groupId)
+        {
+            var members = await _context.Students
+                .Where(s => s.GroupId == groupId)
+                .Select(s => new MemberDTO {
+                    StudentId = s.StudentId,
+                    FullName = s.StudentName,
+                    Email = s.Email,
+                    Phone = s.Phone
+                })
+                .ToListAsync();
+
+            if (members != null)
+            {
+                return members;
+            }
+
+            return new List<MemberDTO> ();
         }
 
     }

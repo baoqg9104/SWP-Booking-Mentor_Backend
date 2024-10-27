@@ -141,6 +141,7 @@ builder.Services.AddScoped<SwpClassService>();
 builder.Services.AddScoped<BookingService>();
 builder.Services.AddScoped<GroupService>();
 builder.Services.AddScoped<SkillService>();
+builder.Services.AddScoped<TransactionService>();
 
 var app = builder.Build();
 
