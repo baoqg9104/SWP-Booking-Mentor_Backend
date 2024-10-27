@@ -26,6 +26,11 @@ namespace SWP391_Mentor_Booking_System_Service.Service
                 if (user == null)
                     return false;
 
+                var email = await _context.Students.FirstOrDefaultAsync(s => s.StudentId !=  updateUserDto.Id && s.Email == updateUserDto.Email);
+
+                if (email != null)
+                    return false;
+
                 user.Email = updateUserDto.Email;
                 user.StudentName = updateUserDto.Name;
                 user.Phone = updateUserDto.Phone;
@@ -42,6 +47,11 @@ namespace SWP391_Mentor_Booking_System_Service.Service
             {
                 var user = await _context.Mentors.FirstOrDefaultAsync(u => u.MentorId == updateUserDto.Id);
                 if (user == null)
+                    return false;
+
+                var email = await _context.Mentors.FirstOrDefaultAsync(s => s.MentorId != updateUserDto.Id && s.Email == updateUserDto.Email);
+
+                if (email != null)
                     return false;
 
                 user.Email = updateUserDto.Email;

@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using SWP391_Mentor_Booking_System_Data.DTO.Transaction;
 
 namespace SWP391_Mentor_Booking_System_Service.Service
 {
@@ -124,6 +125,21 @@ namespace SWP391_Mentor_Booking_System_Service.Service
                 mentorSlot.Status = "Completed";
 
                 booking.Status = "Completed";
+
+                // Add Wallet Transactions
+
+                var transaction = new WalletTransaction()
+                {
+                    BookingId = booking.BookingId,
+                    Point = mentorSlot.BookingPoint,
+                    DateTime = DateTime.Now
+                };
+
+                if (transaction != null)
+                {
+                    await _context.WalletTransactions.AddAsync(transaction);
+                }
+
             }
 
             await _context.SaveChangesAsync();
