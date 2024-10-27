@@ -31,6 +31,9 @@ namespace SWP391_Mentor_Booking_System_Service.Service
             if (mentorSlot == null)
                 return (false, "Mentor slot does not exist");
 
+            if (mentorSlot.Status == "Approved")
+                return (false, "Slot has approved");
+
             if (group.WalletPoint < mentorSlot.BookingPoint)
                 return (false, "Not enough wallet points");
 
@@ -73,14 +76,59 @@ namespace SWP391_Mentor_Booking_System_Service.Service
         // Update Booking Status
         public async Task<bool> UpdateBookingStatusAsync(UpdateBookingStatusDTO updateBookingStatusDto)
         {
-            var existingBooking = await _context.BookingSlots.FirstOrDefaultAsync(b => b.BookingId == updateBookingStatusDto.BookingId);
+            //existingBooking.Status = updateBookingStatusDto.Status;
 
-            if (existingBooking == null)
-                return false;
+            if (updateBookingStatusDto.Status.Equals("Approved"))
+            {
+                var booking = await _context.BookingSlots
+                    .FirstOrDefaultAsync(bs => bs.BookingId == updateBookingStatusDto.BookingId);
 
-            existingBooking.Status = updateBookingStatusDto.Status;
+                var mentorSlot = await _context.MentorSlots
+                    .FirstOrDefaultAsync(ms => ms.MentorSlotId == updateBookingStatusDto.MentorSlotId);
 
-            return await _context.SaveChangesAsync() > 0;
+                if (booking == null || mentorSlot == null)
+                    return false;
+
+                if (mentorSlot.StartTime < DateTime.Now)
+                {
+                    return false;
+                }
+
+                booking.Status = "Approved";
+                mentorSlot.Status = "Approved";
+
+                var otherBookingsSameSlot = await _context.BookingSlots
+                    .Where(bs => bs.BookingId != updateBookingStatusDto.BookingId && bs.MentorSlotId == booking.MentorSlotId).ToListAsync();
+
+                foreach (var b in otherBookingsSameSlot)
+                {
+                    b.Status = "Denied";
+                }                
+            }
+            else if (updateBookingStatusDto.Status.Equals("Completed"))
+            {
+                var mentorSlot = await _context.MentorSlots
+                    .FirstOrDefaultAsync(ms => ms.MentorSlotId == updateBookingStatusDto.MentorSlotId);
+
+                var booking = await _context.BookingSlots
+                    .FirstOrDefaultAsync(ms => ms.MentorSlotId == updateBookingStatusDto.MentorSlotId && ms.Status == "Approved");
+
+                if (booking == null || mentorSlot == null)
+                    return false;
+
+                if (mentorSlot.EndTime > DateTime.Now)
+                {
+                    return false;
+                }
+
+                mentorSlot.Status = "Completed";
+
+                booking.Status = "Completed";
+            }
+
+            await _context.SaveChangesAsync();
+            return true;
+
         }
 
         // Get BookingSlots by MentorSlotId
@@ -96,9 +144,27 @@ namespace SWP391_Mentor_Booking_System_Service.Service
                 BookingId = bs.BookingId,
                 GroupId = bs.GroupId,
                 GroupName = _context.Groups.FirstOrDefault(g => g.GroupId == bs.GroupId)?.Name ?? "Unknown",
+                SwpClass = _context.SwpClasses.FirstOrDefault(c => c.SwpClassId == bs.Group.SwpClassId).Name,
                 MentorSlotId = bs.MentorSlotId,
+                MentorName = _context.MentorSlots
+                .Where(ms => ms.MentorSlotId == bs.MentorSlotId)
+                .Select(ms => ms.Mentor.MentorName)
+                .FirstOrDefault() ?? "Unknown",
+                StartTime = _context.MentorSlots
+                .FirstOrDefault(ms => ms.MentorSlotId == bs.MentorSlotId)
+                .StartTime,
+                EndTime = _context.MentorSlots
+                .FirstOrDefault(ms => ms.MentorSlotId == bs.MentorSlotId)
+                .EndTime,
+                Room = _context.MentorSlots
+                .FirstOrDefault(ms => ms.MentorSlotId == bs.MentorSlotId)
+                .room,
+                IsOnline = _context.MentorSlots
+                .FirstOrDefault(ms => ms.MentorSlotId == bs.MentorSlotId)
+                .isOnline,
                 SkillName = _context.Skills.FirstOrDefault(s => s.SkillId == bs.MentorSkill.SkillId).Name,
                 BookingTime = bs.BookingTime,
+                TopicName = _context.Topics.FirstOrDefault(t => t.TopicId == bs.Group.TopicId).Name,
                 Status = bs.Status
             }).ToList();
         }
@@ -108,6 +174,40 @@ namespace SWP391_Mentor_Booking_System_Service.Service
             var bookings = await _context.BookingSlots
                 .Include(bs => bs.MentorSkill)
                 .Where(bs => bs.GroupId == groupId)
+                .ToListAsync();
+
+            return bookings.Select(bs => new BookingDTO
+            {
+                BookingId = bs.BookingId,
+                GroupId = bs.GroupId,
+                GroupName = _context.Groups.FirstOrDefault(g => g.GroupId == bs.GroupId)?.Name ?? "Unknown",
+                MentorSlotId = bs.MentorSlotId,
+                MentorName = _context.MentorSlots
+                .Where(ms => ms.MentorSlotId == bs.MentorSlotId)
+                .Select(ms => ms.Mentor.MentorName)
+                .FirstOrDefault() ?? "Unknown",
+                StartTime = _context.MentorSlots
+                .FirstOrDefault(ms => ms.MentorSlotId == bs.MentorSlotId)
+                .StartTime,
+                EndTime = _context.MentorSlots
+                .FirstOrDefault(ms => ms.MentorSlotId == bs.MentorSlotId)
+                .EndTime,
+                Room = _context.MentorSlots
+                .FirstOrDefault(ms => ms.MentorSlotId == bs.MentorSlotId)
+                .room,
+                IsOnline = _context.MentorSlots
+                .FirstOrDefault(ms => ms.MentorSlotId == bs.MentorSlotId)
+                .isOnline,
+                SkillName = _context.Skills.FirstOrDefault(s => s.SkillId == bs.MentorSkill.SkillId).Name,
+                BookingTime = bs.BookingTime,
+                Status = bs.Status
+            }).ToList();
+        }
+
+        public async Task<List<BookingDTO>> GetBookingsAsync()
+        {
+            var bookings = await _context.BookingSlots
+                .Include(bs => bs.MentorSkill)
                 .ToListAsync();
 
             return bookings.Select(bs => new BookingDTO

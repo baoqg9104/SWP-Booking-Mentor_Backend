@@ -19,6 +19,8 @@ namespace SWP391_Mentor_Booking_System_Data.DTO.BookingSlot
         public bool IsOnline { get; set; }
         public string SkillName {  get; set; }
         public DateTime BookingTime { get; set; }
+        public string SwpClass { get; set; }
+        public string TopicName { get; set; }
         public string Status { get; set; }
     }
 

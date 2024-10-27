@@ -72,10 +72,17 @@ namespace SWP391_Mentor_Booking_System_Service.Service
                 BookingPoint = createMentorSlotDto.BookingPoint,
                 isOnline = createMentorSlotDto.IsOnline,
                 room = createMentorSlotDto.Room,
+                Status = "Pending"
             };
 
             _context.MentorSlots.Add(mentorSlot);
+
+            mentor.NumOfSlot -= 1;
+
             await _context.SaveChangesAsync();
+
+
+
             return (true, null);
         }
 
@@ -132,6 +139,7 @@ namespace SWP391_Mentor_Booking_System_Service.Service
                     BookingPoint = ms.BookingPoint,
                     isOnline = ms.isOnline,
                     room = ms.room,
+                    Status = ms.Status
                 })
                 .ToListAsync();
         }
@@ -219,6 +227,7 @@ namespace SWP391_Mentor_Booking_System_Service.Service
                     BookingPoint = ms.BookingPoint,
                     isOnline = ms.isOnline,
                     room = ms.room,
+                    Status = ms.Status,
                 })
                 .ToListAsync();
 
@@ -230,6 +239,8 @@ namespace SWP391_Mentor_Booking_System_Service.Service
                     )
                     .CountAsync();
 
+                //slot.Bookings = numOfPending;
+
                 var approvedBooking = await _context.BookingSlots.SingleOrDefaultAsync(bs =>
                     bs.MentorSlotId == slot.MentorSlotId && bs.Status == "Approved"
                 );
@@ -238,8 +249,8 @@ namespace SWP391_Mentor_Booking_System_Service.Service
                     bs.MentorSlotId == slot.MentorSlotId && bs.Status == "Completed"
                 );
 
-                //var groupId = await _context.BookingSlots
-                //    .SingleOrDefaultAsync(bs => bs.MentorSlotId == slot.MentorSlotId && bs.Status == "Completed")
+                var groupId = await _context.BookingSlots
+                    .SingleOrDefaultAsync(bs => bs.MentorSlotId == slot.MentorSlotId && bs.Status == "Completed");
 
                 if (numOfPending > 0)
                 {
