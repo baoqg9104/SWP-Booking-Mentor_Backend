@@ -75,6 +75,9 @@ namespace SWP391_Mentor_Booking_System_Service.Service
                     // Các trường khác để null
                 };
                 _authRepository.AddMentor(mentor);
+            } else
+            {
+                throw new Exception("Invalid role");
             }
 
             await _authRepository.SaveChangesAsync(); // Đảm bảo gọi phương thức SaveChangesAsync từ repository

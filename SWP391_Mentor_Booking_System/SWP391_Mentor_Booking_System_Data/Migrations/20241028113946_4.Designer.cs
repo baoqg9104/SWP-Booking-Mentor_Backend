@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SWP391_Mentor_Booking_System_Data;
 
@@ -11,9 +12,11 @@ using SWP391_Mentor_Booking_System_Data;
 namespace SWP391_Mentor_Booking_System_Data.Migrations
 {
     [DbContext(typeof(SWP391_Mentor_Booking_System_DBContext))]
-    partial class SWP391_Mentor_Booking_System_DBContextModelSnapshot : ModelSnapshot
+    [Migration("20241028113946_4")]
+    partial class _4
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -450,11 +453,11 @@ namespace SWP391_Mentor_Booking_System_Data.Migrations
 
             modelBuilder.Entity("SWP391_Mentor_Booking_System_Data.Data.WalletTransaction", b =>
                 {
-                    b.Property<int>("TransactionId")
+                    b.Property<int>("WalletId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("TransactionId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("WalletId"));
 
                     b.Property<int>("BookingId")
                         .HasColumnType("int");
@@ -465,7 +468,11 @@ namespace SWP391_Mentor_Booking_System_Data.Migrations
                     b.Property<int>("Point")
                         .HasColumnType("int");
 
-                    b.HasKey("TransactionId");
+                    b.Property<string>("Type")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("WalletId");
 
                     b.HasIndex("BookingId");
 
