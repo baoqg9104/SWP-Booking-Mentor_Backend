@@ -19,7 +19,7 @@ namespace SWP391_Mentor_Booking_System_Data.Data
 
         public int Level { get; set; }
 
-        public ICollection<BookingSlot> BookingSlots { get; set; }
+        public ICollection<BookingSkill> BookingSkills { get; set; }
     }
 
 

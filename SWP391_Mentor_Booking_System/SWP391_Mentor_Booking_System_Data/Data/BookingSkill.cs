@@ -6,15 +6,12 @@ using System.Threading.Tasks;
 
 namespace SWP391_Mentor_Booking_System_Data.Data
 {
-    public class WalletTransaction
+    public class BookingSkill
     {
-        public int TransactionId { get; set; }
-        public int BookingId { get; set; }
+        public int BookingSkillId { get; set; }
+        public int BookingSlotId { get; set; }
         public BookingSlot BookingSlot { get; set; }
-        public int Point { get; set; }
-        public DateTime DateTime { get; set; }
+        public int MentorSkillId { get; set; }
+        public MentorSkill MentorSkill { get; set; }
     }
-
-
-
 }

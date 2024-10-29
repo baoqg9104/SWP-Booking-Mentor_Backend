@@ -24,6 +24,7 @@ namespace SWP391_Mentor_Booking_System_Data
         public DbSet<WalletTransaction> WalletTransactions { get; set; }
         public DbSet<RefreshToken> RefreshTokens { get; set; }
         public DbSet<Feedback> Feedbacks { get; set; }
+        public DbSet<BookingSkill> BookingSkills { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -72,10 +73,25 @@ namespace SWP391_Mentor_Booking_System_Data
                 .OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder.Entity<MentorSkill>()
-                .HasMany(ms => ms.BookingSlots)
+                .HasMany(ms => ms.BookingSkills)
                 .WithOne(bs => bs.MentorSkill)
                 .HasForeignKey(bs => bs.MentorSkillId)
                 .OnDelete(DeleteBehavior.Cascade);
+
+            //Booking Skill
+
+            modelBuilder.Entity<BookingSkill>()
+                .HasKey(msl => msl.BookingSkillId);
+
+            modelBuilder.Entity<BookingSkill>()
+                .HasOne(bsl => bsl.BookingSlot)
+                .WithMany(bs => bs.BookingSkills)
+                .HasForeignKey(bsl => bsl.BookingSlotId);
+
+            modelBuilder.Entity<BookingSkill>()
+                .HasOne(bsl => bsl.MentorSkill)
+                .WithMany(msl => msl.BookingSkills)
+                .HasForeignKey(bsl => bsl.MentorSkillId);
 
             // MentorSlot
             modelBuilder.Entity<MentorSlot>()
@@ -103,10 +119,10 @@ namespace SWP391_Mentor_Booking_System_Data
                 .HasForeignKey(b => b.MentorSlotId)
                 .OnDelete(DeleteBehavior.Restrict);
 
-            modelBuilder.Entity<BookingSlot>()
-                .HasOne(bs => bs.MentorSkill)      // Mỗi BookingSlot thuộc về một MentorSkill
-                .WithMany(ms => ms.BookingSlots)  // MentorSkill có nhiều BookingSlot
-                .HasForeignKey(bs => bs.MentorSkillId);
+            //modelBuilder.Entity<BookingSlot>()
+            //    .HasMany(bs => bs.BookingSkills)      
+            //    .WithOne(bsl => bsl.BookingSlot)  
+            //    .HasForeignKey(bs => bs.MentorSkillId);
 
             // Group
             modelBuilder.Entity<Group>()
@@ -148,7 +164,7 @@ namespace SWP391_Mentor_Booking_System_Data
 
             // WalletTransaction
             modelBuilder.Entity<WalletTransaction>()
-                .HasKey(wt => wt.WalletId);
+                .HasKey(wt => wt.TransactionId);
 
             modelBuilder.Entity<WalletTransaction>()
                 .HasOne(wt => wt.BookingSlot)
