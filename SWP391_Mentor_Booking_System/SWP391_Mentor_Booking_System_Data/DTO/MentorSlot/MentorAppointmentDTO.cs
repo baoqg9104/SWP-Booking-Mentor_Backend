@@ -19,5 +19,7 @@ namespace SWP391_Mentor_Booking_System_Data.DTO.MentorSlot
         public string? Status { get; set; }
         public string? Group { get; set; }
         public string? Class {  get; set; }
+        public List<string> SkillName { get; set; }
+        public string MeetUrl { get; set; }
     }
 }

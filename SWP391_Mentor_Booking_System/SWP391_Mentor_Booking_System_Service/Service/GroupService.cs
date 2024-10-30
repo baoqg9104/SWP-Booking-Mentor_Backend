@@ -209,6 +209,19 @@ namespace SWP391_Mentor_Booking_System_Service.Service
             return new List<MemberDTO> ();
         }
 
+        public async Task UpdateProgressAsync(UpdateProgressDTO updateProgressDTO)
+        {
+            var group = await _context.Groups.FirstOrDefaultAsync(g => g.GroupId == updateProgressDTO.GroupId);
+
+            if (group == null)
+            {
+                return;
+            }
+
+            group.Progress = updateProgressDTO.Progress;
+            await _context.SaveChangesAsync();
+        }
+
     }
 
 }

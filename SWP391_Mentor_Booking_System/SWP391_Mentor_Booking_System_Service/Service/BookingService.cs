@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using SWP391_Mentor_Booking_System_Data.DTO.Transaction;
 using System.Text.RegularExpressions;
+using System.Transactions;
 
 namespace SWP391_Mentor_Booking_System_Service.Service
 {
@@ -80,7 +81,22 @@ namespace SWP391_Mentor_Booking_System_Service.Service
             }
 
             // Deduct wallet points from the group
-            group.WalletPoint -= mentorSlot.BookingPoint;   
+            group.WalletPoint -= mentorSlot.BookingPoint;
+
+            await _context.SaveChangesAsync();
+
+            var transaction = new WalletTransaction()
+            {
+                BookingId = booking.BookingId,
+                Type = "Booking",
+                Point = mentorSlot.BookingPoint,
+                DateTime = DateTime.Now,
+            };
+
+            if (transaction != null)
+            {
+                _context.WalletTransactions.Add(transaction);
+            }
 
             await _context.SaveChangesAsync();
             return (true, null);
@@ -102,10 +118,10 @@ namespace SWP391_Mentor_Booking_System_Service.Service
                 if (booking == null || mentorSlot == null)
                     return false;
 
-                if (mentorSlot.StartTime < DateTime.Now)
-                {
-                    return false;
-                }
+                //if (mentorSlot.StartTime < DateTime.Now)
+                //{
+                //    return false;
+                //}
 
                 booking.Status = "Approved";
                 mentorSlot.Status = "Approved";
@@ -123,21 +139,34 @@ namespace SWP391_Mentor_Booking_System_Service.Service
                 {
                     b.Status = "Denied";
                     b.Group.WalletPoint += b.MentorSlot.BookingPoint;
+
+                    var t = new WalletTransaction()
+                    {
+                        BookingId = b.BookingId,
+                        Type = "Refund",
+                        Point = mentorSlot.BookingPoint,
+                        DateTime = DateTime.Now
+                    };
+
+                    if (t != null)
+                    {
+                        await _context.WalletTransactions.AddAsync(t);
+                    }
                 }
 
                 // Add Wallet Transactions
 
-                var transaction = new WalletTransaction()
-                {
-                    BookingId = booking.BookingId,
-                    Point = mentorSlot.BookingPoint,
-                    DateTime = DateTime.Now
-                };
+                //var transaction = new WalletTransaction()
+                //{
+                //    BookingId = booking.BookingId,
+                //    Point = mentorSlot.BookingPoint,
+                //    DateTime = DateTime.Now
+                //};
 
-                if (transaction != null)
-                {
-                    await _context.WalletTransactions.AddAsync(transaction);
-                }
+                //if (transaction != null)
+                //{
+                //    await _context.WalletTransactions.AddAsync(transaction);
+                //}
 
             }
             else if (updateBookingStatusDto.Status.Equals("Completed"))
@@ -151,10 +180,10 @@ namespace SWP391_Mentor_Booking_System_Service.Service
                 if (booking == null || mentorSlot == null)
                     return false;
 
-                if (mentorSlot.EndTime > DateTime.Now)
-                {
-                    return false;
-                }
+                //if (mentorSlot.EndTime > DateTime.Now)
+                //{
+                //    return false;
+                //}
 
                 mentorSlot.Status = "Completed";
 
@@ -217,6 +246,8 @@ namespace SWP391_Mentor_Booking_System_Service.Service
                 .Include(bs => bs.BookingSkills)
                     .ThenInclude(bsk => bsk.MentorSkill)
                         .ThenInclude(ms => ms.Skill)
+                .Include(bs => bs.MentorSlot)  // Bao gồm MentorSlot để truy cập Mentor
+                    .ThenInclude(ms => ms.Mentor)  // Bao gồm Mentor để lấy MeetUrl
                 .Where(bs => bs.GroupId == groupId)
                 .ToListAsync();
 
@@ -242,6 +273,7 @@ namespace SWP391_Mentor_Booking_System_Service.Service
                 IsOnline = _context.MentorSlots
                 .FirstOrDefault(ms => ms.MentorSlotId == bs.MentorSlotId)
                 .isOnline,
+                MeetUrl = bs.MentorSlot?.Mentor?.MeetUrl,
                 SkillName = bs.BookingSkills != null
             ? bs.BookingSkills
                 .Where(bsk => bsk.MentorSkill != null && bsk.MentorSkill.Skill != null)
