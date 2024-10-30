@@ -228,8 +228,22 @@ namespace SWP391_Mentor_Booking_System_Service.Service
                     isOnline = ms.isOnline,
                     room = ms.room,
                     Status = ms.Status,
-                })
-                .ToListAsync();
+
+                    // Retrieve meetUrl from the Mentor table
+                    MeetUrl = _context.Mentors
+                        .Where(m => m.MentorId == ms.MentorId)
+                        .Select(m => m.MeetUrl)
+                        .FirstOrDefault(),
+
+                    // Retrieve skill names from Mentor's MentorSkills
+                    SkillName = ms.BookingSlots
+                        .SelectMany(bs => bs.BookingSkills)
+                        .Where(bsk => bsk.MentorSkill != null && bsk.MentorSkill.Skill != null)
+                        .Select(bsk => bsk.MentorSkill.Skill.Name)
+                        .Distinct()  // Optional: to ensure no duplicate skill names
+                        .ToList()
+                        })
+                        .ToListAsync();
 
             foreach (var slot in mentorAppointments)
             {

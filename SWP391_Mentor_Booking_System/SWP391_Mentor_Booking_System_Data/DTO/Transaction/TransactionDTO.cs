@@ -9,6 +9,7 @@ namespace SWP391_Mentor_Booking_System_Data.DTO.Transaction
     public class TransactionDTO
     {
         public int BookingId { get; set; }
+        public string Type { get; set; }
         public int Point { get; set; }
         public DateTime DateTime { get; set; }
         public string GroupName { get; set; }

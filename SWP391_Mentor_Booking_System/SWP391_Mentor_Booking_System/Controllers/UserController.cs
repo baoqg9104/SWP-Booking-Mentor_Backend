@@ -27,9 +27,10 @@ namespace SWP391_Mentor_Booking_System_API.Controllers
                 if (!ModelState.IsValid)
                     return BadRequest(ModelState);
 
-                var result = await _userService.UpdateUserAsync(updateUserDto);
+                var (result, error) = await _userService.UpdateUserAsync(updateUserDto);
+
                 if (!result)
-                    return NotFound();
+                    return NotFound(error);
 
                 return Ok("Update User Successfully");
             }

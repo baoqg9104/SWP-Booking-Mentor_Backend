@@ -10,6 +10,7 @@ namespace SWP391_Mentor_Booking_System_Data.Data
     {
         public int TransactionId { get; set; }
         public int BookingId { get; set; }
+        public string Type { get; set; }
         public BookingSlot BookingSlot { get; set; }
         public int Point { get; set; }
         public DateTime DateTime { get; set; }

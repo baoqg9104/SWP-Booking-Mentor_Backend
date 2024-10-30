@@ -18,18 +18,18 @@ namespace SWP391_Mentor_Booking_System_Service.Service
             _context = context;
         }
 
-        public async Task<bool> UpdateUserAsync(UpdateUserDTO updateUserDto)
+        public async Task<(bool success, string error)> UpdateUserAsync(UpdateUserDTO updateUserDto)
         {
             if(updateUserDto.role == "Student")
             {
                 var user = await _context.Students.FirstOrDefaultAsync(u => u.StudentId == updateUserDto.Id);
                 if (user == null)
-                    return false;
+                    return (false, "Account does not exist");
 
                 var email = await _context.Students.FirstOrDefaultAsync(s => s.StudentId !=  updateUserDto.Id && s.Email == updateUserDto.Email);
 
                 if (email != null)
-                    return false;
+                    return (false, "Email already exists");
 
                 user.Email = updateUserDto.Email;
                 user.StudentName = updateUserDto.Name;
@@ -40,19 +40,19 @@ namespace SWP391_Mentor_Booking_System_Service.Service
                 _context.Students.Update(user);
                 await _context.SaveChangesAsync();
 
-                return true;
+                return (true, "");
             }
 
             if(updateUserDto.role == "Mentor")
             {
                 var user = await _context.Mentors.FirstOrDefaultAsync(u => u.MentorId == updateUserDto.Id);
                 if (user == null)
-                    return false;
+                    return (false, "Account does not exist");
 
                 var email = await _context.Mentors.FirstOrDefaultAsync(s => s.MentorId != updateUserDto.Id && s.Email == updateUserDto.Email);
 
                 if (email != null)
-                    return false;
+                    return (false, "Email already exists");
 
                 user.Email = updateUserDto.Email;
                 user.MentorName = updateUserDto.Name;
@@ -64,10 +64,10 @@ namespace SWP391_Mentor_Booking_System_Service.Service
                 _context.Mentors.Update(user);
                 await _context.SaveChangesAsync();
 
-                return true;
+                return (true, "");
             }
 
-            return false;
+            return (false, "");
         }
 
         public async Task<bool> ChangePasswordAsync(ChangePassDTO changePassDto)
