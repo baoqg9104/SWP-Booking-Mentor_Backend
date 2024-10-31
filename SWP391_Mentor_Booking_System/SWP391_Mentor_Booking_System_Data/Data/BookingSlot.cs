@@ -17,8 +17,7 @@ namespace SWP391_Mentor_Booking_System_Data.Data
         public int MentorSlotId { get; set; }
         public MentorSlot MentorSlot { get; set; }
 
-        //public int MentorSkillId { get; set; }
-        //public MentorSkill MentorSkill { get; set; }
+      
         public ICollection<BookingSkill> BookingSkills { get; set; }
 
         public DateTime BookingTime { get; set; }
@@ -29,3 +28,4 @@ namespace SWP391_Mentor_Booking_System_Data.Data
 
 
 }
+    

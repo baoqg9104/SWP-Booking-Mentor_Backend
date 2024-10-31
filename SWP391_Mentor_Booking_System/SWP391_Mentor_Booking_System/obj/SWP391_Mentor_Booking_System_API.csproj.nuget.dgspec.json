@@ -1,24 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\GiaBaoZ\\Desktop\\Fullstack\\SWP391_Backend\\Group2_SWP391_SE1867_Backend\\SWP391_Mentor_Booking_System\\SWP391_Mentor_Booking_System\\SWP391_Mentor_Booking_System_API.csproj": {}
+    "D:\\code\\booking12\\Group2_SWP391_SE1867_Backend\\SWP391_Mentor_Booking_System\\SWP391_Mentor_Booking_System\\SWP391_Mentor_Booking_System_API.csproj": {}
   },
   "projects": {
-    "C:\\Users\\GiaBaoZ\\Desktop\\Fullstack\\SWP391_Backend\\Group2_SWP391_SE1867_Backend\\SWP391_Mentor_Booking_System\\SWP391_Mentor_Booking_System\\SWP391_Mentor_Booking_System_API.csproj": {
+    "D:\\code\\booking12\\Group2_SWP391_SE1867_Backend\\SWP391_Mentor_Booking_System\\SWP391_Mentor_Booking_System\\SWP391_Mentor_Booking_System_API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\GiaBaoZ\\Desktop\\Fullstack\\SWP391_Backend\\Group2_SWP391_SE1867_Backend\\SWP391_Mentor_Booking_System\\SWP391_Mentor_Booking_System\\SWP391_Mentor_Booking_System_API.csproj",
+        "projectUniqueName": "D:\\code\\booking12\\Group2_SWP391_SE1867_Backend\\SWP391_Mentor_Booking_System\\SWP391_Mentor_Booking_System\\SWP391_Mentor_Booking_System_API.csproj",
         "projectName": "SWP391_Mentor_Booking_System_API",
-        "projectPath": "C:\\Users\\GiaBaoZ\\Desktop\\Fullstack\\SWP391_Backend\\Group2_SWP391_SE1867_Backend\\SWP391_Mentor_Booking_System\\SWP391_Mentor_Booking_System\\SWP391_Mentor_Booking_System_API.csproj",
-        "packagesPath": "C:\\Users\\GiaBaoZ\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\GiaBaoZ\\Desktop\\Fullstack\\SWP391_Backend\\Group2_SWP391_SE1867_Backend\\SWP391_Mentor_Booking_System\\SWP391_Mentor_Booking_System\\obj\\",
+        "projectPath": "D:\\code\\booking12\\Group2_SWP391_SE1867_Backend\\SWP391_Mentor_Booking_System\\SWP391_Mentor_Booking_System\\SWP391_Mentor_Booking_System_API.csproj",
+        "packagesPath": "C:\\Users\\ADMIN\\.nuget\\packages\\",
+        "outputPath": "D:\\code\\booking12\\Group2_SWP391_SE1867_Backend\\SWP391_Mentor_Booking_System\\SWP391_Mentor_Booking_System\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\GiaBaoZ\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\ADMIN\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -33,11 +29,11 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\GiaBaoZ\\Desktop\\Fullstack\\SWP391_Backend\\Group2_SWP391_SE1867_Backend\\SWP391_Mentor_Booking_System\\SWP391_Mentor_Booking_System_Data\\SWP391_Mentor_Booking_System_Data.csproj": {
-                "projectPath": "C:\\Users\\GiaBaoZ\\Desktop\\Fullstack\\SWP391_Backend\\Group2_SWP391_SE1867_Backend\\SWP391_Mentor_Booking_System\\SWP391_Mentor_Booking_System_Data\\SWP391_Mentor_Booking_System_Data.csproj"
+              "D:\\code\\booking12\\Group2_SWP391_SE1867_Backend\\SWP391_Mentor_Booking_System\\SWP391_Mentor_Booking_System_Data\\SWP391_Mentor_Booking_System_Data.csproj": {
+                "projectPath": "D:\\code\\booking12\\Group2_SWP391_SE1867_Backend\\SWP391_Mentor_Booking_System\\SWP391_Mentor_Booking_System_Data\\SWP391_Mentor_Booking_System_Data.csproj"
               },
-              "C:\\Users\\GiaBaoZ\\Desktop\\Fullstack\\SWP391_Backend\\Group2_SWP391_SE1867_Backend\\SWP391_Mentor_Booking_System\\SWP391_Mentor_Booking_System_Service\\SWP391_Mentor_Booking_System_Service.csproj": {
-                "projectPath": "C:\\Users\\GiaBaoZ\\Desktop\\Fullstack\\SWP391_Backend\\Group2_SWP391_SE1867_Backend\\SWP391_Mentor_Booking_System\\SWP391_Mentor_Booking_System_Service\\SWP391_Mentor_Booking_System_Service.csproj"
+              "D:\\code\\booking12\\Group2_SWP391_SE1867_Backend\\SWP391_Mentor_Booking_System\\SWP391_Mentor_Booking_System_Service\\SWP391_Mentor_Booking_System_Service.csproj": {
+                "projectPath": "D:\\code\\booking12\\Group2_SWP391_SE1867_Backend\\SWP391_Mentor_Booking_System\\SWP391_Mentor_Booking_System_Service\\SWP391_Mentor_Booking_System_Service.csproj"
               }
             }
           }
@@ -46,11 +42,6 @@
           "warnAsError": [
             "NU1605"
           ]
-        },
-        "restoreAuditProperties": {
-          "enableAudit": "true",
-          "auditLevel": "low",
-          "auditMode": "direct"
         }
       },
       "frameworks": {
@@ -95,25 +86,21 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.302/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.101/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\GiaBaoZ\\Desktop\\Fullstack\\SWP391_Backend\\Group2_SWP391_SE1867_Backend\\SWP391_Mentor_Booking_System\\SWP391_Mentor_Booking_System_Data\\SWP391_Mentor_Booking_System_Data.csproj": {
+    "D:\\code\\booking12\\Group2_SWP391_SE1867_Backend\\SWP391_Mentor_Booking_System\\SWP391_Mentor_Booking_System_Data\\SWP391_Mentor_Booking_System_Data.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\GiaBaoZ\\Desktop\\Fullstack\\SWP391_Backend\\Group2_SWP391_SE1867_Backend\\SWP391_Mentor_Booking_System\\SWP391_Mentor_Booking_System_Data\\SWP391_Mentor_Booking_System_Data.csproj",
+        "projectUniqueName": "D:\\code\\booking12\\Group2_SWP391_SE1867_Backend\\SWP391_Mentor_Booking_System\\SWP391_Mentor_Booking_System_Data\\SWP391_Mentor_Booking_System_Data.csproj",
         "projectName": "SWP391_Mentor_Booking_System_Data",
-        "projectPath": "C:\\Users\\GiaBaoZ\\Desktop\\Fullstack\\SWP391_Backend\\Group2_SWP391_SE1867_Backend\\SWP391_Mentor_Booking_System\\SWP391_Mentor_Booking_System_Data\\SWP391_Mentor_Booking_System_Data.csproj",
-        "packagesPath": "C:\\Users\\GiaBaoZ\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\GiaBaoZ\\Desktop\\Fullstack\\SWP391_Backend\\Group2_SWP391_SE1867_Backend\\SWP391_Mentor_Booking_System\\SWP391_Mentor_Booking_System_Data\\obj\\",
+        "projectPath": "D:\\code\\booking12\\Group2_SWP391_SE1867_Backend\\SWP391_Mentor_Booking_System\\SWP391_Mentor_Booking_System_Data\\SWP391_Mentor_Booking_System_Data.csproj",
+        "packagesPath": "C:\\Users\\ADMIN\\.nuget\\packages\\",
+        "outputPath": "D:\\code\\booking12\\Group2_SWP391_SE1867_Backend\\SWP391_Mentor_Booking_System\\SWP391_Mentor_Booking_System_Data\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\GiaBaoZ\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\ADMIN\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -134,11 +121,6 @@
           "warnAsError": [
             "NU1605"
           ]
-        },
-        "restoreAuditProperties": {
-          "enableAudit": "true",
-          "auditLevel": "low",
-          "auditMode": "direct"
         }
       },
       "frameworks": {
@@ -194,25 +176,21 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.302/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.101/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\GiaBaoZ\\Desktop\\Fullstack\\SWP391_Backend\\Group2_SWP391_SE1867_Backend\\SWP391_Mentor_Booking_System\\SWP391_Mentor_Booking_System_Service\\SWP391_Mentor_Booking_System_Service.csproj": {
+    "D:\\code\\booking12\\Group2_SWP391_SE1867_Backend\\SWP391_Mentor_Booking_System\\SWP391_Mentor_Booking_System_Service\\SWP391_Mentor_Booking_System_Service.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\GiaBaoZ\\Desktop\\Fullstack\\SWP391_Backend\\Group2_SWP391_SE1867_Backend\\SWP391_Mentor_Booking_System\\SWP391_Mentor_Booking_System_Service\\SWP391_Mentor_Booking_System_Service.csproj",
+        "projectUniqueName": "D:\\code\\booking12\\Group2_SWP391_SE1867_Backend\\SWP391_Mentor_Booking_System\\SWP391_Mentor_Booking_System_Service\\SWP391_Mentor_Booking_System_Service.csproj",
         "projectName": "SWP391_Mentor_Booking_System_Service",
-        "projectPath": "C:\\Users\\GiaBaoZ\\Desktop\\Fullstack\\SWP391_Backend\\Group2_SWP391_SE1867_Backend\\SWP391_Mentor_Booking_System\\SWP391_Mentor_Booking_System_Service\\SWP391_Mentor_Booking_System_Service.csproj",
-        "packagesPath": "C:\\Users\\GiaBaoZ\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\GiaBaoZ\\Desktop\\Fullstack\\SWP391_Backend\\Group2_SWP391_SE1867_Backend\\SWP391_Mentor_Booking_System\\SWP391_Mentor_Booking_System_Service\\obj\\",
+        "projectPath": "D:\\code\\booking12\\Group2_SWP391_SE1867_Backend\\SWP391_Mentor_Booking_System\\SWP391_Mentor_Booking_System_Service\\SWP391_Mentor_Booking_System_Service.csproj",
+        "packagesPath": "C:\\Users\\ADMIN\\.nuget\\packages\\",
+        "outputPath": "D:\\code\\booking12\\Group2_SWP391_SE1867_Backend\\SWP391_Mentor_Booking_System\\SWP391_Mentor_Booking_System_Service\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\GiaBaoZ\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\ADMIN\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -227,8 +205,8 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\GiaBaoZ\\Desktop\\Fullstack\\SWP391_Backend\\Group2_SWP391_SE1867_Backend\\SWP391_Mentor_Booking_System\\SWP391_Mentor_Booking_System_Data\\SWP391_Mentor_Booking_System_Data.csproj": {
-                "projectPath": "C:\\Users\\GiaBaoZ\\Desktop\\Fullstack\\SWP391_Backend\\Group2_SWP391_SE1867_Backend\\SWP391_Mentor_Booking_System\\SWP391_Mentor_Booking_System_Data\\SWP391_Mentor_Booking_System_Data.csproj"
+              "D:\\code\\booking12\\Group2_SWP391_SE1867_Backend\\SWP391_Mentor_Booking_System\\SWP391_Mentor_Booking_System_Data\\SWP391_Mentor_Booking_System_Data.csproj": {
+                "projectPath": "D:\\code\\booking12\\Group2_SWP391_SE1867_Backend\\SWP391_Mentor_Booking_System\\SWP391_Mentor_Booking_System_Data\\SWP391_Mentor_Booking_System_Data.csproj"
               }
             }
           }
@@ -237,11 +215,6 @@
           "warnAsError": [
             "NU1605"
           ]
-        },
-        "restoreAuditProperties": {
-          "enableAudit": "true",
-          "auditLevel": "low",
-          "auditMode": "direct"
         }
       },
       "frameworks": {
@@ -277,7 +250,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.302/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.101/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

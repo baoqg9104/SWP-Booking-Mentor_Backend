@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace SWP391_Mentor_Booking_System_Data.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialCreate : Migration
+    public partial class InitiateCreate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -191,6 +191,26 @@ namespace SWP391_Mentor_Booking_System_Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "BookingSkills",
+                columns: table => new
+                {
+                    BookingSkillId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    BookingSlotId = table.Column<int>(type: "int", nullable: false),
+                    MentorSkillId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_BookingSkills", x => x.BookingSkillId);
+                    table.ForeignKey(
+                        name: "FK_BookingSkills_MentorSkills_MentorSkillId",
+                        column: x => x.MentorSkillId,
+                        principalTable: "MentorSkills",
+                        principalColumn: "MentorSkillId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "BookingSlots",
                 columns: table => new
                 {
@@ -198,19 +218,12 @@ namespace SWP391_Mentor_Booking_System_Data.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     GroupId = table.Column<string>(type: "nvarchar(450)", nullable: true),
                     MentorSlotId = table.Column<int>(type: "int", nullable: false),
-                    MentorSkillId = table.Column<int>(type: "int", nullable: false),
                     BookingTime = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Status = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_BookingSlots", x => x.BookingId);
-                    table.ForeignKey(
-                        name: "FK_BookingSlots_MentorSkills_MentorSkillId",
-                        column: x => x.MentorSkillId,
-                        principalTable: "MentorSkills",
-                        principalColumn: "MentorSkillId",
-                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_BookingSlots_MentorSlots_MentorSlotId",
                         column: x => x.MentorSlotId,
@@ -226,8 +239,8 @@ namespace SWP391_Mentor_Booking_System_Data.Migrations
                     FeedbackId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     BookingId = table.Column<int>(type: "int", nullable: false),
-                    GroupRating = table.Column<int>(type: "int", nullable: false),
-                    MentorRating = table.Column<int>(type: "int", nullable: false),
+                    GroupRating = table.Column<int>(type: "int", nullable: true),
+                    MentorRating = table.Column<int>(type: "int", nullable: true),
                     GroupFeedback = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     MentorFeedback = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
@@ -246,17 +259,15 @@ namespace SWP391_Mentor_Booking_System_Data.Migrations
                 name: "WalletTransactions",
                 columns: table => new
                 {
-                    WalletId = table.Column<int>(type: "int", nullable: false)
+                    TransactionId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     BookingId = table.Column<int>(type: "int", nullable: false),
-                    Type = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Point = table.Column<int>(type: "int", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Date = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    DateTime = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_WalletTransactions", x => x.WalletId);
+                    table.PrimaryKey("PK_WalletTransactions", x => x.TransactionId);
                     table.ForeignKey(
                         name: "FK_WalletTransactions_BookingSlots_BookingId",
                         column: x => x.BookingId,
@@ -320,14 +331,19 @@ namespace SWP391_Mentor_Booking_System_Data.Migrations
                 });
 
             migrationBuilder.CreateIndex(
+                name: "IX_BookingSkills_BookingSlotId",
+                table: "BookingSkills",
+                column: "BookingSlotId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_BookingSkills_MentorSkillId",
+                table: "BookingSkills",
+                column: "MentorSkillId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_BookingSlots_GroupId",
                 table: "BookingSlots",
                 column: "GroupId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_BookingSlots_MentorSkillId",
-                table: "BookingSlots",
-                column: "MentorSkillId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_BookingSlots_MentorSlotId",
@@ -391,6 +407,14 @@ namespace SWP391_Mentor_Booking_System_Data.Migrations
                 column: "BookingId");
 
             migrationBuilder.AddForeignKey(
+                name: "FK_BookingSkills_BookingSlots_BookingSlotId",
+                table: "BookingSkills",
+                column: "BookingSlotId",
+                principalTable: "BookingSlots",
+                principalColumn: "BookingId",
+                onDelete: ReferentialAction.Cascade);
+
+            migrationBuilder.AddForeignKey(
                 name: "FK_BookingSlots_Groups_GroupId",
                 table: "BookingSlots",
                 column: "GroupId",
@@ -418,6 +442,9 @@ namespace SWP391_Mentor_Booking_System_Data.Migrations
                 name: "Admins");
 
             migrationBuilder.DropTable(
+                name: "BookingSkills");
+
+            migrationBuilder.DropTable(
                 name: "Feedbacks");
 
             migrationBuilder.DropTable(
@@ -427,16 +454,16 @@ namespace SWP391_Mentor_Booking_System_Data.Migrations
                 name: "WalletTransactions");
 
             migrationBuilder.DropTable(
-                name: "BookingSlots");
-
-            migrationBuilder.DropTable(
                 name: "MentorSkills");
 
             migrationBuilder.DropTable(
-                name: "MentorSlots");
+                name: "BookingSlots");
 
             migrationBuilder.DropTable(
                 name: "Skills");
+
+            migrationBuilder.DropTable(
+                name: "MentorSlots");
 
             migrationBuilder.DropTable(
                 name: "Mentors");

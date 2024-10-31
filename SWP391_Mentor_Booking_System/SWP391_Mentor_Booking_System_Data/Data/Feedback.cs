@@ -12,8 +12,8 @@ namespace SWP391_Mentor_Booking_System_Data.Data
         public int FeedbackId { get; set; }
 
         public int BookingId { get; set; }
-        public int GroupRating { get; set; }
-        public int MentorRating { get; set; }
+        public int? GroupRating { get; set; }
+        public int? MentorRating { get; set; }
         public string? GroupFeedback { get; set; }
         public string? MentorFeedback { get; set; }
         public BookingSlot BookingSlot { get; set; }

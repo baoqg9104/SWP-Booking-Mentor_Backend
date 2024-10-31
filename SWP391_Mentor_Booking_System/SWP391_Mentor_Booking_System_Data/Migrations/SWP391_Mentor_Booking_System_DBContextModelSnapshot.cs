@@ -117,13 +117,13 @@ namespace SWP391_Mentor_Booking_System_Data.Migrations
                     b.Property<string>("GroupFeedback")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("GroupRating")
+                    b.Property<int?>("GroupRating")
                         .HasColumnType("int");
 
                     b.Property<string>("MentorFeedback")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("MentorRating")
+                    b.Property<int?>("MentorRating")
                         .HasColumnType("int");
 
                     b.HasKey("FeedbackId");
