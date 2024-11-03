@@ -47,6 +47,8 @@ namespace SWP391_Mentor_Booking_System_Service.Service
 
                 bookingSlot.Feedback.MentorRating = feedbackDto.Rating;
                 bookingSlot.Feedback.MentorFeedback = feedbackDto.FeedbackText;
+                bookingSlot.Feedback.GroupRating = null;
+                bookingSlot.Feedback.GroupFeedback = null;
             }
             else
             {
@@ -56,32 +58,51 @@ namespace SWP391_Mentor_Booking_System_Service.Service
 
                 bookingSlot.Feedback.GroupRating = feedbackDto.Rating;
                 bookingSlot.Feedback.GroupFeedback = feedbackDto.FeedbackText;
+                bookingSlot.Feedback.MentorRating = null;
+                bookingSlot.Feedback.MentorFeedback = null;
+
             }
 
             await _context.SaveChangesAsync();
         }
 
 
-        public async Task<List<FeedbackResponseDTO>> GetFeedbacksForBooking(int bookingId)
+        //public async Task<List<FeedbackResponseDTO>> GetFeedbacksForBooking(int bookingId)
+        //{
+        //    var feedbacks = await _context.Feedbacks
+        //        .Include(f => f.BookingSlot)
+        //            .ThenInclude(bs => bs.Group)
+        //        .Where(f => f.BookingId == bookingId)
+        //        .ToListAsync();
+
+        //    return feedbacks.Select(f => new FeedbackResponseDTO
+        //    {
+        //        BookingId = f.BookingId,
+        //        // Lấy Rating từ cả Mentor và Group, nếu có
+        //        Rating = f.MentorRating ?? f.GroupRating ?? 0,
+        //        FeedbackText = f.MentorFeedback ?? f.GroupFeedback ?? "No feedback provided",
+        //        GroupName = f.BookingSlot.Group.Name,
+        //        ClassName = f.BookingSlot.Group.SwpClass.Name
+        //    }).ToList();
+        //}
+
+        public async Task<List<FeedbackDTO>> GetFeedbacksAsync()
         {
             var feedbacks = await _context.Feedbacks
                 .Include(f => f.BookingSlot)
-                    .ThenInclude(bs => bs.Group)
-                .Where(f => f.BookingId == bookingId)
                 .ToListAsync();
 
-            return feedbacks.Select(f => new FeedbackResponseDTO
+            return feedbacks.Select(f => new FeedbackDTO
             {
                 BookingId = f.BookingId,
-                // Lấy Rating từ cả Mentor và Group, nếu có
-                Rating = f.MentorRating ?? f.GroupRating ?? 0,
-                FeedbackText = f.MentorFeedback ?? f.GroupFeedback ?? "No feedback provided",
-                GroupName = f.BookingSlot.Group.Name,
-                ClassName = f.BookingSlot.Group.SwpClass.Name
+                GroupRating = f.GroupRating,
+                MentorRating = f.MentorRating,
+                GroupFeedback = f.GroupFeedback,
+                MentorFeedback = f.MentorFeedback,
             }).ToList();
         }
 
     }
-
+  
 
 }

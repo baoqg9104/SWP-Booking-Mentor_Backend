@@ -142,6 +142,7 @@ builder.Services.AddScoped<BookingService>();
 builder.Services.AddScoped<GroupService>();
 builder.Services.AddScoped<SkillService>();
 builder.Services.AddScoped<TransactionService>();
+builder.Services.AddScoped<FeedbackService>();
 
 var app = builder.Build();
 
