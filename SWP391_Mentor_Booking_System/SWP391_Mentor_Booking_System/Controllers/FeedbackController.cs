@@ -47,11 +47,18 @@ namespace SWP391_Mentor_Booking_System_API.Controllers
             }
         }
 
-        [HttpGet("{bookingId}")]
-        [Authorize]
-        public async Task<IActionResult> GetFeedbacks(int bookingId)
+        //[HttpGet("{bookingId}")]
+        //[Authorize]
+        //public async Task<IActionResult> GetFeedbacks(int bookingId)
+        //{
+        //    var feedbacks = await _feedbackService.GetFeedbacksForBooking(bookingId);
+        //    return Ok(feedbacks);
+        //}
+
+        [HttpGet("get-feedbacks")]
+        public async Task<IActionResult> GetFeedbacks()
         {
-            var feedbacks = await _feedbackService.GetFeedbacksForBooking(bookingId);
+            var feedbacks = await _feedbackService.GetFeedbacksAsync();
             return Ok(feedbacks);
         }
     }
