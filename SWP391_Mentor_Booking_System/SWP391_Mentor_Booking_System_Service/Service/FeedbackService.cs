@@ -47,8 +47,6 @@ namespace SWP391_Mentor_Booking_System_Service.Service
 
                 bookingSlot.Feedback.MentorRating = feedbackDto.Rating;
                 bookingSlot.Feedback.MentorFeedback = feedbackDto.FeedbackText;
-                bookingSlot.Feedback.GroupRating = null;
-                bookingSlot.Feedback.GroupFeedback = null;
             }
             else
             {
@@ -58,8 +56,6 @@ namespace SWP391_Mentor_Booking_System_Service.Service
 
                 bookingSlot.Feedback.GroupRating = feedbackDto.Rating;
                 bookingSlot.Feedback.GroupFeedback = feedbackDto.FeedbackText;
-                bookingSlot.Feedback.MentorRating = null;
-                bookingSlot.Feedback.MentorFeedback = null;
 
             }
 
