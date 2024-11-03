@@ -21,7 +21,8 @@ namespace SWP391_Mentor_Booking_System_Service.Service
         public async Task<List<TransactionDTO>> GetTransactionsByMentorIdAsync(string mentorId)
         {
             var transactions = await _context.WalletTransactions
-           .Where(wt => wt.BookingSlot.MentorSlot.MentorId == mentorId && wt.BookingSlot.Status == "Approved") // Lọc theo mentorId
+           .Where(wt => wt.BookingSlot.MentorSlot.MentorId == mentorId
+           && (wt.BookingSlot.Status == "Approved" || wt.BookingSlot.Status == "Completed")) 
            .Select(wt => new TransactionDTO
            {
                BookingId = wt.BookingId,
