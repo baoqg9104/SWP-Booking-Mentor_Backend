@@ -30,6 +30,9 @@ namespace SWP391_Mentor_Booking_System_Service.Service
             if (group == null)
                 return (false, "Group does not exist");
 
+            if (group.LeaderId != createBookingDto.StudentId)
+                return (false, "You are not leader");
+
             var mentorSlot = await _context.MentorSlots.FirstOrDefaultAsync(ms => ms.MentorSlotId == createBookingDto.MentorSlotId);
             if (mentorSlot == null)
                 return (false, "Mentor slot does not exist");

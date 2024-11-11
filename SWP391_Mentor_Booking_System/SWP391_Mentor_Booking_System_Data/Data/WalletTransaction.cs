@@ -14,6 +14,8 @@ namespace SWP391_Mentor_Booking_System_Data.Data
         public BookingSlot BookingSlot { get; set; }
         public int Point { get; set; }
         public DateTime DateTime { get; set; }
+        //public DateTime BookingTime { get; set; }
+        //public DateTime? ApproveTime { get; set; }
     }
 
 
