@@ -9,6 +9,7 @@ namespace SWP391_Mentor_Booking_System_Data.DTO.BookingSlot
     public class CreateBookingDTO
     {
         public string? GroupId { get; set; }
+        public string StudentId { get; set; }
         public int MentorSlotId { get; set; }
         public List<int> MentorSkillIds { get; set; }
     }

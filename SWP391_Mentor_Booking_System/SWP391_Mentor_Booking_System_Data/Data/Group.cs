@@ -11,7 +11,7 @@ namespace SWP391_Mentor_Booking_System_Data.Data
         public string? GroupId { get; set; }
         public string Name { get; set; }
         public string LeaderId { get; set; }
-        public Student Leader { get; set; }
+        //public Student Leader { get; set; }
 
         // Foreign Keys
         public int TopicId { get; set; }

@@ -146,11 +146,11 @@ namespace SWP391_Mentor_Booking_System_Data
                .HasForeignKey(s => s.GroupId)
                .OnDelete(DeleteBehavior.SetNull);
 
-            modelBuilder.Entity<Group>()
-                .HasOne(g => g.Leader)
-                .WithMany()
-                .HasForeignKey(g => g.LeaderId)
-                .OnDelete(DeleteBehavior.Restrict);
+            //modelBuilder.Entity<Group>()
+            //    .HasOne(g => g.Leader)
+            //    .WithMany()
+            //    .HasForeignKey(g => g.LeaderId)
+            //    .OnDelete(DeleteBehavior.Restrict);
 
             // SwpClass
             modelBuilder.Entity<SwpClass>()
