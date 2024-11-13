@@ -51,6 +51,7 @@ namespace SWP391_Mentor_Booking_System_Service.Service
                     Gender = null,
                     DateOfBirth = null,
                     GroupId = null,
+                    SwpClassId = registerDto.SwpClassId,
                 };
                 _authRepository.AddStudent(student);
             }

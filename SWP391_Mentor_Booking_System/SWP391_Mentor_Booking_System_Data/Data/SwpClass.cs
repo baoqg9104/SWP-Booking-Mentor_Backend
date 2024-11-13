@@ -18,7 +18,9 @@ namespace SWP391_Mentor_Booking_System_Data.Data
 
         // Relationship with Group
         public ICollection<Group> Groups { get; set; }
-       
+
+        public ICollection<Student> Students { get; set; }
+        public Mentor Mentor { get; set; }
 
     }
 

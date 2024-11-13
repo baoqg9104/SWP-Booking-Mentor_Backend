@@ -121,10 +121,10 @@ namespace SWP391_Mentor_Booking_System_Service.Service
                 if (booking == null || mentorSlot == null)
                     return false;
 
-                //if (mentorSlot.StartTime < DateTime.Now)
-                //{
-                //    return false;
-                //}
+                if (mentorSlot.StartTime < DateTime.Now)
+                {
+                    return false;
+                }
 
                 booking.Status = "Approved";
                 mentorSlot.Status = "Approved";
@@ -183,10 +183,10 @@ namespace SWP391_Mentor_Booking_System_Service.Service
                 if (booking == null || mentorSlot == null)
                     return false;
 
-                //if (mentorSlot.EndTime > DateTime.Now)
-                //{
-                //    return false;
-                //}
+                if (mentorSlot.EndTime > DateTime.Now)
+                {
+                    return false;
+                }
 
                 mentorSlot.Status = "Completed";
 

@@ -24,6 +24,7 @@ namespace SWP391_Mentor_Booking_System_Data.Data
     
         public ICollection<MentorSkill> MentorSkills { get; set; }
         public ICollection<MentorSlot> MentorSlots { get; set; }
+        public SwpClass SwpClass { get; set; }
     }
 
 
