@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using SWP391_Mentor_Booking_System_Data;
 using SWP391_Mentor_Booking_System_Data.Data;
 using SWP391_Mentor_Booking_System_Data.DTO.MentorSlot;
@@ -62,6 +63,18 @@ namespace SWP391_Mentor_Booking_System_Service.Service
             if (mentor.NumOfSlot == 0)
             {
                 return (false, null);
+            }
+
+            if (mentor.MeetUrl.IsNullOrEmpty() && createMentorSlotDto.IsOnline)
+            {
+                return (false, "You don't have a Meet URL yet.");
+            }
+
+            var mentorSkill = await _context.MentorSkills.AnyAsync(x => x.MentorId == mentor.MentorId);
+
+            if (!mentorSkill)
+            {
+                return (false, "You have not added skill");
             }
 
             var mentorSlot = new MentorSlot

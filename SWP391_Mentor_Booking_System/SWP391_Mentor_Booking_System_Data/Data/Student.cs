@@ -18,6 +18,9 @@ namespace SWP391_Mentor_Booking_System_Data.Data
         public string? GroupId { get; set; }
 
         public Group Group { get; set; }
+
+        public int? SwpClassId { get; set; }
+        public SwpClass SwpClass { get; set; }
     }
 
 
