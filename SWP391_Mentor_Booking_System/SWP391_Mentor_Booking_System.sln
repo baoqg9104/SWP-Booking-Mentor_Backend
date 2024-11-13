@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SWP391_Mentor_Booking_Syste
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SWP391_Mentor_Booking_System_Data", "SWP391_Mentor_Booking_System_Data\SWP391_Mentor_Booking_System_Data.csproj", "{C9ADBCF2-FA8D-41DE-ABB9-9EB3F8695A79}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SWP391_Mentor_Booking_System_Service", "SWP391_Mentor_Booking_System_Service\SWP391_Mentor_Booking_System_Service.csproj", "{5EA41E65-ACA7-472C-B213-7444752C35FF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SWP391_Mentor_Booking_System_Service", "SWP391_Mentor_Booking_System_Service\SWP391_Mentor_Booking_System_Service.csproj", "{5EA41E65-ACA7-472C-B213-7444752C35FF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
