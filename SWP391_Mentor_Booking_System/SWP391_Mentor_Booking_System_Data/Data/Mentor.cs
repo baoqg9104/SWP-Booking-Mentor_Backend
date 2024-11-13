@@ -20,10 +20,11 @@ namespace SWP391_Mentor_Booking_System_Data.Data
         public DateTime RegistrationDate { get; set; }
         public string? MeetUrl { get; set; }
         public bool ApplyStatus { get; set; } = false;
-
     
         public ICollection<MentorSkill> MentorSkills { get; set; }
         public ICollection<MentorSlot> MentorSlots { get; set; }
+
+        public int? SwpClassId { get; set; }
         public SwpClass SwpClass { get; set; }
     }
 
