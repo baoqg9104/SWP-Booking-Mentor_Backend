@@ -23,6 +23,6 @@ namespace SWP391_Mentor_Booking_System_Data.DTO
         [Required]
         public string Role { get; set; }
 
-        public int SwpClassId { get; set; }
+        public int? SwpClassId { get; set; }
     }
 }

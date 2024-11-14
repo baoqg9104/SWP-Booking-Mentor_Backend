@@ -17,7 +17,6 @@ namespace SWP391_Mentor_Booking_System_API.Controllers
         }
 
         [HttpGet("all")]
-        [Authorize(Policy = "AdminOnly")]
         public async Task<IActionResult> GetAllStudents()
         {
             var students = await _studentService.GetAllStudentsAsync();

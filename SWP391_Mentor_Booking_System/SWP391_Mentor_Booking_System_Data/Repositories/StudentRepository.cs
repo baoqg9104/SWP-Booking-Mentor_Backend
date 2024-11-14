@@ -24,7 +24,8 @@ namespace SWP391_Mentor_Booking_System_Data.Repositories
 
         public async Task<Student> GetStudentByIdAsync(string id)
         {
-            return await _context.Students.FirstOrDefaultAsync(s => s.StudentId == id);
+            return await _context.Students
+                .FirstOrDefaultAsync(s => s.StudentId == id);
         }
 
         public async Task DeleteStudentAsync(Student student)

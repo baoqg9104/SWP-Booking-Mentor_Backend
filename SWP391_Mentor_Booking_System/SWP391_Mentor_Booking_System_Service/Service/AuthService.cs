@@ -69,6 +69,7 @@ namespace SWP391_Mentor_Booking_System_Service.Service
                     PointsReceived = 0,
                     NumOfSlot = 10,
                     RegistrationDate = DateTime.Now,
+                    SwpClassId = null,
 
                     ApplyStatus =
                         false // Đặt ApplyStatus là false
@@ -223,6 +224,7 @@ namespace SWP391_Mentor_Booking_System_Service.Service
                 claims.Add(new Claim(JwtRegisteredClaimNames.Email, student.Email));
                 claims.Add(new Claim("fullName", student.StudentName));
                 claims.Add(new Claim("groupId", student.GroupId ?? string.Empty));
+                claims.Add(new Claim("swpClassId", student.SwpClassId == null ? string.Empty : student.SwpClassId.ToString()));
             }
             else if (typeof(T) == typeof(Mentor))
             {
@@ -230,6 +232,7 @@ namespace SWP391_Mentor_Booking_System_Service.Service
                 claims.Add(new Claim("id", mentor.MentorId));
                 claims.Add(new Claim(JwtRegisteredClaimNames.Email, mentor.Email));
                 claims.Add(new Claim("fullName", mentor.MentorName));
+                claims.Add(new Claim("swpClassId", mentor.SwpClassId == null ? string.Empty : mentor.SwpClassId.ToString()));
             }
             else if (typeof(T) == typeof(Admin))
             {
