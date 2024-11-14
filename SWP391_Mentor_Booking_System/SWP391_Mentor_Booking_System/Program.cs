@@ -143,6 +143,7 @@ builder.Services.AddScoped<GroupService>();
 builder.Services.AddScoped<SkillService>();
 builder.Services.AddScoped<TransactionService>();
 builder.Services.AddScoped<FeedbackService>();
+builder.Services.AddScoped<RequestToMoveClassService>();
 
 var app = builder.Build();
 
