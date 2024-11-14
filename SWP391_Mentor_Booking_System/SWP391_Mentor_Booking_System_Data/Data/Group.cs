@@ -23,6 +23,7 @@ namespace SWP391_Mentor_Booking_System_Data.Data
         public int WalletPoint { get; set; }
         public int Progress { get; set; }
         public DateTime CreatedDate { get; set; }
+        public bool Status { get; set; }
 
         // Relationship with BookingSlots
         public ICollection<BookingSlot> BookingSlots { get; set; }

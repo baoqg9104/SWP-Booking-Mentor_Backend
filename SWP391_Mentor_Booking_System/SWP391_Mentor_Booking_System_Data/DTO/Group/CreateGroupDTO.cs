@@ -12,6 +12,7 @@ namespace SWP391_Mentor_Booking_System_Data.DTO.Group
         public string Name { get; set; }
         public int TopicId { get; set; }
         public int SwpClassId { get; set; }
+        public List<string> MemberEmails { get; set; }
     }
 
 }
