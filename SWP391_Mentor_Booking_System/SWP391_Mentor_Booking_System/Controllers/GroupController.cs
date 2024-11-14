@@ -86,6 +86,22 @@ namespace SWP391_Mentor_Booking_System_API.Controllers
             return Ok();
         }
 
+        [HttpPut("update-status")]
+        public async Task<IActionResult> UpdateStatus(UpdateStatusGroupDTO dto)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            var result = await _groupService.UpdateStatusGroupAsync(dto);
+
+            if (!result.success)
+            {
+                return BadRequest(result.error);
+            }
+
+            return Ok();
+        }
+
         // Add member
         [HttpPut("add-member")]
         public async Task<IActionResult> AddMember(AddMemberDTO addMemberDto)

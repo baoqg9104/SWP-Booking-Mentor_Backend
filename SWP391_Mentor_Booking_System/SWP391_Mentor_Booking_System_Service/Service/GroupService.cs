@@ -53,6 +53,14 @@ namespace SWP391_Mentor_Booking_System_Service.Service
                 return (false, "Dupplicate topic in the same class");
             }
 
+            if (createGroupDto.MemberEmails == null || createGroupDto.MemberEmails.Count < 4)
+            {
+                return (false, "Minimum number of members is 4");
+            }
+
+            if (createGroupDto.MemberEmails.Count > 6) {
+                return (false, "Maximum number of members is 6");
+            }
 
             // Auto-generate GroupId
             var lastGroup = await _context.Groups.OrderByDescending(g => g.GroupId).FirstOrDefaultAsync();
@@ -67,15 +75,25 @@ namespace SWP391_Mentor_Booking_System_Service.Service
                 LeaderId = createGroupDto.LeaderId,
                 Progress = 0,
                 SwpClassId = createGroupDto.SwpClassId,
-                WalletPoint = 10,
-                CreatedDate = DateTime.Now
+                WalletPoint = 0,
+                CreatedDate = DateTime.Now,
+                Status = false
             };
 
             _context.Groups.Add(group);
-            student.GroupId = group.GroupId;
+
+            //student.GroupId = group.GroupId;
+            foreach (string email in createGroupDto.MemberEmails)
+            {
+                var stu = await _context.Students.FirstOrDefaultAsync(x => x.Email == email);
+                if (stu == null) 
+                {
+                    return (false, "Member not found");
+                }
+                stu.GroupId = groupId;
+            }
+
             await _context.SaveChangesAsync();
-
-
             return (true, group.GroupId);
         }
 
@@ -220,6 +238,21 @@ namespace SWP391_Mentor_Booking_System_Service.Service
 
             group.Progress = updateProgressDTO.Progress;
             await _context.SaveChangesAsync();
+        }
+
+        public async Task<(bool success, string error)> UpdateStatusGroupAsync(UpdateStatusGroupDTO dto)
+        {
+            var group = await _context.Groups.FirstOrDefaultAsync(g => g.GroupId == dto.GroupId);
+
+            if (group == null)
+            {
+                return (false, "Group not found");
+            }
+
+            group.Status = dto.Status;
+            group.WalletPoint = 10;
+            await _context.SaveChangesAsync();
+            return (true, "");
         }
 
     }
