@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Azure.Core;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,6 +23,8 @@ namespace SWP391_Mentor_Booking_System_Data.Data
         public ICollection<Student> Students { get; set; }
         public Mentor Mentor { get; set; }
 
+        public ICollection<RequestToMoveClass> RequestsForCurrentClass { get; set; }
+        public ICollection<RequestToMoveClass> RequestsForClassToMove { get; set; }
     }
 
 

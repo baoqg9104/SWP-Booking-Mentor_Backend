@@ -25,6 +25,7 @@ namespace SWP391_Mentor_Booking_System_Data
         public DbSet<RefreshToken> RefreshTokens { get; set; }
         public DbSet<Feedback> Feedbacks { get; set; }
         public DbSet<BookingSkill> BookingSkills { get; set; }
+        public DbSet<RequestToMoveClass> RequestToMoveClasses { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -181,10 +182,20 @@ namespace SWP391_Mentor_Booking_System_Data
                 .WithOne(b => b.Feedback)
                 .HasForeignKey<Feedback>(f => f.BookingId);
 
+            modelBuilder.Entity<RequestToMoveClass>()
+                .HasKey(r => r.RequestId);
 
+            modelBuilder.Entity<RequestToMoveClass>()
+                .HasOne(r => r.CurrentClass)
+                .WithMany(c => c.RequestsForCurrentClass)
+                .HasForeignKey(r => r.CurrentClassId)
+                .OnDelete(DeleteBehavior.Restrict);
 
-
-
+            modelBuilder.Entity<RequestToMoveClass>()
+                .HasOne(r => r.ClassToMove)
+                .WithMany(c => c.RequestsForClassToMove)
+                .HasForeignKey(r => r.ClassIdToMove)
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

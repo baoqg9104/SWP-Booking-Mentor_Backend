@@ -19,7 +19,8 @@ namespace SWP391_Mentor_Booking_System_Data.Repositories
 
         public async Task<IEnumerable<Student>> GetAllStudentsAsync()
         {
-            return await _context.Students.ToListAsync();
+            return await _context.Students
+                .ToListAsync();
         }
 
         public async Task<Student> GetStudentByIdAsync(string id)
