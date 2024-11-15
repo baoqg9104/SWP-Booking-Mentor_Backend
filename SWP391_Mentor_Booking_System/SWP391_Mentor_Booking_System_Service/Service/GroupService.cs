@@ -23,6 +23,14 @@ namespace SWP391_Mentor_Booking_System_Service.Service
         // Create
         public async Task<(bool Success, string Error)> CreateGroupAsync(CreateGroupDTO createGroupDto)
         {
+
+            var groupName = await _context.Groups.AnyAsync(g => g.Name == createGroupDto.Name);
+
+            if (groupName)
+            {
+                return (false, "Duplicated name");
+            }
+
             // Check if TopicId exists
             var topicExists = await _context.Topics.AnyAsync(t => t.TopicId == createGroupDto.TopicId && t.Status == true);
             if (!topicExists)
@@ -118,7 +126,9 @@ namespace SWP391_Mentor_Booking_System_Service.Service
                 SwpClassName = group.SwpClass.Name,
                 WalletPoint = group.WalletPoint,
                 Progress = group.Progress,
-                CreatedDate = group.CreatedDate
+                CreatedDate = group.CreatedDate,
+                Status = group.Status,
+                LeaderId = group.LeaderId
             };
         }
 
@@ -138,7 +148,9 @@ namespace SWP391_Mentor_Booking_System_Service.Service
                     SwpClassName = g.SwpClass.Name,
                     WalletPoint = g.WalletPoint,
                     Progress = g.Progress,
-                    CreatedDate = g.CreatedDate
+                    CreatedDate = g.CreatedDate,
+                    Status = g.Status,
+                    LeaderId = g.LeaderId
                 })
                 .ToListAsync();
         }
@@ -178,30 +190,37 @@ namespace SWP391_Mentor_Booking_System_Service.Service
 
         public async Task<(bool Success, string Error)> AddMemberAsync(AddMemberDTO addMemberDTO)
         {
-            var student = await _context.Students.FirstOrDefaultAsync(s => s.Email == addMemberDTO.Email);
-
             var group = await _context.Groups.FirstOrDefaultAsync(g => g.GroupId == addMemberDTO.GroupId);
 
-            if (student == null || group == null)
+            if (group == null)
             {
-                return (false, "Student not found");
+                return (false, "Group not found");
             }
 
-            if (student.GroupId != null)
+            if (group.LeaderId != addMemberDTO.LeaderId)
             {
-                return (false, "Student has joined another group");
+                return (false, "You are not leader");
             }
 
             var numOfMembers = await _context.Students
                 .Where(s => s.GroupId == addMemberDTO.GroupId)
                 .CountAsync();
 
-            if (numOfMembers > 6)
+
+            if (numOfMembers + addMemberDTO.Emails.Count > 6)
             {
-                return (false, "Your group is at maximum members.");
+                return (false, "Maximum number of members is 6");
             }
 
-            student.GroupId = group.GroupId;
+            foreach (string email in addMemberDTO.Emails)
+            {
+                var stu = await _context.Students.FirstOrDefaultAsync(x => x.Email == email);
+                if (stu == null)
+                {
+                    return (false, "Member not found");
+                }
+                stu.GroupId = group.GroupId;
+            }  
 
             await _context.SaveChangesAsync();
             return (true, "");
@@ -254,6 +273,75 @@ namespace SWP391_Mentor_Booking_System_Service.Service
             await _context.SaveChangesAsync();
             return (true, "");
         }
+
+        public async Task<(bool Success, string Error)> LeaveGroupAsync(string studentId)
+        {
+            // Kiểm tra xem sinh viên có tồn tại không
+            var student = await _context.Students.FirstOrDefaultAsync(s => s.StudentId == studentId);
+            if (student == null)
+            {
+                return (false, "Student not found");
+            }
+
+            // Kiểm tra xem sinh viên có thuộc nhóm không
+            if (string.IsNullOrEmpty(student.GroupId))
+            {
+                return (false, "Student is not part of any group");
+            }
+
+            // Lấy thông tin nhóm của sinh viên
+            var group = await _context.Groups.Include(g => g.Students)
+                                              .FirstOrDefaultAsync(g => g.GroupId == student.GroupId);
+
+            if (group == null)
+            {
+                return (false, "Group not found");
+            }
+
+            if (group.LeaderId == student.StudentId)
+            {
+                _context.Groups.Remove(group);
+                await _context.SaveChangesAsync();
+                return (true, "Deleted group successful");
+            }
+
+            student.GroupId = null; // Xoá quan hệ nhóm của sinh viên
+
+            await _context.SaveChangesAsync();
+            return (true, "Student has successfully left the group");
+        }
+
+        public async Task<(bool Success, string Error)> DeleteMemberAsync(string studentId)
+        {
+            // Kiểm tra xem sinh viên có tồn tại không
+            var student = await _context.Students.FirstOrDefaultAsync(s => s.StudentId == studentId);
+            if (student == null)
+            {
+                return (false, "Student not found");
+            }
+
+            // Kiểm tra xem sinh viên có thuộc nhóm không
+            if (string.IsNullOrEmpty(student.GroupId))
+            {
+                return (false, "Student is not part of any group");
+            }
+
+            // Lấy thông tin nhóm của sinh viên
+            var group = await _context.Groups.Include(g => g.Students)
+                                              .FirstOrDefaultAsync(g => g.GroupId == student.GroupId);
+
+            if (group == null)
+            {
+                return (false, "Group not found");
+            }
+
+            student.GroupId = null; // Xoá quan hệ nhóm của sinh viên
+
+            await _context.SaveChangesAsync();
+            return (true, "Deleted member successful");
+
+        }
+
 
     }
 

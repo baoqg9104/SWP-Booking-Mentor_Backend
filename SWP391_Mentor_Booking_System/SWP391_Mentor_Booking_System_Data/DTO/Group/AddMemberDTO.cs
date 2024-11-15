@@ -9,6 +9,7 @@ namespace SWP391_Mentor_Booking_System_Data.DTO.Group
     public class AddMemberDTO
     {
         public string GroupId { get; set; }
-        public string Email { get; set; }
+        public string LeaderId { get; set; }
+        public List<string> Emails { get; set; }
     }
 }
