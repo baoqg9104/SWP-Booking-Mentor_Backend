@@ -31,6 +31,11 @@ namespace SWP391_Mentor_Booking_System_Service.Service
                 if (email != null)
                     return (false, "Email already exists");
 
+                var phone = await _context.Students.FirstOrDefaultAsync(s => s.StudentId != updateUserDto.Id && s.Phone == updateUserDto.Phone);
+
+                if (phone != null)
+                    return (false, "Phone already exists");
+
                 user.Email = updateUserDto.Email;
                 user.StudentName = updateUserDto.Name;
                 user.Phone = updateUserDto.Phone;

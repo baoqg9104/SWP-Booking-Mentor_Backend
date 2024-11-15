@@ -127,6 +127,30 @@ namespace SWP391_Mentor_Booking_System_API.Controllers
 
             return Ok();
         }
+
+        [HttpPut("leave-group")]
+        public async Task<IActionResult> LeaveGroup(string studentId)
+        {
+            var result = await _groupService.LeaveGroupAsync(studentId);
+            if (!result.Success)
+            {
+                return BadRequest(result.Error);
+            }
+
+            return Ok(result.Error);
+        }
+
+        [HttpPut("delete-member")]
+        public async Task<IActionResult> DeleteMember(string studentId)
+        {
+            var result = await _groupService.DeleteMemberAsync(studentId);
+            if (!result.Success)
+            {
+                return BadRequest(result.Error);
+            }
+
+            return Ok(result.Error);
+        }
     }
 
 }

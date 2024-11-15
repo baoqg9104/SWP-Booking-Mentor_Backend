@@ -9,6 +9,7 @@ namespace SWP391_Mentor_Booking_System_Data.DTO.Group
     public class GroupDTO
     {
         public string GroupId { get; set; }
+        public string LeaderId { get; set; }
         public string Name { get; set; }
         public int TopicId { get; set; }
         public string TopicName { get; set; }
@@ -17,6 +18,7 @@ namespace SWP391_Mentor_Booking_System_Data.DTO.Group
         public int WalletPoint { get; set; }
         public int Progress { get; set; }
         public DateTime CreatedDate { get; set; }
+        public bool Status { get; set; }
     }
 
 }
