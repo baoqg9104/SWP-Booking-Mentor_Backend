@@ -25,6 +25,23 @@ namespace SWP391_Mentor_Booking_System_Service.Service
             CreateMentorSlotDTO createMentorSlotDto
         )
         {
+            var mentor = await _context.Mentors.SingleOrDefaultAsync(m =>
+                m.MentorId == createMentorSlotDto.MentorId
+            );
+
+            if (!mentor.ApplyStatus)
+                return (false, "Your account is not verified");
+
+            if (mentor.NumOfSlot == 0)
+            {
+                return (false, null);
+            }
+
+            if (mentor.MeetUrl.IsNullOrEmpty() && createMentorSlotDto.IsOnline)
+            {
+                return (false, "You don't have a Meet URL yet.");
+            }
+
             // Check if the slot is in the past
             if (createMentorSlotDto.StartTime < DateTime.Now)
                 return (false, "The start time of the mentor slot cannot be in the past");
@@ -54,20 +71,6 @@ namespace SWP391_Mentor_Booking_System_Service.Service
 
                 if (overlappingRoomSlots.Any())
                     return (false, "Overlapping room slots");
-            }
-
-            var mentor = await _context.Mentors.SingleOrDefaultAsync(m =>
-                m.MentorId == createMentorSlotDto.MentorId
-            );
-
-            if (mentor.NumOfSlot == 0)
-            {
-                return (false, null);
-            }
-
-            if (mentor.MeetUrl.IsNullOrEmpty() && createMentorSlotDto.IsOnline)
-            {
-                return (false, "You don't have a Meet URL yet.");
             }
 
             var mentorSkill = await _context.MentorSkills.AnyAsync(x => x.MentorId == mentor.MentorId);
