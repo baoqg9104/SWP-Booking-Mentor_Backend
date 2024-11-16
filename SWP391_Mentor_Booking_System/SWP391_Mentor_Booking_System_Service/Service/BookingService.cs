@@ -30,6 +30,9 @@ namespace SWP391_Mentor_Booking_System_Service.Service
             if (group == null)
                 return (false, "Group does not exist");
 
+            if (!group.Status)
+                return (false, "Group is disabled");
+
             if (group.LeaderId != createBookingDto.StudentId)
                 return (false, "You are not leader");
 

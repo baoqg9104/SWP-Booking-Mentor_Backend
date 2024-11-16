@@ -138,10 +138,10 @@ namespace SWP391_Mentor_Booking_System_Service.Service
                 throw new Exception("Mật khẩu không chính xác.");
             }
 
-            if (!mentor.ApplyStatus)
-            {
-                throw new Exception("Đợi admin approved.");
-            }
+            //if (!mentor.ApplyStatus)
+            //{
+            //    throw new Exception("Đợi admin approved.");
+            //}
 
             var accessToken = CreateToken(mentor, "Mentor");
             var refreshToken = GenerateRefreshToken(mentor.MentorId);
