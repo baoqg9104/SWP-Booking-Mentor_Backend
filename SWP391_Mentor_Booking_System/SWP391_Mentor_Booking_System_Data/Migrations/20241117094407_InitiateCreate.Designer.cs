@@ -12,8 +12,8 @@ using SWP391_Mentor_Booking_System_Data;
 namespace SWP391_Mentor_Booking_System_Data.Migrations
 {
     [DbContext(typeof(SWP391_Mentor_Booking_System_DBContext))]
-    [Migration("20241029085734_7")]
-    partial class _7
+    [Migration("20241117094407_InitiateCreate")]
+    partial class InitiateCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,6 +24,23 @@ namespace SWP391_Mentor_Booking_System_Data.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+
+            modelBuilder.Entity("SWP391_Mentor_Booking_System_Data.Data.ActiveToken", b =>
+                {
+                    b.Property<string>("TokenId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("ExpiryDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("TokenId");
+
+                    b.ToTable("ActiveTokens");
+                });
 
             modelBuilder.Entity("SWP391_Mentor_Booking_System_Data.Data.Admin", b =>
                 {
@@ -120,13 +137,13 @@ namespace SWP391_Mentor_Booking_System_Data.Migrations
                     b.Property<string>("GroupFeedback")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("GroupRating")
+                    b.Property<int?>("GroupRating")
                         .HasColumnType("int");
 
                     b.Property<string>("MentorFeedback")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("MentorRating")
+                    b.Property<int?>("MentorRating")
                         .HasColumnType("int");
 
                     b.HasKey("FeedbackId");
@@ -147,7 +164,7 @@ namespace SWP391_Mentor_Booking_System_Data.Migrations
 
                     b.Property<string>("LeaderId")
                         .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -155,6 +172,9 @@ namespace SWP391_Mentor_Booking_System_Data.Migrations
 
                     b.Property<int>("Progress")
                         .HasColumnType("int");
+
+                    b.Property<bool>("Status")
+                        .HasColumnType("bit");
 
                     b.Property<int>("SwpClassId")
                         .HasColumnType("int");
@@ -166,8 +186,6 @@ namespace SWP391_Mentor_Booking_System_Data.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("GroupId");
-
-                    b.HasIndex("LeaderId");
 
                     b.HasIndex("SwpClassId");
 
@@ -217,7 +235,14 @@ namespace SWP391_Mentor_Booking_System_Data.Migrations
                     b.Property<DateTime>("RegistrationDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<int?>("SwpClassId")
+                        .HasColumnType("int");
+
                     b.HasKey("MentorId");
+
+                    b.HasIndex("SwpClassId")
+                        .IsUnique()
+                        .HasFilter("[SwpClassId] IS NOT NULL");
 
                     b.ToTable("Mentors");
                 });
@@ -310,6 +335,48 @@ namespace SWP391_Mentor_Booking_System_Data.Migrations
                     b.ToTable("RefreshTokens");
                 });
 
+            modelBuilder.Entity("SWP391_Mentor_Booking_System_Data.Data.RequestToMoveClass", b =>
+                {
+                    b.Property<int>("RequestId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RequestId"));
+
+                    b.Property<DateTime?>("ApprovalDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("ClassIdToMove")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CurrentClassId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Reason")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("RequestDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("StudentId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("RequestId");
+
+                    b.HasIndex("ClassIdToMove");
+
+                    b.HasIndex("CurrentClassId");
+
+                    b.HasIndex("StudentId");
+
+                    b.ToTable("RequestToMoveClasses");
+                });
+
             modelBuilder.Entity("SWP391_Mentor_Booking_System_Data.Data.Semester", b =>
                 {
                     b.Property<int>("SemesterId")
@@ -386,9 +453,14 @@ namespace SWP391_Mentor_Booking_System_Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("SwpClassId")
+                        .HasColumnType("int");
+
                     b.HasKey("StudentId");
 
                     b.HasIndex("GroupId");
+
+                    b.HasIndex("SwpClassId");
 
                     b.ToTable("Students");
                 });
@@ -529,12 +601,6 @@ namespace SWP391_Mentor_Booking_System_Data.Migrations
 
             modelBuilder.Entity("SWP391_Mentor_Booking_System_Data.Data.Group", b =>
                 {
-                    b.HasOne("SWP391_Mentor_Booking_System_Data.Data.Student", "Leader")
-                        .WithMany()
-                        .HasForeignKey("LeaderId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
                     b.HasOne("SWP391_Mentor_Booking_System_Data.Data.SwpClass", "SwpClass")
                         .WithMany("Groups")
                         .HasForeignKey("SwpClassId")
@@ -547,11 +613,18 @@ namespace SWP391_Mentor_Booking_System_Data.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.Navigation("Leader");
-
                     b.Navigation("SwpClass");
 
                     b.Navigation("Topic");
+                });
+
+            modelBuilder.Entity("SWP391_Mentor_Booking_System_Data.Data.Mentor", b =>
+                {
+                    b.HasOne("SWP391_Mentor_Booking_System_Data.Data.SwpClass", "SwpClass")
+                        .WithOne("Mentor")
+                        .HasForeignKey("SWP391_Mentor_Booking_System_Data.Data.Mentor", "SwpClassId");
+
+                    b.Navigation("SwpClass");
                 });
 
             modelBuilder.Entity("SWP391_Mentor_Booking_System_Data.Data.MentorSkill", b =>
@@ -584,6 +657,33 @@ namespace SWP391_Mentor_Booking_System_Data.Migrations
                     b.Navigation("Mentor");
                 });
 
+            modelBuilder.Entity("SWP391_Mentor_Booking_System_Data.Data.RequestToMoveClass", b =>
+                {
+                    b.HasOne("SWP391_Mentor_Booking_System_Data.Data.SwpClass", "ClassToMove")
+                        .WithMany("RequestsForClassToMove")
+                        .HasForeignKey("ClassIdToMove")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("SWP391_Mentor_Booking_System_Data.Data.SwpClass", "CurrentClass")
+                        .WithMany("RequestsForCurrentClass")
+                        .HasForeignKey("CurrentClassId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("SWP391_Mentor_Booking_System_Data.Data.Student", "Student")
+                        .WithMany()
+                        .HasForeignKey("StudentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ClassToMove");
+
+                    b.Navigation("CurrentClass");
+
+                    b.Navigation("Student");
+                });
+
             modelBuilder.Entity("SWP391_Mentor_Booking_System_Data.Data.Student", b =>
                 {
                     b.HasOne("SWP391_Mentor_Booking_System_Data.Data.Group", "Group")
@@ -591,7 +691,13 @@ namespace SWP391_Mentor_Booking_System_Data.Migrations
                         .HasForeignKey("GroupId")
                         .OnDelete(DeleteBehavior.SetNull);
 
+                    b.HasOne("SWP391_Mentor_Booking_System_Data.Data.SwpClass", "SwpClass")
+                        .WithMany("Students")
+                        .HasForeignKey("SwpClassId");
+
                     b.Navigation("Group");
+
+                    b.Navigation("SwpClass");
                 });
 
             modelBuilder.Entity("SWP391_Mentor_Booking_System_Data.Data.SwpClass", b =>
@@ -674,6 +780,15 @@ namespace SWP391_Mentor_Booking_System_Data.Migrations
             modelBuilder.Entity("SWP391_Mentor_Booking_System_Data.Data.SwpClass", b =>
                 {
                     b.Navigation("Groups");
+
+                    b.Navigation("Mentor")
+                        .IsRequired();
+
+                    b.Navigation("RequestsForClassToMove");
+
+                    b.Navigation("RequestsForCurrentClass");
+
+                    b.Navigation("Students");
                 });
 
             modelBuilder.Entity("SWP391_Mentor_Booking_System_Data.Data.Topic", b =>

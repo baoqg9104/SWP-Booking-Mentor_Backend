@@ -5,6 +5,7 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using SWP391_Mentor_Booking_System_Data;
 using SWP391_Mentor_Booking_System_Data.Repositories;
+using SWP391_Mentor_Booking_System_Service;
 using SWP391_Mentor_Booking_System_Service.Service;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -145,7 +146,11 @@ builder.Services.AddScoped<TransactionService>();
 builder.Services.AddScoped<FeedbackService>();
 builder.Services.AddScoped<RequestToMoveClassService>();
 
+
+
+
 var app = builder.Build();
+
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -160,9 +165,14 @@ app.UseCors("AllowSpecificOrigin");
 // Enable HTTPS redirection
 app.UseHttpsRedirection();
 
+
+app.UseMiddleware<JwtMiddleware>();
+
+
 // Enable authentication and authorization
 app.UseAuthentication();
 app.UseAuthorization();
+
 
 // Map controllers to routes
 app.MapControllers();

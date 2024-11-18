@@ -26,6 +26,8 @@ namespace SWP391_Mentor_Booking_System_Data
         public DbSet<Feedback> Feedbacks { get; set; }
         public DbSet<BookingSkill> BookingSkills { get; set; }
         public DbSet<RequestToMoveClass> RequestToMoveClasses { get; set; }
+        public DbSet<ActiveToken> ActiveTokens { get; set; }
+
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -196,6 +198,9 @@ namespace SWP391_Mentor_Booking_System_Data
                 .WithMany(c => c.RequestsForClassToMove)
                 .HasForeignKey(r => r.ClassIdToMove)
                 .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<ActiveToken>()
+                .HasKey(at => at.TokenId); // Đặt TokenId là khóa chính
         }
     }
 }
