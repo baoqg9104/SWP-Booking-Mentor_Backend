@@ -308,6 +308,27 @@ namespace SWP391_Mentor_Booking_System_Data.Migrations
                     b.ToTable("MentorSlots");
                 });
 
+            modelBuilder.Entity("SWP391_Mentor_Booking_System_Data.Data.OtpEntry", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Otp")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("OtpExpiry")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("OtpEntries");
+                });
+
             modelBuilder.Entity("SWP391_Mentor_Booking_System_Data.Data.RefreshToken", b =>
                 {
                     b.Property<int>("Id")
