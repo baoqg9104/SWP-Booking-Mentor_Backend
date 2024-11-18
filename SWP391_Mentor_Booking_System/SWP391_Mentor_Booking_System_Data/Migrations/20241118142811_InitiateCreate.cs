@@ -41,6 +41,20 @@ namespace SWP391_Mentor_Booking_System_Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "OtpEntries",
+                columns: table => new
+                {
+                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Otp = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    OtpExpiry = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_OtpEntries", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "RefreshTokens",
                 columns: table => new
                 {
@@ -519,6 +533,9 @@ namespace SWP391_Mentor_Booking_System_Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "Feedbacks");
+
+            migrationBuilder.DropTable(
+                name: "OtpEntries");
 
             migrationBuilder.DropTable(
                 name: "RefreshTokens");

@@ -19,7 +19,6 @@ namespace SWP391_Mentor_Booking_System_API.Controllers
 
         // Create
         [HttpPost("create")]
-        [Authorize(Policy = "AdminOnly")]
         public async Task<IActionResult> CreateSemester([FromBody] CreateSemesterDTO createSemesterDto)
         {
             if (!ModelState.IsValid)

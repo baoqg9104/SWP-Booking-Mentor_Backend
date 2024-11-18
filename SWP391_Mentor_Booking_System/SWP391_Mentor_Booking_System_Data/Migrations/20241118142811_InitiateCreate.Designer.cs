@@ -12,7 +12,7 @@ using SWP391_Mentor_Booking_System_Data;
 namespace SWP391_Mentor_Booking_System_Data.Migrations
 {
     [DbContext(typeof(SWP391_Mentor_Booking_System_DBContext))]
-    [Migration("20241117094407_InitiateCreate")]
+    [Migration("20241118142811_InitiateCreate")]
     partial class InitiateCreate
     {
         /// <inheritdoc />
@@ -309,6 +309,27 @@ namespace SWP391_Mentor_Booking_System_Data.Migrations
                     b.HasIndex("MentorId");
 
                     b.ToTable("MentorSlots");
+                });
+
+            modelBuilder.Entity("SWP391_Mentor_Booking_System_Data.Data.OtpEntry", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Otp")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("OtpExpiry")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("OtpEntries");
                 });
 
             modelBuilder.Entity("SWP391_Mentor_Booking_System_Data.Data.RefreshToken", b =>
