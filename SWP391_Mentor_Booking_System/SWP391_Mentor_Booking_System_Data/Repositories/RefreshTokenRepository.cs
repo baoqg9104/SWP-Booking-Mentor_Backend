@@ -41,6 +41,20 @@ namespace SWP391_Mentor_Booking_System_Data.Repositories
         {
             await _context.SaveChangesAsync();
         }
+        public async Task DeleteRefreshTokensByUserIdAsync(string userId)
+        {
+            var tokens = await _context.RefreshTokens.Where(rt => rt.UserId == userId).ToListAsync();
+            _context.RefreshTokens.RemoveRange(tokens);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task<RefreshToken> GetActiveTokenByTokenAsync(string token)
+        {
+            return await _context.RefreshTokens
+                .Where(t => t.Token == token && t.ExpiryDate > DateTime.UtcNow)
+                .FirstOrDefaultAsync();
+        }
+
     }
 
 

@@ -22,6 +22,23 @@ namespace SWP391_Mentor_Booking_System_Data.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("SWP391_Mentor_Booking_System_Data.Data.ActiveToken", b =>
+                {
+                    b.Property<string>("TokenId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("ExpiryDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("TokenId");
+
+                    b.ToTable("ActiveTokens");
+                });
+
             modelBuilder.Entity("SWP391_Mentor_Booking_System_Data.Data.Admin", b =>
                 {
                     b.Property<string>("AdminId")

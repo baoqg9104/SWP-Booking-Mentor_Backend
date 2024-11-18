@@ -43,6 +43,25 @@ namespace SWP391_Mentor_Booking_System_Data.Repositories
             await _context.SaveChangesAsync();
         }
 
+        public async Task<List<ActiveToken>> GetActiveTokensByUserIdAsync(string userId)
+        {
+            return await _context.ActiveTokens.Where(t => t.UserId == userId).ToListAsync();
+        }
+
+        public async Task<ActiveToken> GetActiveTokenByTokenAsync(string token)
+        {
+            return await _context.ActiveTokens.FirstOrDefaultAsync(t => t.TokenId == token);
+        }
+
+        public void RemoveActiveTokens(List<ActiveToken> tokens)
+        {
+            _context.ActiveTokens.RemoveRange(tokens);
+        }
+
+        public void AddActiveToken(ActiveToken token)
+        {
+            _context.ActiveTokens.Add(token);
+        }
 
 
         public void AddStudent(Student student)
