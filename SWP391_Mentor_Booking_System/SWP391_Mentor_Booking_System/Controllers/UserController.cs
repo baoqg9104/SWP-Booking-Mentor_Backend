@@ -38,7 +38,7 @@ namespace SWP391_Mentor_Booking_System_API.Controllers
             {
                 return BadRequest(ex.Message);
             }
-            
+
         }
 
         [HttpPut("change-password")]
@@ -55,6 +55,45 @@ namespace SWP391_Mentor_Booking_System_API.Controllers
             return Ok("Update Password Successfully");
         }
 
+        [HttpPost("generate-otp")]
+        [AllowAnonymous]
+        public async Task<IActionResult> GenerateOtp([FromBody] EmailRequest emailRequest)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            var (success, error) = await _userService.GenerateAndSendOtpAsync(emailRequest.RecipientEmail);
+
+            if (!success)
+                return BadRequest($"Error: {error}");
+
+            return Ok("OTP sent successfully.");
+        }
+
+        [HttpPost("validate-otp")]
+        [AllowAnonymous]
+        public async Task<IActionResult> ValidateOtp([FromBody] OtpRequest otpRequest)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            var (success, error) = await _userService.ValidateOtpAsync(otpRequest.Email, otpRequest.Otp);
+
+            if (!success)
+                return BadRequest($"Error: {error}");
+
+            return Ok("OTP validated successfully.");
+        }
     }
 
+    public class EmailRequest
+    {
+        public string RecipientEmail { get; set; }
+    }
+
+    public class OtpRequest
+    {
+        public string Email { get; set; }
+        public string Otp { get; set; }
+    }
 }
