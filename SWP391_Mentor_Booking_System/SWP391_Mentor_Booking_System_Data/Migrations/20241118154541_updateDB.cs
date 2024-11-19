@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace SWP391_Mentor_Booking_System_Data.Migrations
 {
     /// <inheritdoc />
-    public partial class InitiateCreate : Migration
+    public partial class updateDB : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using SWP391_Mentor_Booking_System_Data;
+using SWP391_Mentor_Booking_System_Data.DTO.Email;
 using SWP391_Mentor_Booking_System_Data.Repositories;
 using SWP391_Mentor_Booking_System_Service;
 using SWP391_Mentor_Booking_System_Service.Service;
@@ -146,6 +147,8 @@ builder.Services.AddScoped<TransactionService>();
 builder.Services.AddScoped<FeedbackService>();
 builder.Services.AddScoped<RequestToMoveClassService>();
 
+builder.Services.Configure<EmailSettings>(builder.Configuration.GetSection("EmailSettings"));
+builder.Services.AddScoped<EmailService>();
 
 
 
