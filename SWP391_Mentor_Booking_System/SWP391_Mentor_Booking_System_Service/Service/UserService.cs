@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SWP391_Mentor_Booking_System_Data;
+using SWP391_Mentor_Booking_System_Data.Data;
 using SWP391_Mentor_Booking_System_Data.DTO;
 using System;
 using System.Collections.Generic;
@@ -12,10 +13,11 @@ namespace SWP391_Mentor_Booking_System_Service.Service
     public class UserService
     {
         private readonly SWP391_Mentor_Booking_System_DBContext _context;
-
-        public UserService(SWP391_Mentor_Booking_System_DBContext context)
+        private readonly EmailService _emailService;
+        public UserService(SWP391_Mentor_Booking_System_DBContext context, EmailService emailService)
         {
             _context = context;
+            _emailService = emailService;
         }
 
         public async Task<(bool success, string error)> UpdateUserAsync(UpdateUserDTO updateUserDto)
@@ -106,8 +108,39 @@ namespace SWP391_Mentor_Booking_System_Service.Service
             return false;
         }
 
+        public async Task<(bool Success, string Error)> GenerateAndSendOtpAsync(string email) 
+        { 
+            var otp = new Random().Next(100000, 999999).ToString(); 
+            var otpExpiry = DateTime.Now.AddMinutes(10); 
+            var otpEntry = new OtpEntry 
+            { 
+                Id = Guid.NewGuid().ToString(), 
+                Email = email, 
+                Otp = otp, 
+                OtpExpiry = otpExpiry 
+            }; 
+            _context.OtpEntries.Add(otpEntry); 
+            await _context.SaveChangesAsync(); 
+            await _emailService.SendOtpEmailAsync(email, otp); 
+            return (true, null); 
+        }
 
+        public async Task<(bool Success, string Error)> ValidateOtpAsync(string email, string otp)
+        {
+            var otpEntry = await _context.OtpEntries
+                .FirstOrDefaultAsync(o => o.Email == email && o.Otp == otp);
 
+            if (otpEntry == null)
+                return (false, "Invalid OTP");
+
+            if (otpEntry.OtpExpiry < DateTime.Now)
+                return (false, "OTP has expired");
+
+            _context.OtpEntries.Remove(otpEntry);
+            await _context.SaveChangesAsync();
+
+            return (true, null);
+        }
     }
 
 }
