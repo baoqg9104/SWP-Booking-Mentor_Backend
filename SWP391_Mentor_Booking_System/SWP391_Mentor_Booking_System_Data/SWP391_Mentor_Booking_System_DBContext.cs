@@ -27,6 +27,7 @@ namespace SWP391_Mentor_Booking_System_Data
         public DbSet<BookingSkill> BookingSkills { get; set; }
         public DbSet<RequestToMoveClass> RequestToMoveClasses { get; set; }
         public DbSet<ActiveToken> ActiveTokens { get; set; }
+        public DbSet<OtpEntry> OtpEntries { get; set; }
 
 
 
@@ -200,7 +201,10 @@ namespace SWP391_Mentor_Booking_System_Data
                 .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<ActiveToken>()
-                .HasKey(at => at.TokenId); // Đặt TokenId là khóa chính
+                .HasKey(at => at.TokenId);
+
+            modelBuilder.Entity<OtpEntry>()
+                .HasKey(at => at.Id);// Đặt TokenId là khóa chính
         }
     }
 }
