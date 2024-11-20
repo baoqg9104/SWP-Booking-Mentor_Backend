@@ -65,7 +65,7 @@ namespace SWP391_Mentor_Booking_System_API.Controllers
             var (success, error) = await _userService.GenerateAndSendOtpAsync(emailRequest.RecipientEmail);
 
             if (!success)
-                return BadRequest($"Error: {error}");
+                return BadRequest(error);
 
             return Ok("OTP sent successfully.");
         }
@@ -83,6 +83,21 @@ namespace SWP391_Mentor_Booking_System_API.Controllers
                 return BadRequest($"Error: {error}");
 
             return Ok("OTP validated successfully.");
+        }
+
+        [HttpPost("set-new-password")]
+        [AllowAnonymous]
+        public async Task<IActionResult> SetNewPassword([FromBody] SetNewPasswordDTO dto)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            var (success, error) = await _userService.SetNewPasswordAsync(dto);
+
+            if (!success)
+                return BadRequest(error);
+
+            return Ok("Set new password successful");
         }
     }
 
