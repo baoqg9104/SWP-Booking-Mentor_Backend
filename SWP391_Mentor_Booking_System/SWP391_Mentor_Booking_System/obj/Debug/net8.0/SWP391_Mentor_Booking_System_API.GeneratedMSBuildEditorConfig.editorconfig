@@ -17,19 +17,11 @@ build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = SWP391_Mentor_Booking_System_API
 build_property.RootNamespace = SWP391_Mentor_Booking_System_API
-<<<<<<< HEAD
 build_property.ProjectDir = C:\Users\GiaBaoZ\Desktop\Fullstack\SWP391_Backend\Group2_SWP391_SE1867_Backend\SWP391_Mentor_Booking_System\SWP391_Mentor_Booking_System\
-=======
-build_property.ProjectDir = C:\Users\Admin\Documents\GitHub\Group2_SWP391_SE1867_Backend\SWP391_Mentor_Booking_System\SWP391_Mentor_Booking_System\
->>>>>>> main
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
 build_property.RazorLangVersion = 8.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-<<<<<<< HEAD
 build_property.MSBuildProjectDirectory = C:\Users\GiaBaoZ\Desktop\Fullstack\SWP391_Backend\Group2_SWP391_SE1867_Backend\SWP391_Mentor_Booking_System\SWP391_Mentor_Booking_System
-=======
-build_property.MSBuildProjectDirectory = C:\Users\Admin\Documents\GitHub\Group2_SWP391_SE1867_Backend\SWP391_Mentor_Booking_System\SWP391_Mentor_Booking_System
->>>>>>> main
 build_property._RazorSourceGeneratorDebug = 

@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Components.Forms;
+using Microsoft.EntityFrameworkCore;
 using SWP391_Mentor_Booking_System_Data;
 using SWP391_Mentor_Booking_System_Data.Data;
 using SWP391_Mentor_Booking_System_Data.DTO;
@@ -109,7 +110,24 @@ namespace SWP391_Mentor_Booking_System_Service.Service
         }
 
         public async Task<(bool Success, string Error)> GenerateAndSendOtpAsync(string email) 
-        { 
+        {
+            var user = await _context.Admins
+            .Where(x => x.Email == email)
+            .Select(x => new { x.Email, UserType = "Admin" })
+            .Union(_context.Mentors
+                .Where(x => x.Email == email)
+                .Select(x => new { x.Email, UserType = "Mentor" }))
+            .Union(_context.Students
+                .Where(x => x.Email == email)
+                .Select(x => new { x.Email, UserType = "Student" }))
+            .FirstOrDefaultAsync();
+
+            if (user == null)
+            {
+                return (false, "User not found");
+            }
+
+
             var otp = new Random().Next(100000, 999999).ToString(); 
             var otpExpiry = DateTime.Now.AddMinutes(10); 
             var otpEntry = new OtpEntry 
@@ -140,6 +158,46 @@ namespace SWP391_Mentor_Booking_System_Service.Service
             await _context.SaveChangesAsync();
 
             return (true, null);
+        }
+
+        public async Task<(bool Success, string Error)> SetNewPasswordAsync(SetNewPasswordDTO dto)
+        {
+            var user = await _context.Admins
+            .Where(x => x.Email == dto.Email)
+            .Select(x => new { x.Email, UserType = "Admin" })
+            .Union(_context.Mentors
+                .Where(x => x.Email == dto.Email)
+                .Select(x => new { x.Email, UserType = "Mentor" }))
+            .Union(_context.Students
+                .Where(x => x.Email == dto.Email)
+                .Select(x => new { x.Email, UserType = "Student" }))
+            .FirstOrDefaultAsync();
+
+            if (user == null)
+            {
+                return (false, "User not found");
+            }
+
+            var hashPassword = BCrypt.Net.BCrypt.HashPassword(dto.Password);
+
+            if (user.UserType == "Admin")
+            {
+                var admin = await _context.Admins.FirstOrDefaultAsync(x => x.Email == dto.Email);
+                admin.Password = hashPassword;
+            }
+            else if (user.UserType == "Mentor")
+            {
+                var mentor = await _context.Mentors.FirstOrDefaultAsync(x => x.Email == dto.Email);
+                mentor.Password = hashPassword;
+            }
+            else if (user.UserType == "Student")
+            {
+                var student = await _context.Students.FirstOrDefaultAsync(x => x.Email == dto.Email);
+                student.Password = hashPassword;
+            }
+
+            await _context.SaveChangesAsync();
+            return (true, "Password updated successfully");
         }
     }
 
