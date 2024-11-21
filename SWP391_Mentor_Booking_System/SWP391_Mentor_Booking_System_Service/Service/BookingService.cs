@@ -112,18 +112,28 @@ namespace SWP391_Mentor_Booking_System_Service.Service
         // Update Booking Status
         public async Task<bool> UpdateBookingStatusAsync(UpdateBookingStatusDTO updateBookingStatusDto)
         {
-            //existingBooking.Status = updateBookingStatusDto.Status;
-
             if (updateBookingStatusDto.Status.Equals("Approved"))
             {
                 var booking = await _context.BookingSlots
+                    .Include(bs => bs.Group)
+                    .ThenInclude(g => g.Students) // Eagerly load the students
+                    .Include(bs => bs.MentorSlot)
+                    .ThenInclude(ms => ms.Mentor)
                     .FirstOrDefaultAsync(bs => bs.BookingId == updateBookingStatusDto.BookingId);
 
+                if (booking == null)
+                {
+                    throw new NullReferenceException("Booking not found.");
+                }
+
                 var mentorSlot = await _context.MentorSlots
+                    .Include(ms => ms.Mentor)
                     .FirstOrDefaultAsync(ms => ms.MentorSlotId == updateBookingStatusDto.MentorSlotId);
 
-                if (booking == null || mentorSlot == null)
-                    return false;
+                if (mentorSlot == null)
+                {
+                    throw new NullReferenceException("MentorSlot not found.");
+                }
 
                 if (mentorSlot.StartTime < DateTime.Now)
                 {
@@ -134,6 +144,11 @@ namespace SWP391_Mentor_Booking_System_Service.Service
                 mentorSlot.Status = "Approved";
 
                 var mentor = await _context.Mentors.FirstOrDefaultAsync(m => m.MentorId == mentorSlot.MentorId);
+
+                if (mentor == null)
+                {
+                    throw new NullReferenceException("Mentor not found.");
+                }
 
                 mentor.PointsReceived += mentorSlot.BookingPoint;
 
@@ -160,36 +175,40 @@ namespace SWP391_Mentor_Booking_System_Service.Service
                         await _context.WalletTransactions.AddAsync(t);
                     }
                 }
-                await SendMentorSlotApprovalEmailAsync(mentor.Email, mentorSlot); 
-                foreach (var student in booking.Group.Students) 
-                { 
-                    await SendMentorSlotApprovalEmailForStudentsAsync(student.Email, mentorSlot); 
+
+                // Send email to the mentor
+                await SendMentorSlotApprovalEmailAsync(mentor.Email, mentorSlot);
+
+                // Send email to each student
+                if (booking.Group?.Students != null)
+                {
+                    foreach (var student in booking.Group.Students)
+                    {
+                        await SendMentorSlotApprovalEmailForStudentsAsync(student.Email, mentorSlot);
+                    }
                 }
-                // Add Wallet Transactions
-
-                //var transaction = new WalletTransaction()
-                //{
-                //    BookingId = booking.BookingId,
-                //    Point = mentorSlot.BookingPoint,
-                //    DateTime = DateTime.Now
-                //};
-
-                //if (transaction != null)
-                //{
-                //    await _context.WalletTransactions.AddAsync(transaction);
-                //}
-
+                else
+                {
+                    throw new NullReferenceException("Group or Students not found.");
+                }
             }
             else if (updateBookingStatusDto.Status.Equals("Completed"))
             {
                 var mentorSlot = await _context.MentorSlots
                     .FirstOrDefaultAsync(ms => ms.MentorSlotId == updateBookingStatusDto.MentorSlotId);
 
+                if (mentorSlot == null)
+                {
+                    throw new NullReferenceException("MentorSlot not found.");
+                }
+
                 var booking = await _context.BookingSlots
                     .FirstOrDefaultAsync(ms => ms.MentorSlotId == updateBookingStatusDto.MentorSlotId && ms.Status == "Approved");
 
-                if (booking == null || mentorSlot == null)
-                    return false;
+                if (booking == null)
+                {
+                    throw new NullReferenceException("Booking not found.");
+                }
 
                 if (mentorSlot.EndTime > DateTime.Now)
                 {
@@ -197,13 +216,11 @@ namespace SWP391_Mentor_Booking_System_Service.Service
                 }
 
                 mentorSlot.Status = "Completed";
-
                 booking.Status = "Completed";
             }
 
             await _context.SaveChangesAsync();
             return true;
-
         }
 
         private async Task SendMentorSlotApprovalEmailAsync(string recipientEmail, MentorSlot mentorSlot) 
@@ -232,7 +249,7 @@ namespace SWP391_Mentor_Booking_System_Service.Service
             string body = $@" 
              <h1>Mentor Slot Approved</h1> 
              <p>Dear Students,</p> 
-             <p>Your booking slot has been approved by mentors with the following details:</p> 
+             <p>Your booking slot has been approved by mentor with the following details:</p> 
              <ul> <li><strong>Mentor Name:</strong> {mentorSlot.Mentor.MentorName}</li> 
              <li><strong>Start Time:</strong> {mentorSlot.StartTime}</li> 
              <li><strong>End Time:</strong> {mentorSlot.EndTime}</li> 
