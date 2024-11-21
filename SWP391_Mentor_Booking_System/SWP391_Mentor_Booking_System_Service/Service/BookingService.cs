@@ -174,6 +174,15 @@ namespace SWP391_Mentor_Booking_System_Service.Service
                     {
                         await _context.WalletTransactions.AddAsync(t);
                     }
+
+                    await SendMentorSlotDeniedEmailAsync(mentor.Email, b.MentorSlot);
+                    if (b.Group?.Students != null) 
+                    { 
+                        foreach (var student in b.Group.Students) 
+                        { 
+                            await SendMentorSlotDeniedEmailForStudentAsync(student.Email, b.MentorSlot); 
+                        } 
+                    }
                 }
 
                 // Send email to the mentor
@@ -191,6 +200,8 @@ namespace SWP391_Mentor_Booking_System_Service.Service
                 {
                     throw new NullReferenceException("Group or Students not found.");
                 }
+
+
             }
             else if (updateBookingStatusDto.Status.Equals("Completed"))
             {
@@ -250,6 +261,46 @@ namespace SWP391_Mentor_Booking_System_Service.Service
              <h1>Mentor Slot Approved</h1> 
              <p>Dear Students,</p> 
              <p>Your booking slot has been approved by mentor with the following details:</p> 
+             <ul> <li><strong>Mentor Name:</strong> {mentorSlot.Mentor.MentorName}</li> 
+             <li><strong>Start Time:</strong> {mentorSlot.StartTime}</li> 
+             <li><strong>End Time:</strong> {mentorSlot.EndTime}</li> 
+             <li><strong>Booking Points:</strong> {mentorSlot.BookingPoint}</li>";
+            if (mentorSlot.isOnline)
+            {
+                body += $@" <li><strong>Meeting URL:</strong> 
+                <a href='{mentorSlot.Mentor.MeetUrl}'>{mentorSlot.Mentor.MeetUrl}</a></li>";
+            }
+            body += @" </ul> <p>Thank you for using our service!</p>";
+            await _emailService.SendEmailAsync(recipientEmail, subject, body);
+        }
+
+        private async Task SendMentorSlotDeniedEmailAsync(string recipientEmail, MentorSlot mentorSlot)
+        {
+            string subject = "Mentor Slot Denied!";
+            string body = $@" 
+             <h1>Mentor Slot Approved</h1> 
+             <p>Dear {mentorSlot.Mentor.MentorName},</p> 
+             <p>Your mentor slot has been denied with the following details:</p> 
+             <ul> <li><strong>Mentor Name:</strong> {mentorSlot.Mentor.MentorName}</li> 
+             <li><strong>Start Time:</strong> {mentorSlot.StartTime}</li> 
+             <li><strong>End Time:</strong> {mentorSlot.EndTime}</li> 
+             <li><strong>Booking Points:</strong> {mentorSlot.BookingPoint}</li>";
+            if (mentorSlot.isOnline)
+            {
+                body += $@" <li><strong>Meeting URL:</strong> 
+                <a href='{mentorSlot.Mentor.MeetUrl}'>{mentorSlot.Mentor.MeetUrl}</a></li>";
+            }
+            body += @" </ul> <p>Thank you for using our service!</p>";
+            await _emailService.SendEmailAsync(recipientEmail, subject, body);
+        }
+
+        private async Task SendMentorSlotDeniedEmailForStudentAsync(string recipientEmail, MentorSlot mentorSlot)
+        {
+            string subject = "Mentor Slot Denied!";
+            string body = $@" 
+             <h1>Mentor Slot Approved</h1> 
+             <p>Dear Students,</p> 
+             <p>Your booking slot has been denied by mentor with the following details:</p> 
              <ul> <li><strong>Mentor Name:</strong> {mentorSlot.Mentor.MentorName}</li> 
              <li><strong>Start Time:</strong> {mentorSlot.StartTime}</li> 
              <li><strong>End Time:</strong> {mentorSlot.EndTime}</li> 
