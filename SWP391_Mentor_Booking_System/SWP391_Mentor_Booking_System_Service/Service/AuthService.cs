@@ -181,15 +181,16 @@
                     throw new Exception("Email không tồn tại.");
                 }
 
-                // So sánh mật khẩu trực tiếp (không dùng mã hóa)
-                if (loginDto.Password != admin.Password)
-                {
-                    throw new UnauthorizedAccessException("Mật khẩu không chính xác.");
-                }
+            // So sánh mật khẩu trực tiếp (không dùng mã hóa)
+            if (!BCrypt.Net.BCrypt.Verify(loginDto.Password, admin.Password))
+            {
+                throw new UnauthorizedAccessException("Mật khẩu không chính xác.");
+            }
 
-                // Tạo token cho admin
-                var accessToken = CreateToken(admin, "Admin");
+            // Tạo token cho admin
+            var accessToken = CreateToken(admin, "Admin");
                 var refreshToken = GenerateRefreshToken(admin.AdminId);
+                await SaveAccessTokenAsync(admin.AdminId, accessToken);
 
                 var refreshTokenEntity = new RefreshToken
                 {
