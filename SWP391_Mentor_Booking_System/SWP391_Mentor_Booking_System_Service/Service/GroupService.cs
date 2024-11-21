@@ -83,7 +83,7 @@ namespace SWP391_Mentor_Booking_System_Service.Service
                 LeaderId = createGroupDto.LeaderId,
                 Progress = 0,
                 SwpClassId = createGroupDto.SwpClassId,
-                WalletPoint = 0,
+                WalletPoint = 10,
                 CreatedDate = DateTime.Now,
                 Status = false
             };
@@ -269,7 +269,6 @@ namespace SWP391_Mentor_Booking_System_Service.Service
             }
 
             group.Status = dto.Status;
-            group.WalletPoint = 10;
             await _context.SaveChangesAsync();
             return (true, "");
         }

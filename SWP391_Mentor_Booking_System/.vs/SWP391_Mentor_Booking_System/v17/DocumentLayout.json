@@ -3,12 +3,20 @@
   "WorkspaceRootPath": "C:\\Users\\GiaBaoZ\\Desktop\\Fullstack\\SWP391_Backend\\Group2_SWP391_SE1867_Backend\\SWP391_Mentor_Booking_System\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{5EA41E65-ACA7-472C-B213-7444752C35FF}|SWP391_Mentor_Booking_System_Service\\SWP391_Mentor_Booking_System_Service.csproj|c:\\users\\giabaoz\\desktop\\fullstack\\swp391_backend\\group2_swp391_se1867_backend\\swp391_mentor_booking_system\\swp391_mentor_booking_system_service\\service\\feedbackservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{5EA41E65-ACA7-472C-B213-7444752C35FF}|SWP391_Mentor_Booking_System_Service\\SWP391_Mentor_Booking_System_Service.csproj|solutionrelative:swp391_mentor_booking_system_service\\service\\feedbackservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{5EA41E65-ACA7-472C-B213-7444752C35FF}|SWP391_Mentor_Booking_System_Service\\SWP391_Mentor_Booking_System_Service.csproj|c:\\users\\giabaoz\\desktop\\fullstack\\swp391_backend\\group2_swp391_se1867_backend\\swp391_mentor_booking_system\\swp391_mentor_booking_system_service\\service\\bookingservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{5EA41E65-ACA7-472C-B213-7444752C35FF}|SWP391_Mentor_Booking_System_Service\\SWP391_Mentor_Booking_System_Service.csproj|solutionrelative:swp391_mentor_booking_system_service\\service\\bookingservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5EA41E65-ACA7-472C-B213-7444752C35FF}|SWP391_Mentor_Booking_System_Service\\SWP391_Mentor_Booking_System_Service.csproj|c:\\users\\giabaoz\\desktop\\fullstack\\swp391_backend\\group2_swp391_se1867_backend\\swp391_mentor_booking_system\\swp391_mentor_booking_system_service\\service\\groupservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5EA41E65-ACA7-472C-B213-7444752C35FF}|SWP391_Mentor_Booking_System_Service\\SWP391_Mentor_Booking_System_Service.csproj|solutionrelative:swp391_mentor_booking_system_service\\service\\groupservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9737B847-4BCC-487D-AAFC-CFAD861BC03D}|SWP391_Mentor_Booking_System\\SWP391_Mentor_Booking_System_API.csproj|c:\\users\\giabaoz\\desktop\\fullstack\\swp391_backend\\group2_swp391_se1867_backend\\swp391_mentor_booking_system\\swp391_mentor_booking_system\\controllers\\studentcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9737B847-4BCC-487D-AAFC-CFAD861BC03D}|SWP391_Mentor_Booking_System\\SWP391_Mentor_Booking_System_API.csproj|solutionrelative:swp391_mentor_booking_system\\controllers\\studentcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5EA41E65-ACA7-472C-B213-7444752C35FF}|SWP391_Mentor_Booking_System_Service\\SWP391_Mentor_Booking_System_Service.csproj|c:\\users\\giabaoz\\desktop\\fullstack\\swp391_backend\\group2_swp391_se1867_backend\\swp391_mentor_booking_system\\swp391_mentor_booking_system_service\\service\\feedbackservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5EA41E65-ACA7-472C-B213-7444752C35FF}|SWP391_Mentor_Booking_System_Service\\SWP391_Mentor_Booking_System_Service.csproj|solutionrelative:swp391_mentor_booking_system_service\\service\\feedbackservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{5EA41E65-ACA7-472C-B213-7444752C35FF}|SWP391_Mentor_Booking_System_Service\\SWP391_Mentor_Booking_System_Service.csproj|c:\\users\\giabaoz\\desktop\\fullstack\\swp391_backend\\group2_swp391_se1867_backend\\swp391_mentor_booking_system\\swp391_mentor_booking_system_service\\service\\authservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -29,10 +37,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{9737B847-4BCC-487D-AAFC-CFAD861BC03D}|SWP391_Mentor_Booking_System\\SWP391_Mentor_Booking_System_API.csproj|c:\\users\\giabaoz\\desktop\\fullstack\\swp391_backend\\group2_swp391_se1867_backend\\swp391_mentor_booking_system\\swp391_mentor_booking_system\\controllers\\groupcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{9737B847-4BCC-487D-AAFC-CFAD861BC03D}|SWP391_Mentor_Booking_System\\SWP391_Mentor_Booking_System_API.csproj|solutionrelative:swp391_mentor_booking_system\\controllers\\groupcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{5EA41E65-ACA7-472C-B213-7444752C35FF}|SWP391_Mentor_Booking_System_Service\\SWP391_Mentor_Booking_System_Service.csproj|c:\\users\\giabaoz\\desktop\\fullstack\\swp391_backend\\group2_swp391_se1867_backend\\swp391_mentor_booking_system\\swp391_mentor_booking_system_service\\service\\groupservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{5EA41E65-ACA7-472C-B213-7444752C35FF}|SWP391_Mentor_Booking_System_Service\\SWP391_Mentor_Booking_System_Service.csproj|solutionrelative:swp391_mentor_booking_system_service\\service\\groupservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{C9ADBCF2-FA8D-41DE-ABB9-9EB3F8695A79}|SWP391_Mentor_Booking_System_Data\\SWP391_Mentor_Booking_System_Data.csproj|c:\\users\\giabaoz\\desktop\\fullstack\\swp391_backend\\group2_swp391_se1867_backend\\swp391_mentor_booking_system\\swp391_mentor_booking_system_data\\dto\\group\\groupdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -127,10 +131,6 @@
       "RelativeMoniker": "D:0:0:{5EA41E65-ACA7-472C-B213-7444752C35FF}|SWP391_Mentor_Booking_System_Service\\SWP391_Mentor_Booking_System_Service.csproj|solutionrelative:swp391_mentor_booking_system_service\\service\\studentservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{9737B847-4BCC-487D-AAFC-CFAD861BC03D}|SWP391_Mentor_Booking_System\\SWP391_Mentor_Booking_System_API.csproj|c:\\users\\giabaoz\\desktop\\fullstack\\swp391_backend\\group2_swp391_se1867_backend\\swp391_mentor_booking_system\\swp391_mentor_booking_system\\controllers\\studentcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{9737B847-4BCC-487D-AAFC-CFAD861BC03D}|SWP391_Mentor_Booking_System\\SWP391_Mentor_Booking_System_API.csproj|solutionrelative:swp391_mentor_booking_system\\controllers\\studentcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{C9ADBCF2-FA8D-41DE-ABB9-9EB3F8695A79}|SWP391_Mentor_Booking_System_Data\\SWP391_Mentor_Booking_System_Data.csproj|c:\\users\\giabaoz\\desktop\\fullstack\\swp391_backend\\group2_swp391_se1867_backend\\swp391_mentor_booking_system\\swp391_mentor_booking_system_data\\dto\\registerdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{C9ADBCF2-FA8D-41DE-ABB9-9EB3F8695A79}|SWP391_Mentor_Booking_System_Data\\SWP391_Mentor_Booking_System_Data.csproj|solutionrelative:swp391_mentor_booking_system_data\\dto\\registerdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -202,7 +202,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 212,
-          "SelectedChildIndex": 10,
+          "SelectedChildIndex": 8,
           "Children": [
             {
               "$type": "Bookmark",
@@ -218,7 +218,104 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 17,
+              "DocumentIndex": 1,
+              "Title": "GroupService.cs",
+              "DocumentMoniker": "C:\\Users\\GiaBaoZ\\Desktop\\Fullstack\\SWP391_Backend\\Group2_SWP391_SE1867_Backend\\SWP391_Mentor_Booking_System\\SWP391_Mentor_Booking_System_Service\\Service\\GroupService.cs",
+              "RelativeDocumentMoniker": "SWP391_Mentor_Booking_System_Service\\Service\\GroupService.cs",
+              "ToolTip": "C:\\Users\\GiaBaoZ\\Desktop\\Fullstack\\SWP391_Backend\\Group2_SWP391_SE1867_Backend\\SWP391_Mentor_Booking_System\\SWP391_Mentor_Booking_System_Service\\Service\\GroupService.cs",
+              "RelativeToolTip": "SWP391_Mentor_Booking_System_Service\\Service\\GroupService.cs",
+              "ViewState": "AQIAAF0AAAAAAAAAAAAAAFUAAAAgAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-05T01:14:41.697Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "UserService.cs",
+              "DocumentMoniker": "C:\\Users\\GiaBaoZ\\Desktop\\Fullstack\\SWP391_Backend\\Group2_SWP391_SE1867_Backend\\SWP391_Mentor_Booking_System\\SWP391_Mentor_Booking_System_Service\\Service\\UserService.cs",
+              "RelativeDocumentMoniker": "SWP391_Mentor_Booking_System_Service\\Service\\UserService.cs",
+              "ToolTip": "C:\\Users\\GiaBaoZ\\Desktop\\Fullstack\\SWP391_Backend\\Group2_SWP391_SE1867_Backend\\SWP391_Mentor_Booking_System\\SWP391_Mentor_Booking_System_Service\\Service\\UserService.cs",
+              "RelativeToolTip": "SWP391_Mentor_Booking_System_Service\\Service\\UserService.cs",
+              "ViewState": "AQIAACcAAAAAAAAAAAAAACIAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-13T18:00:23.011Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "GroupController.cs",
+              "DocumentMoniker": "C:\\Users\\GiaBaoZ\\Desktop\\Fullstack\\SWP391_Backend\\Group2_SWP391_SE1867_Backend\\SWP391_Mentor_Booking_System\\SWP391_Mentor_Booking_System\\Controllers\\GroupController.cs",
+              "RelativeDocumentMoniker": "SWP391_Mentor_Booking_System\\Controllers\\GroupController.cs",
+              "ToolTip": "C:\\Users\\GiaBaoZ\\Desktop\\Fullstack\\SWP391_Backend\\Group2_SWP391_SE1867_Backend\\SWP391_Mentor_Booking_System\\SWP391_Mentor_Booking_System\\Controllers\\GroupController.cs",
+              "RelativeToolTip": "SWP391_Mentor_Booking_System\\Controllers\\GroupController.cs",
+              "ViewState": "AQIAAIsAAAAAAAAAAAAuwJQAAAAwAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-14T04:22:58.819Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "AuthService.cs",
+              "DocumentMoniker": "C:\\Users\\GiaBaoZ\\Desktop\\Fullstack\\SWP391_Backend\\Group2_SWP391_SE1867_Backend\\SWP391_Mentor_Booking_System\\SWP391_Mentor_Booking_System_Service\\Service\\AuthService.cs",
+              "RelativeDocumentMoniker": "SWP391_Mentor_Booking_System_Service\\Service\\AuthService.cs",
+              "ToolTip": "C:\\Users\\GiaBaoZ\\Desktop\\Fullstack\\SWP391_Backend\\Group2_SWP391_SE1867_Backend\\SWP391_Mentor_Booking_System\\SWP391_Mentor_Booking_System_Service\\Service\\AuthService.cs",
+              "RelativeToolTip": "SWP391_Mentor_Booking_System_Service\\Service\\AuthService.cs",
+              "ViewState": "AQIAANoAAAAAAAAAAAAAAJIAAABFAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-13T17:55:14.787Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "MentorSlotService.cs",
+              "DocumentMoniker": "C:\\Users\\GiaBaoZ\\Desktop\\Fullstack\\SWP391_Backend\\Group2_SWP391_SE1867_Backend\\SWP391_Mentor_Booking_System\\SWP391_Mentor_Booking_System_Service\\Service\\MentorSlotService.cs",
+              "RelativeDocumentMoniker": "SWP391_Mentor_Booking_System_Service\\Service\\MentorSlotService.cs",
+              "ToolTip": "C:\\Users\\GiaBaoZ\\Desktop\\Fullstack\\SWP391_Backend\\Group2_SWP391_SE1867_Backend\\SWP391_Mentor_Booking_System\\SWP391_Mentor_Booking_System_Service\\Service\\MentorSlotService.cs",
+              "RelativeToolTip": "SWP391_Mentor_Booking_System_Service\\Service\\MentorSlotService.cs",
+              "ViewState": "AQIAABgAAAAAAAAAAAAmwCAAAAA/AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-13T17:59:03.883Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "BookingService.cs",
+              "DocumentMoniker": "C:\\Users\\GiaBaoZ\\Desktop\\Fullstack\\SWP391_Backend\\Group2_SWP391_SE1867_Backend\\SWP391_Mentor_Booking_System\\SWP391_Mentor_Booking_System_Service\\Service\\BookingService.cs",
+              "RelativeDocumentMoniker": "SWP391_Mentor_Booking_System_Service\\Service\\BookingService.cs",
+              "ToolTip": "C:\\Users\\GiaBaoZ\\Desktop\\Fullstack\\SWP391_Backend\\Group2_SWP391_SE1867_Backend\\SWP391_Mentor_Booking_System\\SWP391_Mentor_Booking_System_Service\\Service\\BookingService.cs",
+              "RelativeToolTip": "SWP391_Mentor_Booking_System_Service\\Service\\BookingService.cs",
+              "ViewState": "AQIAAGUAAAAAAAAAAAAAABoAAAAJAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-22T01:31:48.948Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "FeedbackService.cs",
+              "DocumentMoniker": "C:\\Users\\GiaBaoZ\\Desktop\\Fullstack\\SWP391_Backend\\Group2_SWP391_SE1867_Backend\\SWP391_Mentor_Booking_System\\SWP391_Mentor_Booking_System_Service\\Service\\FeedbackService.cs",
+              "RelativeDocumentMoniker": "SWP391_Mentor_Booking_System_Service\\Service\\FeedbackService.cs",
+              "ToolTip": "C:\\Users\\GiaBaoZ\\Desktop\\Fullstack\\SWP391_Backend\\Group2_SWP391_SE1867_Backend\\SWP391_Mentor_Booking_System\\SWP391_Mentor_Booking_System_Service\\Service\\FeedbackService.cs",
+              "RelativeToolTip": "SWP391_Mentor_Booking_System_Service\\Service\\FeedbackService.cs",
+              "ViewState": "AQIAABMAAAAAAAAAAAAcwCQAAAAzAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-03T17:39:29.737Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "StudentController.cs",
+              "DocumentMoniker": "C:\\Users\\GiaBaoZ\\Desktop\\Fullstack\\SWP391_Backend\\Group2_SWP391_SE1867_Backend\\SWP391_Mentor_Booking_System\\SWP391_Mentor_Booking_System\\Controllers\\StudentController.cs",
+              "RelativeDocumentMoniker": "SWP391_Mentor_Booking_System\\Controllers\\StudentController.cs",
+              "ToolTip": "C:\\Users\\GiaBaoZ\\Desktop\\Fullstack\\SWP391_Backend\\Group2_SWP391_SE1867_Backend\\SWP391_Mentor_Booking_System\\SWP391_Mentor_Booking_System\\Controllers\\StudentController.cs",
+              "RelativeToolTip": "SWP391_Mentor_Booking_System\\Controllers\\StudentController.cs",
+              "ViewState": "AQIAAAUAAAAAAAAAAAAuwBIAAAAYAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-14T04:07:53.85Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
               "Title": "SemesterController.cs",
               "DocumentMoniker": "C:\\Users\\GiaBaoZ\\Desktop\\Fullstack\\SWP391_Backend\\Group2_SWP391_SE1867_Backend\\SWP391_Mentor_Booking_System\\SWP391_Mentor_Booking_System\\Controllers\\SemesterController.cs",
               "RelativeDocumentMoniker": "SWP391_Mentor_Booking_System\\Controllers\\SemesterController.cs",
@@ -231,91 +328,6 @@
             {
               "$type": "Document",
               "DocumentIndex": 7,
-              "Title": "GroupService.cs",
-              "DocumentMoniker": "C:\\Users\\GiaBaoZ\\Desktop\\Fullstack\\SWP391_Backend\\Group2_SWP391_SE1867_Backend\\SWP391_Mentor_Booking_System\\SWP391_Mentor_Booking_System_Service\\Service\\GroupService.cs",
-              "RelativeDocumentMoniker": "SWP391_Mentor_Booking_System_Service\\Service\\GroupService.cs",
-              "ToolTip": "C:\\Users\\GiaBaoZ\\Desktop\\Fullstack\\SWP391_Backend\\Group2_SWP391_SE1867_Backend\\SWP391_Mentor_Booking_System\\SWP391_Mentor_Booking_System_Service\\Service\\GroupService.cs",
-              "RelativeToolTip": "SWP391_Mentor_Booking_System_Service\\Service\\GroupService.cs",
-              "ViewState": "AQIAAC4BAAAAAAAAAAAmwFEBAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-05T01:14:41.697Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "UserService.cs",
-              "DocumentMoniker": "C:\\Users\\GiaBaoZ\\Desktop\\Fullstack\\SWP391_Backend\\Group2_SWP391_SE1867_Backend\\SWP391_Mentor_Booking_System\\SWP391_Mentor_Booking_System_Service\\Service\\UserService.cs",
-              "RelativeDocumentMoniker": "SWP391_Mentor_Booking_System_Service\\Service\\UserService.cs",
-              "ToolTip": "C:\\Users\\GiaBaoZ\\Desktop\\Fullstack\\SWP391_Backend\\Group2_SWP391_SE1867_Backend\\SWP391_Mentor_Booking_System\\SWP391_Mentor_Booking_System_Service\\Service\\UserService.cs",
-              "RelativeToolTip": "SWP391_Mentor_Booking_System_Service\\Service\\UserService.cs",
-              "ViewState": "AQIAACcAAAAAAAAAAAAAACIAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-13T18:00:23.011Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "GroupController.cs",
-              "DocumentMoniker": "C:\\Users\\GiaBaoZ\\Desktop\\Fullstack\\SWP391_Backend\\Group2_SWP391_SE1867_Backend\\SWP391_Mentor_Booking_System\\SWP391_Mentor_Booking_System\\Controllers\\GroupController.cs",
-              "RelativeDocumentMoniker": "SWP391_Mentor_Booking_System\\Controllers\\GroupController.cs",
-              "ToolTip": "C:\\Users\\GiaBaoZ\\Desktop\\Fullstack\\SWP391_Backend\\Group2_SWP391_SE1867_Backend\\SWP391_Mentor_Booking_System\\SWP391_Mentor_Booking_System\\Controllers\\GroupController.cs",
-              "RelativeToolTip": "SWP391_Mentor_Booking_System\\Controllers\\GroupController.cs",
-              "ViewState": "AQIAAIsAAAAAAAAAAAAuwJQAAAAwAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-14T04:22:58.819Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "AuthService.cs",
-              "DocumentMoniker": "C:\\Users\\GiaBaoZ\\Desktop\\Fullstack\\SWP391_Backend\\Group2_SWP391_SE1867_Backend\\SWP391_Mentor_Booking_System\\SWP391_Mentor_Booking_System_Service\\Service\\AuthService.cs",
-              "RelativeDocumentMoniker": "SWP391_Mentor_Booking_System_Service\\Service\\AuthService.cs",
-              "ToolTip": "C:\\Users\\GiaBaoZ\\Desktop\\Fullstack\\SWP391_Backend\\Group2_SWP391_SE1867_Backend\\SWP391_Mentor_Booking_System\\SWP391_Mentor_Booking_System_Service\\Service\\AuthService.cs",
-              "RelativeToolTip": "SWP391_Mentor_Booking_System_Service\\Service\\AuthService.cs",
-              "ViewState": "AQIAANoAAAAAAAAAAAAAAJIAAABFAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-13T17:55:14.787Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "MentorSlotService.cs",
-              "DocumentMoniker": "C:\\Users\\GiaBaoZ\\Desktop\\Fullstack\\SWP391_Backend\\Group2_SWP391_SE1867_Backend\\SWP391_Mentor_Booking_System\\SWP391_Mentor_Booking_System_Service\\Service\\MentorSlotService.cs",
-              "RelativeDocumentMoniker": "SWP391_Mentor_Booking_System_Service\\Service\\MentorSlotService.cs",
-              "ToolTip": "C:\\Users\\GiaBaoZ\\Desktop\\Fullstack\\SWP391_Backend\\Group2_SWP391_SE1867_Backend\\SWP391_Mentor_Booking_System\\SWP391_Mentor_Booking_System_Service\\Service\\MentorSlotService.cs",
-              "RelativeToolTip": "SWP391_Mentor_Booking_System_Service\\Service\\MentorSlotService.cs",
-              "ViewState": "AQIAABgAAAAAAAAAAAAmwCAAAAA/AAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-13T17:59:03.883Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "BookingService.cs",
-              "DocumentMoniker": "C:\\Users\\GiaBaoZ\\Desktop\\Fullstack\\SWP391_Backend\\Group2_SWP391_SE1867_Backend\\SWP391_Mentor_Booking_System\\SWP391_Mentor_Booking_System_Service\\Service\\BookingService.cs",
-              "RelativeDocumentMoniker": "SWP391_Mentor_Booking_System_Service\\Service\\BookingService.cs",
-              "ToolTip": "C:\\Users\\GiaBaoZ\\Desktop\\Fullstack\\SWP391_Backend\\Group2_SWP391_SE1867_Backend\\SWP391_Mentor_Booking_System\\SWP391_Mentor_Booking_System_Service\\Service\\BookingService.cs",
-              "RelativeToolTip": "SWP391_Mentor_Booking_System_Service\\Service\\BookingService.cs",
-              "ViewState": "AQIAABAAAAAAAAAAAAAuwCAAAAAeAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-22T01:31:48.948Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "FeedbackService.cs",
-              "DocumentMoniker": "C:\\Users\\GiaBaoZ\\Desktop\\Fullstack\\SWP391_Backend\\Group2_SWP391_SE1867_Backend\\SWP391_Mentor_Booking_System\\SWP391_Mentor_Booking_System_Service\\Service\\FeedbackService.cs",
-              "RelativeDocumentMoniker": "SWP391_Mentor_Booking_System_Service\\Service\\FeedbackService.cs",
-              "ToolTip": "C:\\Users\\GiaBaoZ\\Desktop\\Fullstack\\SWP391_Backend\\Group2_SWP391_SE1867_Backend\\SWP391_Mentor_Booking_System\\SWP391_Mentor_Booking_System_Service\\Service\\FeedbackService.cs",
-              "RelativeToolTip": "SWP391_Mentor_Booking_System_Service\\Service\\FeedbackService.cs",
-              "ViewState": "AQIAABMAAAAAAAAAAAAcwCQAAAAzAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-03T17:39:29.737Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
               "Title": "MentorService.cs",
               "DocumentMoniker": "C:\\Users\\GiaBaoZ\\Desktop\\Fullstack\\SWP391_Backend\\Group2_SWP391_SE1867_Backend\\SWP391_Mentor_Booking_System\\SWP391_Mentor_Booking_System_Service\\Service\\MentorService.cs",
               "RelativeDocumentMoniker": "SWP391_Mentor_Booking_System_Service\\Service\\MentorService.cs",
@@ -327,7 +339,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 16,
               "Title": "CreateRequestToMoveClassDTO.cs",
               "DocumentMoniker": "C:\\Users\\GiaBaoZ\\Desktop\\Fullstack\\SWP391_Backend\\Group2_SWP391_SE1867_Backend\\SWP391_Mentor_Booking_System\\SWP391_Mentor_Booking_System_Data\\DTO\\RequestToMoveClass\\CreateRequestToMoveClassDTO.cs",
               "RelativeDocumentMoniker": "SWP391_Mentor_Booking_System_Data\\DTO\\RequestToMoveClass\\CreateRequestToMoveClassDTO.cs",
@@ -339,7 +351,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
+              "DocumentIndex": 17,
               "Title": "RequestToMoveClass.cs",
               "DocumentMoniker": "C:\\Users\\GiaBaoZ\\Desktop\\Fullstack\\SWP391_Backend\\Group2_SWP391_SE1867_Backend\\SWP391_Mentor_Booking_System\\SWP391_Mentor_Booking_System_Data\\Data\\RequestToMoveClass.cs",
               "RelativeDocumentMoniker": "SWP391_Mentor_Booking_System_Data\\Data\\RequestToMoveClass.cs",
@@ -351,7 +363,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 12,
               "Title": "CreateGroupDTO.cs",
               "DocumentMoniker": "C:\\Users\\GiaBaoZ\\Desktop\\Fullstack\\SWP391_Backend\\Group2_SWP391_SE1867_Backend\\SWP391_Mentor_Booking_System\\SWP391_Mentor_Booking_System_Data\\DTO\\Group\\CreateGroupDTO.cs",
               "RelativeDocumentMoniker": "SWP391_Mentor_Booking_System_Data\\DTO\\Group\\CreateGroupDTO.cs",
@@ -363,7 +375,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 9,
               "Title": "GroupDTO.cs",
               "DocumentMoniker": "C:\\Users\\GiaBaoZ\\Desktop\\Fullstack\\SWP391_Backend\\Group2_SWP391_SE1867_Backend\\SWP391_Mentor_Booking_System\\SWP391_Mentor_Booking_System_Data\\DTO\\Group\\GroupDTO.cs",
               "RelativeDocumentMoniker": "SWP391_Mentor_Booking_System_Data\\DTO\\Group\\GroupDTO.cs",
@@ -375,7 +387,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 10,
               "Title": "UpdateStatusGroupDTO.cs",
               "DocumentMoniker": "C:\\Users\\GiaBaoZ\\Desktop\\Fullstack\\SWP391_Backend\\Group2_SWP391_SE1867_Backend\\SWP391_Mentor_Booking_System\\SWP391_Mentor_Booking_System_Data\\DTO\\Group\\UpdateStatusGroupDTO.cs",
               "RelativeDocumentMoniker": "SWP391_Mentor_Booking_System_Data\\DTO\\Group\\UpdateStatusGroupDTO.cs",
@@ -387,7 +399,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 13,
               "Title": "RequestToMoveClassService.cs",
               "DocumentMoniker": "C:\\Users\\GiaBaoZ\\Desktop\\Fullstack\\SWP391_Backend\\Group2_SWP391_SE1867_Backend\\SWP391_Mentor_Booking_System\\SWP391_Mentor_Booking_System_Service\\Service\\RequestToMoveClassService.cs",
               "RelativeDocumentMoniker": "SWP391_Mentor_Booking_System_Service\\Service\\RequestToMoveClassService.cs",
@@ -399,7 +411,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 11,
               "Title": "Group.cs",
               "DocumentMoniker": "C:\\Users\\GiaBaoZ\\Desktop\\Fullstack\\SWP391_Backend\\Group2_SWP391_SE1867_Backend\\SWP391_Mentor_Booking_System\\SWP391_Mentor_Booking_System_Data\\Data\\Group.cs",
               "RelativeDocumentMoniker": "SWP391_Mentor_Booking_System_Data\\Data\\Group.cs",
@@ -411,7 +423,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 14,
               "Title": "RequestToMoveClassController.cs",
               "DocumentMoniker": "C:\\Users\\GiaBaoZ\\Desktop\\Fullstack\\SWP391_Backend\\Group2_SWP391_SE1867_Backend\\SWP391_Mentor_Booking_System\\SWP391_Mentor_Booking_System\\Controllers\\RequestToMoveClassController.cs",
               "RelativeDocumentMoniker": "SWP391_Mentor_Booking_System\\Controllers\\RequestToMoveClassController.cs",
@@ -423,7 +435,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 15,
               "Title": "GetRequestToMoveClassDTO.cs",
               "DocumentMoniker": "C:\\Users\\GiaBaoZ\\Desktop\\Fullstack\\SWP391_Backend\\Group2_SWP391_SE1867_Backend\\SWP391_Mentor_Booking_System\\SWP391_Mentor_Booking_System_Data\\DTO\\RequestToMoveClass\\GetRequestToMoveClassDTO.cs",
               "RelativeDocumentMoniker": "SWP391_Mentor_Booking_System_Data\\DTO\\RequestToMoveClass\\GetRequestToMoveClassDTO.cs",
@@ -435,7 +447,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 18,
+              "DocumentIndex": 19,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\GiaBaoZ\\Desktop\\Fullstack\\SWP391_Backend\\Group2_SWP391_SE1867_Backend\\SWP391_Mentor_Booking_System\\SWP391_Mentor_Booking_System\\Program.cs",
               "RelativeDocumentMoniker": "SWP391_Mentor_Booking_System\\Program.cs",
@@ -447,7 +459,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 19,
+              "DocumentIndex": 20,
               "Title": "BookingSlot.cs",
               "DocumentMoniker": "C:\\Users\\GiaBaoZ\\Desktop\\Fullstack\\SWP391_Backend\\Group2_SWP391_SE1867_Backend\\SWP391_Mentor_Booking_System\\SWP391_Mentor_Booking_System_Data\\Data\\BookingSlot.cs",
               "RelativeDocumentMoniker": "SWP391_Mentor_Booking_System_Data\\Data\\BookingSlot.cs",
@@ -459,7 +471,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 20,
+              "DocumentIndex": 21,
               "Title": "SWP391_Mentor_Booking_System_DBContext.cs",
               "DocumentMoniker": "C:\\Users\\GiaBaoZ\\Desktop\\Fullstack\\SWP391_Backend\\Group2_SWP391_SE1867_Backend\\SWP391_Mentor_Booking_System\\SWP391_Mentor_Booking_System_Data\\SWP391_Mentor_Booking_System_DBContext.cs",
               "RelativeDocumentMoniker": "SWP391_Mentor_Booking_System_Data\\SWP391_Mentor_Booking_System_DBContext.cs",
@@ -471,7 +483,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 22,
+              "DocumentIndex": 23,
               "Title": "MentorSlotController.cs",
               "DocumentMoniker": "C:\\Users\\GiaBaoZ\\Desktop\\Fullstack\\SWP391_Backend\\Group2_SWP391_SE1867_Backend\\SWP391_Mentor_Booking_System\\SWP391_Mentor_Booking_System\\Controllers\\MentorSlotController.cs",
               "RelativeDocumentMoniker": "SWP391_Mentor_Booking_System\\Controllers\\MentorSlotController.cs",
@@ -483,7 +495,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 21,
+              "DocumentIndex": 22,
               "Title": "BookingController.cs",
               "DocumentMoniker": "C:\\Users\\GiaBaoZ\\Desktop\\Fullstack\\SWP391_Backend\\Group2_SWP391_SE1867_Backend\\SWP391_Mentor_Booking_System\\SWP391_Mentor_Booking_System\\Controllers\\BookingController.cs",
               "RelativeDocumentMoniker": "SWP391_Mentor_Booking_System\\Controllers\\BookingController.cs",
@@ -507,7 +519,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 23,
+              "DocumentIndex": 24,
               "Title": "SkillController.cs",
               "DocumentMoniker": "C:\\Users\\GiaBaoZ\\Desktop\\Fullstack\\SWP391_Backend\\Group2_SWP391_SE1867_Backend\\SWP391_Mentor_Booking_System\\SWP391_Mentor_Booking_System\\Controllers\\SkillController.cs",
               "RelativeDocumentMoniker": "SWP391_Mentor_Booking_System\\Controllers\\SkillController.cs",
@@ -519,7 +531,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 24,
+              "DocumentIndex": 25,
               "Title": "UpdateRequestToMoveClassDTO.cs",
               "DocumentMoniker": "C:\\Users\\GiaBaoZ\\Desktop\\Fullstack\\SWP391_Backend\\Group2_SWP391_SE1867_Backend\\SWP391_Mentor_Booking_System\\SWP391_Mentor_Booking_System_Data\\DTO\\RequestToMoveClass\\UpdateRequestToMoveClassDTO.cs",
               "RelativeDocumentMoniker": "SWP391_Mentor_Booking_System_Data\\DTO\\RequestToMoveClass\\UpdateRequestToMoveClassDTO.cs",
@@ -531,7 +543,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 25,
+              "DocumentIndex": 26,
               "Title": "SemesterService.cs",
               "DocumentMoniker": "C:\\Users\\GiaBaoZ\\Desktop\\Fullstack\\SWP391_Backend\\Group2_SWP391_SE1867_Backend\\SWP391_Mentor_Booking_System\\SWP391_Mentor_Booking_System_Service\\Service\\SemesterService.cs",
               "RelativeDocumentMoniker": "SWP391_Mentor_Booking_System_Service\\Service\\SemesterService.cs",
@@ -555,7 +567,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 27,
+              "DocumentIndex": 28,
               "Title": "20241114092053_11.cs",
               "DocumentMoniker": "C:\\Users\\GiaBaoZ\\Desktop\\Fullstack\\SWP391_Backend\\Group2_SWP391_SE1867_Backend\\SWP391_Mentor_Booking_System\\SWP391_Mentor_Booking_System_Data\\Migrations\\20241114092053_11.cs",
               "RelativeDocumentMoniker": "SWP391_Mentor_Booking_System_Data\\Migrations\\20241114092053_11.cs",
@@ -566,7 +578,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 28,
+              "DocumentIndex": 29,
               "Title": "SWP391_Mentor_Booking_System_DBContextModelSnapshot.cs",
               "DocumentMoniker": "C:\\Users\\GiaBaoZ\\Desktop\\Fullstack\\SWP391_Backend\\Group2_SWP391_SE1867_Backend\\SWP391_Mentor_Booking_System\\SWP391_Mentor_Booking_System_Data\\Migrations\\SWP391_Mentor_Booking_System_DBContextModelSnapshot.cs",
               "RelativeDocumentMoniker": "SWP391_Mentor_Booking_System_Data\\Migrations\\SWP391_Mentor_Booking_System_DBContextModelSnapshot.cs",
@@ -578,7 +590,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 29,
+              "DocumentIndex": 30,
               "Title": "StudentRepository.cs",
               "DocumentMoniker": "C:\\Users\\GiaBaoZ\\Desktop\\Fullstack\\SWP391_Backend\\Group2_SWP391_SE1867_Backend\\SWP391_Mentor_Booking_System\\SWP391_Mentor_Booking_System_Data\\Repositories\\StudentRepository.cs",
               "RelativeDocumentMoniker": "SWP391_Mentor_Booking_System_Data\\Repositories\\StudentRepository.cs",
@@ -590,7 +602,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 26,
+              "DocumentIndex": 27,
               "Title": "SwpClass.cs",
               "DocumentMoniker": "C:\\Users\\GiaBaoZ\\Desktop\\Fullstack\\SWP391_Backend\\Group2_SWP391_SE1867_Backend\\SWP391_Mentor_Booking_System\\SWP391_Mentor_Booking_System_Data\\Data\\SwpClass.cs",
               "RelativeDocumentMoniker": "SWP391_Mentor_Booking_System_Data\\Data\\SwpClass.cs",
@@ -602,7 +614,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 30,
+              "DocumentIndex": 31,
               "Title": "StudentService.cs",
               "DocumentMoniker": "C:\\Users\\GiaBaoZ\\Desktop\\Fullstack\\SWP391_Backend\\Group2_SWP391_SE1867_Backend\\SWP391_Mentor_Booking_System\\SWP391_Mentor_Booking_System_Service\\Service\\StudentService.cs",
               "RelativeDocumentMoniker": "SWP391_Mentor_Booking_System_Service\\Service\\StudentService.cs",
@@ -623,18 +635,6 @@
               "ViewState": "AQIAACgAAAAAAAAAAAAgwAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-11-14T04:54:07.495Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 31,
-              "Title": "StudentController.cs",
-              "DocumentMoniker": "C:\\Users\\GiaBaoZ\\Desktop\\Fullstack\\SWP391_Backend\\Group2_SWP391_SE1867_Backend\\SWP391_Mentor_Booking_System\\SWP391_Mentor_Booking_System\\Controllers\\StudentController.cs",
-              "RelativeDocumentMoniker": "SWP391_Mentor_Booking_System\\Controllers\\StudentController.cs",
-              "ToolTip": "C:\\Users\\GiaBaoZ\\Desktop\\Fullstack\\SWP391_Backend\\Group2_SWP391_SE1867_Backend\\SWP391_Mentor_Booking_System\\SWP391_Mentor_Booking_System\\Controllers\\StudentController.cs",
-              "RelativeToolTip": "SWP391_Mentor_Booking_System\\Controllers\\StudentController.cs",
-              "ViewState": "AQIAAA0AAAAAAAAAAAA3wBMAAAAdAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-14T04:07:53.85Z"
             },
             {
               "$type": "Document",

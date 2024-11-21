@@ -83,5 +83,10 @@ namespace SWP391_Mentor_Booking_System_Data.Repositories
         {
             return await _context.Mentors.FirstOrDefaultAsync(m => m.MentorId == userId);
         }
+
+        public void AddAdmin(Admin admin)
+        {
+            _context.Admins.Add(admin);
+        }
     }
 }

@@ -4,6 +4,7 @@ using SWP391_Mentor_Booking_System_Data.Data;
 using SWP391_Mentor_Booking_System_Data.DTO.RequestToMoveClass;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -72,6 +73,14 @@ namespace SWP391_Mentor_Booking_System_Service.Service
 
             request.ApprovalDate = DateTime.Now;
             request.Status = dto.Status;
+
+            var student = await _context.Students.FirstOrDefaultAsync(x => x.StudentId == request.StudentId);
+
+            if (student != null)
+            {
+                student.SwpClassId = request.ClassIdToMove;
+            }
+
             await _context.SaveChangesAsync();
 
             return (true, "Request resolved successfully");

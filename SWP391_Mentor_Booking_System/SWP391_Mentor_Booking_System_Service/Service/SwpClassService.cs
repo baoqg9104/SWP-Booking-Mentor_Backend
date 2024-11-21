@@ -84,7 +84,8 @@ namespace SWP391_Mentor_Booking_System_Service.Service
             if (swpClass == null)
                 return false;
 
-            _context.SwpClasses.Remove(swpClass);
+            swpClass.Status = false;
+ 
             return await _context.SaveChangesAsync() > 0;
         }
     }
