@@ -16,10 +16,11 @@ namespace SWP391_Mentor_Booking_System_Service.Service
     public class BookingService
     {
         private readonly SWP391_Mentor_Booking_System_DBContext _context;
-
-        public BookingService(SWP391_Mentor_Booking_System_DBContext context)
+        private readonly EmailService _emailService;
+        public BookingService(SWP391_Mentor_Booking_System_DBContext context, EmailService emailService)
         {
             _context = context;
+            _emailService = emailService;
         }
 
         // Create Booking
@@ -159,7 +160,11 @@ namespace SWP391_Mentor_Booking_System_Service.Service
                         await _context.WalletTransactions.AddAsync(t);
                     }
                 }
-
+                await SendMentorSlotApprovalEmailAsync(mentor.Email, mentorSlot); 
+                foreach (var student in booking.Group.Students) 
+                { 
+                    await SendMentorSlotApprovalEmailForStudentsAsync(student.Email, mentorSlot); 
+                }
                 // Add Wallet Transactions
 
                 //var transaction = new WalletTransaction()
@@ -199,6 +204,46 @@ namespace SWP391_Mentor_Booking_System_Service.Service
             await _context.SaveChangesAsync();
             return true;
 
+        }
+
+        private async Task SendMentorSlotApprovalEmailAsync(string recipientEmail, MentorSlot mentorSlot) 
+        { 
+            string subject = "Mentor Slot Approved!"; 
+            string body = $@" 
+             <h1>Mentor Slot Approved</h1> 
+             <p>Dear {mentorSlot.Mentor.MentorName},</p> 
+             <p>Your mentor slot has been approved with the following details:</p> 
+             <ul> <li><strong>Mentor Name:</strong> {mentorSlot.Mentor.MentorName}</li> 
+             <li><strong>Start Time:</strong> {mentorSlot.StartTime}</li> 
+             <li><strong>End Time:</strong> {mentorSlot.EndTime}</li> 
+             <li><strong>Booking Points:</strong> {mentorSlot.BookingPoint}</li>"; 
+            if (mentorSlot.isOnline) 
+            { 
+                body += $@" <li><strong>Meeting URL:</strong> 
+                <a href='{mentorSlot.Mentor.MeetUrl}'>{mentorSlot.Mentor.MeetUrl}</a></li>"; 
+            } 
+            body += @" </ul> <p>Thank you for using our service!</p>"; 
+            await _emailService.SendEmailAsync(recipientEmail, subject, body); 
+        }
+
+        private async Task SendMentorSlotApprovalEmailForStudentsAsync(string recipientEmail, MentorSlot mentorSlot)
+        {
+            string subject = "Mentor Slot Approved!";
+            string body = $@" 
+             <h1>Mentor Slot Approved</h1> 
+             <p>Dear Students,</p> 
+             <p>Your booking slot has been approved by mentors with the following details:</p> 
+             <ul> <li><strong>Mentor Name:</strong> {mentorSlot.Mentor.MentorName}</li> 
+             <li><strong>Start Time:</strong> {mentorSlot.StartTime}</li> 
+             <li><strong>End Time:</strong> {mentorSlot.EndTime}</li> 
+             <li><strong>Booking Points:</strong> {mentorSlot.BookingPoint}</li>";
+            if (mentorSlot.isOnline)
+            {
+                body += $@" <li><strong>Meeting URL:</strong> 
+                <a href='{mentorSlot.Mentor.MeetUrl}'>{mentorSlot.Mentor.MeetUrl}</a></li>";
+            }
+            body += @" </ul> <p>Thank you for using our service!</p>";
+            await _emailService.SendEmailAsync(recipientEmail, subject, body);
         }
 
         // Get BookingSlots by MentorSlotId
