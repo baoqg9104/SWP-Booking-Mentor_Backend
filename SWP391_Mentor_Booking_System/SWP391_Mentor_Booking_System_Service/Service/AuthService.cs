@@ -340,7 +340,6 @@
                 }
             }
 
-
             public async Task<bool> IsTokenValid(string token)
             {
                 // Kiểm tra token trong bảng ActiveTokens hoặc RefreshTokens

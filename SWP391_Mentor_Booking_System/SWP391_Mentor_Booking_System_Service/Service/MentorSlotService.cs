@@ -14,10 +14,11 @@ namespace SWP391_Mentor_Booking_System_Service.Service
     public class MentorSlotService
     {
         private readonly SWP391_Mentor_Booking_System_DBContext _context;
-
-        public MentorSlotService(SWP391_Mentor_Booking_System_DBContext context)
+        private readonly EmailService _emailService;
+        public MentorSlotService(SWP391_Mentor_Booking_System_DBContext context,  EmailService emailService)
         {
             _context = context;
+            _emailService = emailService;
         }
 
         // Create

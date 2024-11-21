@@ -1000,6 +1000,22 @@
   },
   {
     "ContainingType": "SWP391_Mentor_Booking_System_API.Controllers.UserController",
+    "Method": "SetNewPassword",
+    "RelativePath": "api/User/set-new-password",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "SWP391_Mentor_Booking_System_Data.DTO.SetNewPasswordDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "SWP391_Mentor_Booking_System_API.Controllers.UserController",
     "Method": "UpdateUser",
     "RelativePath": "api/User/update-user",
     "HttpMethod": "PUT",
