@@ -1,6 +1,8 @@
 <h1 align="center" id="title">SWP Mentor Booking</h1>
 
-<p align="center"><img src="https://socialify.git.ci/baoqg9104/SWP-Booking-Mentor_Frontend/image?font=Inter&amp;language=1&amp;name=1&amp;owner=1&amp;pattern=Plus&amp;theme=Light" alt="project-image"></p>
+<p align="center"><img src="https://socialify.git.ci/baoqg9104/SWP-Booking-Mentor_Backend/image?language=1&name=1&owner=1&theme=Light" alt="project-image"></p>
+
+
 
 <p id="description">A web application developed for SWP391 course that allows students to book mentor sessions based on required skills using wallet points. The system includes features for account management project group creation mentor scheduling feedback and reporting optimizing mentor support and improving student learning outcomes. This project serves as a foundation for applying Agile methodology and Scrum model in efficient and flexible software development.</p>
 
